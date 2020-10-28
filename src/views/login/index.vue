@@ -1,72 +1,58 @@
 <template>
-  <div class="login-container">
+  <div class="app-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
-
-      <div class="title-container">
-        <h3 class="title">
-          {{ $t('login.title') }}
-        </h3>
-        <lang-select class="set-language"/>
-      </div>
-
-      <el-form-item prop="username">
-        <span class="svg-container">
-          <svg-icon icon-class="user"/>
-        </span>
+      <header>
+        <a href="#" class="back"/>
+        <h1>로그인</h1>
+        <a href="#" class="forward">회원가입</a>
+      </header>
+      <div class="login_pannel">
         <el-input
           ref="username"
           v-model="loginForm.username"
-          :placeholder="$t('login.username')"
+          placeholder="핸드폰 번호"
           name="username"
           type="text"
           tabindex="1"
           autocomplete="on"
           @keyup.enter.native="handleLogin"/>
-      </el-form-item>
+        <br>
+        <el-input
+          :key="passwordType"
+          ref="password"
+          v-model="loginForm.password"
+          :type="passwordType"
+          placeholder="비밀번호"
+          name="password"
+          tabindex="2"
+          autocomplete="on"
+          @keyup.native="checkCapslock"
+          @blur="capsTooltip = false"
+          @keyup.enter.native="handleLogin"/>
+        <br>
+        <el-button :loading="loading" type="primary" class="original itsok" @click.native.prevent="handleLogin">
+          로그인
+        </el-button>
+        <div class="checks2">
+          <input id="autologin_id" type="checkbox" name="autologin">
+          <label for="autologin_id">자동로그인</label>
+        </div>
+        <div class="checks2">
+          <input id="easylogin_id" type="checkbox" name="easylogin">
+          <label for="easylogin_id">간편로그인</label>
+        </div>
+      </div>
+      <a href="#" class="repassword">비밀번 재설정 ></a>
 
-      <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
-        <el-form-item prop="password">
-          <span class="svg-container">
-            <svg-icon icon-class="password"/>
-          </span>
-          <el-input
-            :key="passwordType"
-            ref="password"
-            v-model="loginForm.password"
-            :type="passwordType"
-            :placeholder="$t('login.password')"
-            name="password"
-            tabindex="2"
-            autocomplete="on"
-            @keyup.native="checkCapslock"
-            @blur="capsTooltip = false"
-            @keyup.enter.native="handleLogin"/>
-          <span class="show-pwd" @click="showPwd">
-            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"/>
-          </span>
-        </el-form-item>
-      </el-tooltip>
-
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">
-        {{ $t('login.logIn') }}
-      </el-button>
-
-      <el-link icon="el-icon-edit">Edit</el-link>
-
-      <el-row type="flex" justify="space-between" align="middle" style="width: 100%;">
-        <el-checkbox v-model="loginForm.isSaveId">{{ $t('btn.idStore') }}</el-checkbox>
-      </el-row>
     </el-form>
   </div>
 </template>
 
 <script>
 import { getCookie } from '@/utils/auth'
-import LangSelect from '@/components/LangSelect'
 
 export default {
   name: 'Login',
-  components: { LangSelect },
   data() {
     const validateUsername = (rule, value, callback) => {
       if (value) {

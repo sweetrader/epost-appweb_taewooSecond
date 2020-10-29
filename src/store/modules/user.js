@@ -7,6 +7,8 @@ const state = {
   token: getToken(),
   id: '',
   name: '',
+  mberId: '',
+  mberSeCd: '',
   roles: [],
   roleInfo: '',
   mchtFncDiv: ''
@@ -21,6 +23,12 @@ const mutations = {
   },
   SET_NAME: (state, name) => {
     state.name = name
+  },
+  SET_MBER_ID: (state, mberId) => {
+    state.mberId = mberId
+  },
+  SET_MBER_SE_CD: (state, mberSeCd) => {
+    state.mberSeCd = mberSeCd
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles
@@ -58,6 +66,8 @@ const actions = {
       getInfo().then(response => {
         commit('SET_ID', response.username) // 아이디
         commit('SET_NAME', response.mngNm) // 이름
+        commit('SET_MBER_ID', response.mberId) // 회원아이디
+        commit('SET_MBER_SE_CD', response.mberSeCd) // 회원구분코드
         commit('SET_ROLES', response.authorities) // 권한 목록
         commit('SET_ROLE_INFO', response.ruleInfo) // 권한 정보
         response.roles = []

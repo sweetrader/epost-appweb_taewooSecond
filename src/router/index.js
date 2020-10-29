@@ -15,6 +15,7 @@ import calculate from './modules/calculate'
 import statistic from './modules/statistic'
 import system from './modules/system'
 import myInfo from './modules/myInfo'
+import mberInfo from './modules/mberInfo'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -86,6 +87,7 @@ export const asyncRoutes = [
   statistic,
   system,
   myInfo,
+  mberInfo,
 
   /** 라우터에 명시하지 않은 url 처리 **/
   { path: '*', redirect: '/404', hidden: true }

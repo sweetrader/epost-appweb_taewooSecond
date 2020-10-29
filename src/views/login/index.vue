@@ -30,9 +30,7 @@
           @blur="capsTooltip = false"
           @keyup.enter.native="handleLogin"/>
         <br>
-        <el-button :loading="loading" type="primary" class="original itsok" @click.native.prevent="handleLogin">
-          로그인
-        </el-button>
+        <el-button :loading="loading" type="primary" class="original itsok" @click.native.prevent="handleLogin">로그인</el-button>
         <div class="checks2">
           <input id="autologin_id" type="checkbox" name="autologin">
           <label for="autologin_id">자동로그인</label>

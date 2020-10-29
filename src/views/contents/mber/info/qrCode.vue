@@ -1,23 +1,35 @@
 <template>
+
   <div class="app-container">
     <header>
       <a href="#" class="back"/><h1>내 QR코드</h1>
     </header>
     <div class="easy_login_area qr_bg">
-      <div> <vue-qrcode value="qrValue" :scale="8"/>
+      <div> <vue-qrcode :value="piCd" :scale="8"/>
       </div>
-
       <a href="#" class="qr_ok">취소</a>
     </div>
-
   </div>
+
 </template>
 <script>
 import VueQrcode from 'vue-qrcode'
 import waves from '@/directive/waves'
 
 export default {
+  name: 'QrCode',
   directives: { waves },
-  components: { VueQrcode }
+  components: { VueQrcode },
+  props: {
+    piCd: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+
+    }
+  }
 }
 </script>

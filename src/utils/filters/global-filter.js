@@ -66,3 +66,16 @@ export function toPhoneNumberFilter(num) {
 
   return phone
 }
+
+export function toBizNumber(num) {
+  if (num === null || typeof (num) === 'undefined') {
+    return num
+  }
+  const number = num
+  let bizNumber = ''
+
+  // 사업자 등록번호 체크
+  bizNumber = number.substring(0, 2) + '-' + number.substring(3, 4) + '-' + number.substring(5, 9)
+
+  return bizNumber
+}

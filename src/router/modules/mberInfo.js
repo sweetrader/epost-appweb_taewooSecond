@@ -27,6 +27,12 @@ const mberInfo = {
       name: 'qrCode',
       component: () => import('@/views/contents/mber/info/qrCode'),
       props: true
+    },
+    {
+      path: 'mber/info/mbtlNoChange',
+      name: 'mbtlNoChange',
+      component: () => import('@/views/contents/mber/info/mbtlNoChange'),
+      props: true
     }
   ]
 }

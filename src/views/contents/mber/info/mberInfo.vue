@@ -18,7 +18,7 @@
       <a href="#">비밀번호 변경</a>
       <a href="#">간편로그인 설정</a>
     </div>
-    <a href="#" class="out">회원탈퇴 ></a>
+    <a href="#" class="out" @click="withdrMber()">회원탈퇴 ></a>
   </div>
 </template>
 <script>
@@ -56,6 +56,9 @@ export default {
     },
     mbtlNoChange() {
       this.$router.push({ name: 'mbtlNoChange', params: { mbtlNo: this.mberInfo.splitMbtlNo }})
+    },
+    withdrMber() {
+      this.$router.push({ name: 'withdrMber' })
     },
     async callMberInfo() {
       const response = await selectMberInfo(this.$store.getters.mberId)

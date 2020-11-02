@@ -33,6 +33,12 @@ const mberInfo = {
       name: 'mbtlNoChange',
       component: () => import('@/views/contents/mber/info/mbtlNoChange'),
       props: true
+    },
+    {
+      path: 'mber/info/withdrMber',
+      name: 'withdrMber',
+      component: () => import('@/views/contents/mber/info/withdrMber'),
+      props: true
     }
   ]
 }

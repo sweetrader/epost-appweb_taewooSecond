@@ -50,7 +50,8 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/sbscrb',
+    path: '/mber/sbscrb',
+    name: 'sbscrb',
     component: () => import('@/views/contents/mber/sbscrb/sbscrb'),
     hidden: true,
     children: [
@@ -58,6 +59,12 @@ export const constantRoutes = [
         path: '/sbscrb/stplat',
         name: 'stplat',
         component: () => import('@/views/contents/mber/sbscrb/stplat'),
+        hidden: true
+      },
+      {
+        path: 'indvStplatAgre',
+        name: 'indvStplatAgre',
+        component: () => import('@/views/contents/mber/sbscrb/indvStplatAgre'),
         hidden: true
       }
     ]

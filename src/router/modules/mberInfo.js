@@ -23,19 +23,19 @@ const mberInfo = {
       }
     },
     {
-      path: 'mber/info/qrCode',
+      path: 'qrCode',
       name: 'qrCode',
       component: () => import('@/views/contents/mber/info/qrCode'),
       props: true
     },
     {
-      path: 'mber/info/mbtlNoChange',
+      path: 'mbtlNoChange',
       name: 'mbtlNoChange',
       component: () => import('@/views/contents/mber/info/mbtlNoChange'),
       props: true
     },
     {
-      path: 'mber/info/withdrMber',
+      path: 'withdrMber',
       name: 'withdrMber',
       component: () => import('@/views/contents/mber/info/withdrMber'),
       props: true

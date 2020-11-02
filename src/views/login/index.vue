@@ -4,7 +4,7 @@
       <header>
         <a href="#" class="back"/>
         <h1>로그인</h1>
-        <a href="#" class="forward" @click="sbscrb()">회원가입</a>
+        <a href="#" class="forward" @click="moveMberSbscrb()">회원가입</a>
       </header>
       <div class="login_pannel">
         <el-input
@@ -154,9 +154,8 @@ export default {
       })
     },
     // 회원가입
-    sbscrb() {
-      console.log('sbscrb')
-      this.$router.push('/sbscrb')
+    moveMberSbscrb() {
+      this.$router.push({ name: 'sbscrb' })
     },
     rePassword() {
       console.log('rePassword')

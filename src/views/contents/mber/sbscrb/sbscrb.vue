@@ -5,7 +5,7 @@
     </header>
 
     <div class="join_category">
-      <div class="join_category_div">
+      <div class="join_category_div" @click="moveIndvStplatAgre()">
         <img src="../../../../assets/image/join_icon_01.png" alt=""><br>
         개인 회원<br>
         <span>만 18세 이상 가능(외국인포함)</span>
@@ -18,3 +18,23 @@
     </div>
   </div>
 </template>
+<script>
+import waves from '@/directive/waves'
+
+export default {
+  name: 'Sbscrb',
+  directives: { waves },
+  data() {
+    return {
+    }
+  },
+  created() {
+  },
+  methods: {
+    moveIndvStplatAgre() {
+      console.log('ddd')
+      this.$router.push({ name: 'indvStplatAgre' })
+    }
+  }
+}
+</script>

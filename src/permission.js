@@ -8,7 +8,7 @@ import getPageTitle from '@/utils/get-page-title'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 // 권한을 체크하지 않을 Url 목록
-const whiteList = ['/login', '/sbscrb']
+const whiteList = ['/login', '/mber/sbscrb', '/mber/sbscrb/indvStplatAgre']
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
@@ -54,9 +54,16 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
-
+    // console.log(whiteList)
+    // console.log(whiteList.indexOf(to.path))
+    // console.log('경로  :' + to.path)
+    // if (whiteList.indexOf(to.path) !== -1 || to.path.substring(0, 12) === '/mber/sbscrb') {
+    //   console.log('들어옴')
+    //   console.log(to.path)
+    //   next()
+    // // } else
     if (whiteList.indexOf(to.path) !== -1) {
-      // in the free login whitelist, go directly
+    //   // in the free login whitelist, go directly
       next()
     } else {
       // other pages that do not have permission to access are redirected to the login page.

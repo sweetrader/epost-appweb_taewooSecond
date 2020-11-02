@@ -28,37 +28,15 @@
     </div>
     <div class="jisik_master">
       <h5>지식마스터</h5>
-      <div class="jisik_master_cell">
+      <div v-for="(kmsRanking, index) in kmsRankingList" :key="kmsRanking.registerId" class="jisik_master_cell">
         <div class="soonwi">
-          <b>1</b>위<br><span>홍길동</span>
+          <b>{{ index + 1 }}</b>위<br><span>{{ kmsRanking.registerNm }}</span>
         </div>
         <div class="det">
-          지식점수<br><span>95점</span>
+          지식점수<br><span>{{ kmsRanking.kmsPointSum | toThousandFilter }} 점</span>
         </div>
         <div class="det">
-          지식점수<br><span>95점</span>
-        </div>
-      </div>
-      <div class="jisik_master_cell">
-        <div class="soonwi">
-          <b>2</b>위<br><span>김민수</span>
-        </div>
-        <div class="det">
-          지식점수<br><span>95점</span>
-        </div>
-        <div class="det">
-          지식점수<br><span>95점</span>
-        </div>
-      </div>
-      <div class="jisik_master_cell">
-        <div class="soonwi">
-          <b>3</b>위<br><span>이민우</span>
-        </div>
-        <div class="det">
-          지식점수<br><span>95점</span>
-        </div>
-        <div class="det">
-          지식점수<br><span>95점</span>
+          답변<br><span>{{ kmsRanking.kmsBoardReplyList.length | toThousandFilter }} 개</span>
         </div>
       </div>
     </div>
@@ -67,8 +45,8 @@
 </template>
 
 <script>
-import { SEARCH_TYPE, CATEGORY_TYPE } from '@/utils/kms'
-import { getKmsSearchList } from '@/api/kms'
+import { SEARCH_TYPE, CATEGORY_TYPE, isEmpty } from '@/utils/kms'
+import { getKmsSearchList, getKmsBoardRanking } from '@/api/kms'
 import waves from '@/directive/waves'
 
 export default {
@@ -78,11 +56,12 @@ export default {
     return {
       kmsList: null,
       myKmsList: null,
+      kmsRankingList: null,
       kmsListTotCnt: 0,
       myKmsListTotCnt: 0,
       kmsListQuery: {
         page: 1,
-        size: 10,
+        size: 5,
         searchType: null,
         searchKeyword: null,
         categoryList: CATEGORY_TYPE.ALL,
@@ -90,7 +69,7 @@ export default {
       },
       myKmsListQuery: {
         page: 1,
-        size: 10,
+        size: 5,
         searchType: SEARCH_TYPE.REG_ID,
         searchKeyword: this.$store.getters.mberId,
         categoryList: CATEGORY_TYPE.ALL,
@@ -104,6 +83,7 @@ export default {
     this.dataLoading = true
     this.getKmsList()
     this.getMyKmsList()
+    this.getKmsBoardRanking()
     setTimeout(() => {
       this.dataLoading = false
     }, 300)
@@ -115,13 +95,20 @@ export default {
       this.kmsList = response.resData.kmsBoardList
     },
     async getMyKmsList() {
+      if (isEmpty(this.$store.getters.mberId)) {
+        return
+      }
       const response = await getKmsSearchList(this.myKmsListQuery)
       this.myKmsListTotCnt = response.resData.totCnt
       this.myKmsList = response.resData.kmsBoardList
-      console.log(response)
     },
-    registerKmsBoard() {
-      console.log('registerKmsBoard')
+    async getKmsBoardRanking() {
+      const kmsBoardRankingParams = {
+        size: 3
+      }
+      const response = await getKmsBoardRanking(kmsBoardRankingParams)
+      this.kmsRankingList = response.resData.kmsRankingList
+      console.log(response)
     }
   }
 }

@@ -72,3 +72,8 @@ export function updateKmsBoardReplyPublicYn(data) {
   const url = url_prefix + '/reply/' + data.rplId + '/publicyn'
   return request.put(url, data, req_config)
 }
+
+export function getKmsBoardRanking(data) {
+  const url = url_prefix + '/ranking' + objectToParam(data)
+  return request.get(url, req_config)
+}

@@ -150,6 +150,7 @@ export default {
           response = await updateKmsBoard(this.kmsBoard)
         }
         console.log(response)
+        this.$router.back()
       } else {
         this.kmsBoardReply.rplCn = this.contents
         this.kmsBoardReply.kmsId = this.kmsId

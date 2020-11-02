@@ -8,7 +8,7 @@ import getPageTitle from '@/utils/get-page-title'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 // 권한을 체크하지 않을 Url 목록
-const whiteList = ['/login', '/mber/sbscrb', '/mber/sbscrb/indvStplatAgre']
+const whiteList = ['/login', '/mber/sbscrb', '/mber/sbscrb/indvStplatAgre', '/kms/index']
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar

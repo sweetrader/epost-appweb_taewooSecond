@@ -14,3 +14,10 @@ export function selectMberInfo(data) {
   const config = req_config
   return request.get(url, config)
 }
+
+// 회원탈퇴
+export function updateWithdrMber(data) {
+  const url = url_prefix + '/withdr'
+  const config = req_config
+  return request.put(url, data, config)
+}

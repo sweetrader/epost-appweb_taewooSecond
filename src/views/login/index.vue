@@ -4,7 +4,7 @@
       <header>
         <a href="#" class="back"/>
         <h1>로그인</h1>
-        <a href="#" class="forward">회원가입</a>
+        <a href="#" class="forward" @click="sbscrb()">회원가입</a>
       </header>
       <div class="login_pannel">
         <el-input
@@ -40,7 +40,7 @@
           <label for="easylogin_id">간편로그인</label>
         </div>
       </div>
-      <a href="#" class="repassword">비밀번 재설정 ></a>
+      <a href="#" class="repassword" @click="rePassword()">비밀번 재설정 ></a>
 
     </el-form>
   </div>
@@ -68,8 +68,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '1234',
+        username: '01050518345',
+        password: 'Qwer1234!',
         isSaveId: false
       },
       loginRules: {
@@ -152,6 +152,15 @@ export default {
           return false
         }
       })
+    },
+    // 회원가입
+    sbscrb() {
+      console.log('sbscrb')
+      this.$router.push('/sbscrb')
+    },
+    rePassword() {
+      console.log('rePassword')
+      this.$router.push('/stplat')
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {

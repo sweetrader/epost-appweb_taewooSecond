@@ -9,7 +9,7 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 // 권한을 체크하지 않을 Url 목록
 
-const whiteList = ['/login', '/mber/sbscrb', '/mber/sbscrb/indvStplatAgre', '/mber/sbscrb/indvSbscrbNice', '/kms/index']
+const whiteList = ['/login', '/mber/sbscrb', '/mber/sbscrb/indvStplatAgre', '/mber/sbscrb/indvSbscrbNice', '/kms/index', '/mber/sbscrb/createIndvSbscrb', '/mber/sbscrb/totalSbscrb']
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar
@@ -57,7 +57,7 @@ router.beforeEach(async(to, from, next) => {
     /* has no token*/
     // console.log(whiteList)
     // console.log(whiteList.indexOf(to.path))
-    // console.log('경로  :' + to.path)
+    console.log('경로  :' + to.path)
     // if (whiteList.indexOf(to.path) !== -1 || to.path.substring(0, 12) === '/mber/sbscrb') {
     //   console.log('들어옴')
     //   console.log(to.path)

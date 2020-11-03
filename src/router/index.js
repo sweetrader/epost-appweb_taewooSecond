@@ -56,6 +56,12 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/mber/sbscrb/totalSbscrb',
+    name: 'totalSbscrb',
+    component: () => import('@/views/contents/mber/sbscrb/totalSbscrb'),
+    hidden: true
+  },
+  {
     path: '/mber/sbscrb/indvStplatAgre',
     name: 'indvStplatAgre',
     component: () => import('@/views/contents/mber/sbscrb/indvStplatAgre'),
@@ -65,6 +71,12 @@ export const constantRoutes = [
     path: '/mber/sbscrb/indvSbscrbNice',
     name: 'indvSbscrbNice',
     component: () => import('@/views/contents/mber/sbscrb/indvSbscrbNice'),
+    hidden: true
+  },
+  {
+    path: '/mber/sbscrb/createIndvSbscrb',
+    name: 'createIndvSbscrb',
+    component: () => import('@/views/contents/mber/sbscrb/createIndvSbscrb'),
     hidden: true
   },
   {

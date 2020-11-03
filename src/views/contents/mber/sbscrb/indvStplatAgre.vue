@@ -122,7 +122,7 @@ export default {
         alert('동의서에 확인 해주셈')
       // this.$message.error('동의서에 확인하지 않으면 가입이 진행 되지 않습니다.')
       } else {
-        this.$router.push({ name: 'indvSbscrbNice' })
+        this.$router.push({ name: 'indvSbscrbNice', params: { subAgreCheakYn_4: this.subAgreCheakYn[3] }})
       }
     }
   }

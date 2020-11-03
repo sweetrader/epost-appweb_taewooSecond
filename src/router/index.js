@@ -68,6 +68,24 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/kms/ranking',
+    name: 'KmsRanking',
+    component: () => import('@/views/contents/kms/ranking'),
+    hidden: true
+  },
+  {
+    path: '/kms/create',
+    name: 'CreateKmsEditor',
+    component: () => import('@/views/contents/kms/create'),
+    hidden: true
+  },
+  {
+    path: '/kms/index',
+    name: 'KmsMain',
+    component: () => import('@/views/contents/kms/index'),
+    hidden: true
+  },
+  {
     path: '/404',
     component: () => import('@/views/error-page/404'),
     hidden: true

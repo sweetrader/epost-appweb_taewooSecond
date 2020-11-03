@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <header>
-      <a href="#" class="back"/><h1>회원가입</h1>
+      <a href="#" class="back" @click="historyBack()"/><h1>회원가입</h1>
     </header>
 
     <div class="join_category">
@@ -32,8 +32,10 @@ export default {
   },
   methods: {
     moveIndvStplatAgre() {
-      console.log('ddd')
       this.$router.push({ name: 'indvStplatAgre' })
+    },
+    historyBack() {
+      this.$router.go(-1)
     }
   }
 }

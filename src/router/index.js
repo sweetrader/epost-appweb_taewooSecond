@@ -53,21 +53,19 @@ export const constantRoutes = [
     path: '/mber/sbscrb',
     name: 'sbscrb',
     component: () => import('@/views/contents/mber/sbscrb/sbscrb'),
-    hidden: true,
-    children: [
-      {
-        path: '/sbscrb/stplat',
-        name: 'stplat',
-        component: () => import('@/views/contents/mber/sbscrb/stplat'),
-        hidden: true
-      },
-      {
-        path: 'indvStplatAgre',
-        name: 'indvStplatAgre',
-        component: () => import('@/views/contents/mber/sbscrb/indvStplatAgre'),
-        hidden: true
-      }
-    ]
+    hidden: true
+  },
+  {
+    path: '/mber/sbscrb/indvStplatAgre',
+    name: 'indvStplatAgre',
+    component: () => import('@/views/contents/mber/sbscrb/indvStplatAgre'),
+    hidden: true
+  },
+  {
+    path: '/mber/sbscrb/indvSbscrbNice',
+    name: 'indvSbscrbNice',
+    component: () => import('@/views/contents/mber/sbscrb/indvSbscrbNice'),
+    hidden: true
   },
   {
     path: '/404',

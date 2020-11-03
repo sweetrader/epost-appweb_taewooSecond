@@ -59,7 +59,7 @@ export default {
     withdrMberButton() {
       if (!this.agreemetCheakYn) {
         alert('동의서에 확인 해주셈')
-        // this.$message.error('동의서에 확인하지 않으면 회원탈퇴가 되지 않습니다.')
+      // this.$message.error('동의서에 확인하지 않으면 회원탈퇴가 되지 않습니다.')
       } else {
         this.logout()
       }

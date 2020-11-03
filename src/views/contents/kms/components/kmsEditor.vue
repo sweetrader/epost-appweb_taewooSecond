@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <header>
-      <router-link to="$router.back()" class="back"/>
+      <a href="#" class="back" @click="$router.back()"/>
       <h1>질문 등록</h1>
     </header>
     <div class="bw">

@@ -35,6 +35,11 @@ export function isEmpty(value) {
   }
 }
 
+export function getDateStr(value) {
+  const strArr = value.split(' ')[0]
+  return strArr
+}
+
 export function getCategory() {
   var categoryList = []
 

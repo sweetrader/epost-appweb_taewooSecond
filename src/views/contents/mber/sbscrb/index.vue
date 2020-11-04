@@ -2,7 +2,8 @@
   <chooseMberSbscrb v-if="step_1" @mberSe="chooseMberSbscrb"/>
   <stplatAgre v-else-if="step_2" @historyback="historyBackGo" @stplatAgre="stplatAgreSbscrb"/>
   <sbscrbNice v-else-if="step_3" @nextStep="certiNiceSbscrb"/>
-  <indvSbscrb v-else-if="step_IndvSbscrb_4" @historyback="historyBackGo"/>
+  <indvSbscrb v-else-if="step_IndvSbscrb_4" @indvSbscrb="indvSbscrbData" @historyback="historyBackGo"/>
+  <easyLogin v-else-if="step_5" @historyback="historyBackGo"/>
 </template>
 <script>
 import waves from '@/directive/waves'
@@ -10,6 +11,7 @@ import chooseMberSbscrb from '@/views/contents/mber/sbscrb/sbscrb'
 import stplatAgre from '@/views/contents/mber/sbscrb/stplatAgre'
 import sbscrbNice from '@/views/contents/mber/sbscrb/sbscrbNice'
 import indvSbscrb from '@/views/contents/mber/sbscrb/indvSbscrb'
+import easyLogin from '@/views/contents/mber/sbscrb/easyLogin'
 // import chooseMberSbscrb from '@/views/contents/mber/sbscrb/sbscrb'
 export default {
   name: 'SbsCrbindex',
@@ -18,7 +20,8 @@ export default {
     chooseMberSbscrb,
     stplatAgre,
     sbscrbNice,
-    indvSbscrb
+    indvSbscrb,
+    easyLogin
   },
   data() {
     return {
@@ -32,7 +35,18 @@ export default {
       step_7: false,
       insertMberSbscrb: {
         mberSeCd: '',
-        subAgreCheakYn: ''
+        subAgreCheakYn: '',
+        mberNm: '',
+        birth: '',
+        gender: '',
+        mbtlNo: '',
+        mberPassword: '',
+        mberRePassword: '',
+        emailAddr: '',
+        sbscrbDe: '',
+        addr: '',
+        addrDtl: '',
+        zip: ''
       }
     }
   },
@@ -72,6 +86,21 @@ export default {
       } else {
         console.log('화면이나 달아라 뻘짓하지말고')
       }
+    },
+    indvSbscrbData(data) {
+      this.insertMberSbscrb.mberNm = data.mberNm
+      this.insertMberSbscrb.birth = data.birth
+      this.insertMberSbscrb.gender = data.gender
+      this.insertMberSbscrb.mbtlNo = data.mbtlNo
+      this.insertMberSbscrb.mberPassword = data.mberPassword
+      this.insertMberSbscrb.mberRePassword = data.mberRePassword
+      this.insertMberSbscrb.emailAddr = data.emailAddr
+      this.insertMberSbscrb.addr = data.addr
+      this.insertMberSbscrb.addrDtl = data.addrDtl
+      this.insertMberSbscrb.zip = data.zip
+
+      this.step_IndvSbscrb_4 = false
+      this.step_5 = true
     }
   }
 }

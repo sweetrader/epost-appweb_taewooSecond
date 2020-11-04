@@ -84,7 +84,7 @@ font-style: normal;
 	font-weight: normal;
 	font-style: normal;
   }
-  
+
 body {
   margin: 0;
   font-family: 'hanaL';
@@ -427,8 +427,8 @@ white-space: nowrap; overflow: hidden; text-overflow: ellipsis;  white-space: no
 .jisik_master_cell div.det span { color:#495057;font-size:14px;font-weight:normal;display:block;margin-top:-10px; }
 
 .bw { width:100%;height:calc( 100% - 49px );position:fixed;top:49px;left:0px;background:white;padding-left:15px;padding-right:15px;padding-top:30px;box-sizing:border-box; }
-.bw input[type="text"] { height:40px;width:100%;box-sizing:border-box;border:1px solid #adb5bd;border-radius:3px;padding-left:10px;color:black;font-size:14px;font-weight:normal;margin-bottom:10px; }
-.bw input[type="text"]::placeholder { color:#ADB5BD }
+.bw input[type="text"] { height:40px;width:100%;box-sizing:border-box;border:1px solid #adb5bd;border-radius:3px;padding-left:10px;color:black;font-size:14px;font-weight:normal; font-family: 'Noto Sans KR', sans-serif !important; margin-bottom:10px; }
+.bw input[type="text"]::placeholder { font-size:14px;font-weight:normal; font-family: 'Noto Sans KR', sans-serif !important; color:#ADB5BD }
 .bw textarea { width:100%;padding:10px;box-sizing:border-box;border:1px solid #adb5bd;border-radius:3px;color:black;font-size:14px;font-weight:normal;font-family: 'Noto Sans KR', sans-serif !important;resize:none;outline:none;height:229px; }
 .bw textarea::placeholder { color:#ADB5BD }
 .question_title2 { position:relative;width:100%;height:auto;min-height:78px;padding:15px;box-sizing:border-box;padding-top:20px;padding-bottom:20px;border-bottom:1px solid #ced4da;overflow:visible; }

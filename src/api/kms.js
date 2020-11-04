@@ -77,3 +77,8 @@ export function getKmsBoardRanking(data) {
   const url = url_prefix + '/ranking' + objectToParam(data)
   return request.get(url, req_config)
 }
+
+export function getKmsBoardReplySearchList(data) {
+  const url = url_prefix + '/reply' + objectToParam(data)
+  return request.get(url, req_config)
+}

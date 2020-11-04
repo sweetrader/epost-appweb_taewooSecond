@@ -17,7 +17,8 @@
             <span>{{ getDateStr(kmsBoardReply.registerDt) }}</span>
           </div>
         </div>
-        <a href="#" class="seemorethings">더보기</a>
+        <router-link :to="{ name: 'KmsRankingList', params: { registerId: kmsRanking.registerId, registerNm: kmsRanking.registerNm }}" class="seemorethings">더보기</router-link>
+        <!-- <a href="#" class="seemorethings">더보기</a> -->
       </div>
     </div>
   </div>

@@ -17,6 +17,7 @@ import system from './modules/system'
 import myInfo from './modules/myInfo'
 import mberInfo from './modules/mberInfo'
 import space from './modules/space'
+import kms from './modules/kms'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -58,24 +59,6 @@ export const constantRoutes = [
     props: true
   },
   {
-    path: '/kms/ranking',
-    name: 'KmsRanking',
-    component: () => import('@/views/contents/kms/ranking'),
-    hidden: true
-  },
-  {
-    path: '/kms/create',
-    name: 'CreateKmsEditor',
-    component: () => import('@/views/contents/kms/create'),
-    hidden: true
-  },
-  {
-    path: '/kms/index',
-    name: 'KmsMain',
-    component: () => import('@/views/contents/kms/index'),
-    hidden: true
-  },
-  {
     path: '/404',
     component: () => import('@/views/error-page/404'),
     hidden: true
@@ -115,6 +98,7 @@ export const asyncRoutes = [
   myInfo,
   mberInfo,
   space,
+  kms,
 
   /** 라우터에 명시하지 않은 url 처리 **/
   { path: '*', redirect: '/404', hidden: true }

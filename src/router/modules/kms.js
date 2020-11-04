@@ -1,11 +1,11 @@
 /** When your routing table is too long, you can split it into small modules **/
 
-import Layout2 from '@/layout/index2'
+import Layout from '@/layout'
 
 const kms = {
   path: '/kms',
   redirect: '/kms/index',
-  component: Layout2,
+  component: Layout,
   children: [
     {
       path: 'index',

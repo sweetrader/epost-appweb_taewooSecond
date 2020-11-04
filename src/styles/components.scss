@@ -1,0 +1,158 @@
+// ----------------------
+// header
+// ----------------------
+* {
+    margin: 0;
+    padding: 0;
+}
+#header{
+    width:100%;
+    height:rem(96);
+    line-height:rem(96);
+    background:white;   
+    position: relative;
+    top:0px;
+    left:0px;
+    z-index:80;
+    font-weight:normal;
+    display: flex;
+    align-items: center;
+    
+    .left-aria {
+        flex: 1;
+        img{
+            width: rem(72);
+            display: flex;
+        }
+    }
+    .center-aria{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        p{
+            @include font-style(28, $bk, NotoSans-Regular);    
+        }
+    }
+    .right-aria{
+        flex: 1;
+        display: flex;
+        flex-direction: row-reverse;
+        .btnX{
+            width: rem(52);
+            margin-right: rem(30);
+        }
+        .btnMenu{
+            width: rem(48);
+            margin-right: rem(20);
+        }
+        .btnRegister{
+            margin-right: rem(30);
+            @include font-style(24, $deepGy, NotoSans-Regular);
+        }
+        
+    }
+    .white {
+        color: #fff!important;    
+    }
+}
+
+.dark {
+    background-color: $header-bg!important;
+}
+
+// ----------------------
+// tab
+// ----------------------
+#tab{
+    width: 100%;
+    height: rem(87);
+    line-height: rem(87);
+    display: flex;
+    background:white;   
+    text-align: center;
+    border-bottom: 1px solid #CED4DA;
+    
+    section{
+        flex: 1;
+        p{  
+            margin: 0 auto;
+            width: max-content;
+            height: rem(81);
+            @include font-style(24, $gy, NotoSans-Regular);
+        }
+        .active{
+            border-bottom: 3px solid $red;
+            padding: 0 rem(10);
+            @include font-style(24, $bk, NotoSans-Regular);
+        }
+    }
+}
+
+
+// ----------------------
+// bottombutton
+// ----------------------
+
+#bottom-button{
+    height: rem(100);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: $red;
+    .two-button{
+        height: rem(100);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        cursor: pointer;
+        justify-content: center;
+        .left-button{
+            border-right: 1px solid white;
+            text-align: center;
+            align-self: center;
+            @include font-style(28, white, NotoSans-Regular);
+        }
+        .right-button{
+            text-align: center;
+            margin: auto 0;
+            align-self: center;
+            @include font-style(28, white, NotoSans-Regular);
+        }
+    }
+    .two-button_v2 {
+        height: rem(100);
+        display: flex;
+        justify-content: center;
+        text-align: center;
+
+
+        .left-button{
+            border-right: 1px solid white;
+            text-align: center;
+            width: rem(230);
+            background-color: white;
+            line-height: rem(100);
+            @include font-style(28, $gy, NotoSans-Regular);
+        }
+        .right-button{
+            text-align: center;
+            flex: 1;
+            line-height: rem(100);
+
+            @include font-style(28, white, NotoSans-Regular);
+        }
+    }
+    .one-button{
+        .one-button-click{
+            line-height: rem(100);
+            text-align: center;
+            @include font-style(28, white, NotoSans-Regular);
+        }
+
+        .invalid{
+            background-color: #EEEEEE!important;
+            color: #CED4DA!important;
+        }
+    }
+}

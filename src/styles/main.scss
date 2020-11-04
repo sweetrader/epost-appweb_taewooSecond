@@ -1,0 +1,372 @@
+input, textarea{
+    all: unset;
+    width: 100%;
+    @include font-style(28, $bk, NotoSans-Regular);
+    &::placeholder {
+        @include font-style(28, $placehorder, NotoSans-Regular);
+    }
+}
+.input-wraper{
+    display: flex;
+    flex: 1;
+    width: 100%;    
+    border-radius: rem(10);
+    height: rem(82);
+    line-height: rem(82);
+    border: 1px solid $border;
+    margin-bottom: rem(20);  
+    background-color: white;                  
+    @include sidePadding(20);
+   
+}
+.textarea-wraper{
+    display: flex;
+    flex: 1;
+    width: 100%; 
+    border-radius: rem(10);
+    height: rem(153);
+    border: 1px solid $border;
+    margin-bottom: rem(20);  
+    padding: rem(20) 0;
+    background-color: white;                  
+    @include sidePadding(20);
+}
+select {
+    all: unset;
+    width: 100%;
+    @include background('../assets/image/space/icons/path-below.png', rem(36) rem(36), 98% 50%);
+    @include font-style(28, $placehorder, NotoSans-Regular);
+}
+.select-placehorder{
+    @include font-style(28, $placehorder, NotoSans-Regular);
+}
+.mx-datepicker{
+    width: 100%;
+    height: rem(82);
+    .mx-input{
+
+    }
+}
+#resister-post{
+    padding-bottom: rem(100); 
+
+    .section{
+        background: white;
+        margin-top: rem(14);
+        .title{
+            height: rem(112);
+            line-height: rem(112);
+            border-bottom: 1px solid $border;
+            display: flex;
+            @include font-style(32, $bk, NotoSans-Regular);
+            @include sidePadding(30);
+            
+            p{
+                flex: 1;
+            }
+            .button{
+                padding-right: rem(40);
+                text-align: right;
+                @include font-style(24, $gy, NotoSans-Regular);
+                @include background('../assets/image/space/icons/path-right-gy.png', rem(36) rem(36), 100% 50%)
+            }
+        }
+        .contents-wraper{
+            @include font-style(28, $bk, NotoSans-Regular);
+            @include sidePadding(30);
+            .each-text-of-two{
+                // width: max-content;
+                height: rem(82);
+                line-height: rem(82);
+                text-align: right;
+                @include sidePadding(15);
+                @include font-style(28, $gy, NotoSans-Regular);
+            }
+            .inner-content{
+                margin-top: rem(60);
+                .wraper-two-div{
+                    width: 100%;
+                    display: flex;
+                    .inner-wrap{
+                        width: max-content;
+                        display: flex;                        
+                    }                  
+                    .checkbox{               
+                        margin-left: auto;  
+                        height: rem(82);
+                        line-height: rem(82);
+                        padding-left: rem(50);
+                        box-sizing: border-box;
+                        @include background('../assets/image/space/icons/check-off.png', rem(42) rem(42), 0 50%);
+                        @include font-style(28, $gy, NotoSans-Regular);
+                    }
+                    .on {
+                        @include background('../assets/image/space/icons/check-on.png', rem(42) rem(42), 0 50%);
+                    }
+                
+                }                
+                
+                .define-width{
+                    flex: none;
+                    width: rem(302)!important;
+                }
+                .two-wraper{
+                    display: flex;
+                    padding-right: 0;
+                    input {
+                        flex-grow: 1;
+                    }
+                    .search{
+                        text-align: center;
+                        border-left: 1px solid $border;
+                        width: rem(110);
+                        @include font-style(28, $gy, NotoSans-Regular);
+                    }
+                }
+                .content-title{
+                    display: flex;
+                    margin-bottom: rem(10);
+                    p{
+                        flex-grow: 1;
+                        @include font-style(28, $purple, NotoSans-Regular);
+                    }
+                    .guide{
+                        flex-grow: 0;
+                        padding-right: rem(45);
+                        @include background('../assets/image/space/icons/question.png', rem(29) rem(29), 95% 50%);
+                        @include font-style(24, $gy, NotoSans-Regular);
+                    }
+                }
+                .upload-picture{
+                    
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    div{
+                        align-self: center;
+                        img{
+                            width: rem(37);
+                            vertical-align: middle;
+                        }
+                        p{
+                            display: inline-block;
+                            margin-left: rem(10);
+                            @include font-style(28, $bk, NotoSans-Regular);
+                            span{
+                                @include font-style(28, $red, NotoSans-Regular);
+
+                            }
+
+                        }
+                        
+                    }
+                }
+                .notice{
+                    margin-top: rem(30);
+                    margin-bottom: rem(56);
+                    @include font-style(24, $gy, NotoSans-Regular);
+                    @include sidePadding(30);
+                }
+                .photo-list-area{
+                    width: 100%;
+                    background-color: $btn-bg;
+                    border-radius: rem(10);
+                    padding: rem(10) 0;
+                    @include sidePadding(20);
+                    .each-photo{
+                        display: flex;
+                        padding: rem(5) 0;
+                        p{
+                            flex-grow: 1;
+                            @include font-style(28, #495057, NotoSans-Regular);
+                        }
+                        img{
+                            width: rem(36);
+                        }
+                    }
+                }
+                &:last-child{
+                    padding-bottom: rem(60);
+                }
+            }
+            .two-checkbox-wraper{
+                
+                @include font-style(28, $gy, NotoSans-Regular);
+                *{
+                    flex: 1;
+                }
+                dl{
+                    display: flex;
+                    .checkbox-inner{
+                        display: flex;                        
+                        div{
+                            padding-left: rem(60);
+                            @include background('../assets/image/space/icons/check-off.png', rem(42) rem(42), 0 50%);
+                        }
+                        .on {
+                            @include background('../assets/image/space/icons/check-on.png', rem(42) rem(42), 0 50%);
+                        }
+                    }
+                    &:last-child{
+                        margin-top: rem(20);
+                    }
+                }
+             
+            }
+            .two-button-wrap{
+                width: 100%;
+                display: flex;
+                height: rem(82);
+                line-height: rem(82);
+                border-radius: rem(10);
+                margin-bottom: rem(20);
+                background-color: $btn-bg;
+                .each-button{
+                    border: 1px solid $border;
+                    text-align: center;
+                    flex: 1;
+                }
+                .on{
+                    background-color: white;
+                    border: 1px solid $red;
+                    color: $red;
+                    img{
+                        width: rem(22);
+                        margin-right: rem(10);
+                    }
+                }
+                .left {
+                    border-left: none;
+                    border-radius: 0 rem(10) rem(10) 0;
+                }
+                .right {
+                    border-right: none;
+                    border-radius: rem(10) 0 0 rem(10);
+                }
+                .border-radius-left {
+                    border-radius: rem(10) 0 0 rem(10);
+                }
+                .border-radius-right {
+                    border-radius: 0 rem(10) rem(10) 0;
+                }
+            }
+            .check-available-party {
+                @include font-style(24, $gy, NotoSans-Regular);
+            }
+        }
+    }
+
+    .modal {
+        z-index: 100;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: rem(550);
+        background-color: white;
+        border: 1px solid #495057;
+        padding: rem(50) 0;
+        -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
+        -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
+        text-align: center;
+        line-height: normal;
+        @include sidePadding(40);
+        .xButton{
+            position: absolute;
+            top:rem(10);
+            right: rem(10);
+            width: rem(52);
+        }
+        .explainImg{
+            width: 100%;
+        }
+        p{
+            padding: rem(20) 0;
+            @include font-style(24, $red, NotoSans-Regular);
+        }
+        dl{
+            display: flex;
+            border-top: 1px solid $border;
+            padding-top: rem(20);
+            @include font-style(24, $gy, NotoSans-Regular);
+            ul{
+                text-align: left;
+                flex-grow: 1;
+                padding-left: rem(60);
+                box-sizing: border-box;
+                font-weight: normal;
+            }
+            
+        }
+    }
+}
+
+// 공간 정보 불러오기 페이지
+#space-info-list{
+    background-color: white;
+    line-height: normal;
+    padding-bottom: rem(150);
+    .search-section{
+        margin-top: rem(20);
+        @include sidePadding(30);
+        input {
+            @include background('../assets/image/space/icons/search.png', rem(25.39) rem(25.39), 100% 50%);
+        }
+    }
+    .list-section {        
+        .list-item-wraper{
+            border-bottom: 1px solid $border;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            padding: rem(35) 0;
+            @supports (display: grid) {
+                display: grid;
+                grid-template-columns: auto 1fr auto;
+            }
+            @include sidePadding(30);
+            .checkbox{
+                width: rem(45);
+                height: rem(45);
+                padding-right: rem(20);
+            }
+            .on{
+                @include background('../assets/image/space/icons/check-on.png', rem(42) rem(42), 0 50%);
+            }
+            .off{
+                @include background('../assets/image/space/icons/check-off.png', rem(42) rem(42), 0 50%);
+            }
+            .middle-aria{
+                flex-grow: 1;
+                .ctgr-space{
+                    width: max-content;
+                    border-radius: rem(5);
+                    border: 1px solid $blue;
+                    padding: 0 rem(10); 
+                    margin-bottom: rem(10);
+                    p{
+                        @include font-style(20, $blue, NotoSans-Regular);
+                    }
+                }
+                .building-name{
+                    margin-bottom: rem(10);
+                    @include font-style(28, $bk, NotoSans-Regular);
+
+                }
+                .building-addr{
+                    @include font-style(24, gy, NotoSans-Regular);
+                }
+                .register-date{
+                    @include font-style(24, gy, NotoSans-Regular);
+                }
+            }
+            .right-aria{
+                width: rem(72);
+                height: rem(72);
+                @include background('../assets/image/space/icons/path-right-bk.png', rem(72) rem(72), 0 0);
+            }
+        }
+    }
+}

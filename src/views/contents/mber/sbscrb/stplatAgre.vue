@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <header>
-      <a href="#" class="back" @click="historyBack()"/><h1>개인 회원가입</h1>
+      <a href="#" class="back" @click="historyBack()"/><h1>회원가입</h1>
     </header>
     <div class="wrap">
       <div class="cont_join">
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     historyBack() {
-      this.$router.go(-1)
+      this.$emit('historyback', 2)
     },
     nextBtnActiveCheak() {
       if (this.subAgreCheakYn[0] === true && this.subAgreCheakYn[1] === true && this.subAgreCheakYn[2] === true) {
@@ -120,7 +120,7 @@ export default {
     moveCertiNice() {
       if (!this.nextBtnActive) {
         alert('동의서에 확인 해주셈')
-      // this.$message.error('동의서에 확인하지 않으면 가입이 진행 되지 않습니다.')
+        // this.$message.error('동의서에 확인하지 않으면 가입이 진행 되지 않습니다.')
       } else {
         if (this.subAgreCheakYn[3] === true) {
           this.subAgreCheakYn_4 = 'Y'
@@ -128,7 +128,7 @@ export default {
           this.subAgreCheakYn_4 = 'N'
         }
         // 상위 겍체로 값 올려주는 함수(부모쪽 함수로 변수를 전달해 주는 중요하 함수 기능이다.)
-        this.$emit('certiNice', this.subAgreCheakYn_4)
+        this.$emit('stplatAgre', this.subAgreCheakYn_4)
         // this.$router.push({ name: 'indvSbscrbNice', params: { subAgreCheakYn_4: this.subAgreCheakYn[3] }})
       }
     }

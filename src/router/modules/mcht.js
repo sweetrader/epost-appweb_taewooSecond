@@ -15,7 +15,7 @@ const mcht = {
   children: [
     {
       path: 'list',
-      name: 'MchtManagement',
+      name: 'Mchtlist',
       component: () => import('@/views/contents/management/mcht/index'),
       meta: {
         icon: 'user',

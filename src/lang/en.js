@@ -23,7 +23,13 @@ export default {
     'manager': 'Admin',
     'mngCreate': 'Register Account',
     'mngEdit': 'Edit Account',
-    'myInfo': 'My Information'
+    'myInfo': 'My Information',
+    spc: {
+      spc: 'Space Management',
+      space: 'Space',
+      rent: 'Rent',
+      dmand: 'Demand'
+    }
   },
   // --------------- 버튼
   btn: {
@@ -56,7 +62,8 @@ export default {
     excelSample: 'Sample File',
     saveTemp: 'Save Draft',
     duplCheck: 'Duplicate Check',
-    checkOk: 'Available'
+    checkOk: 'Available',
+    addRent: 'Add Rent'
   },
   // --------------- Placeholder, 흐림 글씨
   placeholder: {
@@ -111,7 +118,18 @@ export default {
     'manager': 'Admin',
     'mngCreate': 'Register Admin',
     'mngEdit': 'Edit Admin',
-    'myInfo': 'My Info'
+    'myInfo': 'My Info',
+    spc: {
+      space: 'Space',
+      spaceInsert: 'Add Space',
+      spaceEdit: 'Edit Space',
+      rent: 'Rent',
+      rentInsert: 'Add Rent',
+      rentEdit: 'Edit Rent',
+      dmand: 'Demand',
+      dmandInsert: 'Add Demand',
+      dmandEdit: 'Edit Demand'
+    }
   },
   // --------------- 경고, 에러, 성공 메세지 문구 등
   message: {
@@ -570,5 +588,40 @@ export default {
     eml: 'Email',
     regDttm: 'Registered',
     modDttm: 'Edited'
+  },
+  // 공간
+  spc: {
+    no: 'No',
+    spcRsrcId: 'ID',
+    rentRsrcId: 'ID',
+    dmandCndtnId: 'ID',
+    mberId: 'Member ID',
+    addr: 'Address',
+    addrDtl: 'Address Detail',
+    useCl: 'Use Classification',
+    rentType: 'Rent Type',
+    rentBgnDe: 'Rent Begin Date',
+    sj: 'Subject',
+    dscrp: 'Description'
+  },
+  kms: {
+    tab: {
+      all: 'all',
+      noAnswer: 'No Answer',
+      master: 'Master'
+    },
+    search: {
+      title: 'title',
+      contents: 'contents',
+      id: 'user id'
+    },
+    categoryOptions: {
+      dlvy: 'dlvy',
+      prcCl: 'prcCl',
+      dlvyPic: 'dlvyPic',
+      vhcTrns: 'vhcTrns',
+      spcRent: 'spcRent',
+      roomRes: 'roomRes'
+    }
   }
 }

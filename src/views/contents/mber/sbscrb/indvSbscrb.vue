@@ -33,13 +33,13 @@
       </ul>
       <input v-model="indvInsertData.emailAddr" type="text" placeholder="이메일 입력">
       <div class="basic_address">
-        <input id="address" v-model="indvInsertData.addr" type="text" placeholder="기본주소 입력"><button @click="execDaumPostSearch">찾기</button>
+        <input id="address" type="text" placeholder="기본주소 입력" readonly><button @click="execDaumPostSearch">찾기</button>
       </div>
       <div>
-        <input id="postNumber" v-model="indvInsertData.zip" type="text" placeholder="우편번호" style="width: 25%;" readonly>
+        <input id="postNumber" type="text" placeholder="우편번호" style="width: 25%;" readonly>
         <input id="detailAddress" v-model="indvInsertData.addrDtl" type="text" placeholder="상세주소 입력" style="width: 74%;">
       </div>
-      <a href="#" class="next_btn2" @click="nextBtnClick()">다음</a>
+      <a href="#" :class="{ 'next_btn2' : !nextBtnActive, 'next_btn2 itsok' : nextBtnActive }" @click="nextBtnClick()">다음</a>
     </div>
   </div>
 </template>
@@ -51,6 +51,7 @@ export default {
   directives: { waves },
   data() {
     return {
+      nextBtnActive: true,
       indvInsertData: {
         mberNm: '',
         birth: '',
@@ -71,19 +72,22 @@ export default {
       }
     }
   },
-  watch: {
-    // indvInsertData: {
-    //   deep: true,
-    //   handler(after) {
-    //     console.log(after.addr.curr)
-    //     console.log(after.mberPassword)
+  computed: {
+    // nextBtnActive() {
+    //   if(this.valiCheak()){
+    //     this.nextBtnActive = true
+    //   }else {
+    //     this.nextBtnActive = false
     //   }
+    //   return nextBtnActive
     // }
   },
   created() {
-    const recaptchaScript = document.createElement('script')
-    recaptchaScript.setAttribute('src', 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js')
-    document.head.appendChild(recaptchaScript)
+    this.$nextTick(function() {
+      const recaptchaScript = document.createElement('script')
+      recaptchaScript.setAttribute('src', 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js')
+      document.head.appendChild(recaptchaScript)
+    })
 
     this.indvInsertData.mberNm = '성춘향'
     this.indvInsertData.birth = '17540804'
@@ -139,7 +143,12 @@ export default {
       }).open()
     },
     nextBtnClick() {
-      console.log(this.valiCheak())
+      // 상위 겍체로 값 올려주는 함수(부모쪽 함수로 변수를 전달해 주는 중요하 함수 기능이다.)
+      if (this.valiCheak()) {
+        this.$emit('indvSbscrb', this.indvInsertData)
+      } else {
+        alert('다음으로 진행 하는데 있어 유효성 검증에 문제가 있답니다.')
+      }
     },
     valiCheak() {
       this.valirule.emailAddrCheak = validEmail(this.indvInsertData.emailAddr)
@@ -159,17 +168,14 @@ export default {
         // this.$message.error('이메일 형식을 지켜 주셔야 합니다.')
         return false
       } else if (this.indvInsertData.addr === null || this.indvInsertData.addr === '') {
-        console.log(this.indvInsertData.addr)
         alert('주소찾기를 눌러주세요.')
         // this.$message.error('이메일 형식을 지켜 주셔야 합니다.')
         return false
       } else if (this.indvInsertData.addrDtl === null || this.indvInsertData.addrDtl === '') {
-        console.log(this.indvInsertData.addrDtl)
         alert('상세주소를 입력해주세요')
         // this.$message.error('이메일 형식을 지켜 주셔야 합니다.')
         return false
       } else if (this.indvInsertData.zip === null || this.indvInsertData.zip === '') {
-        console.log(this.indvInsertData.zip)
         alert('주소찾기를 눌러주세요.')
         // this.$message.error('이메일 형식을 지켜 주셔야 합니다.')
         return false

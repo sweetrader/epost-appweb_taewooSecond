@@ -155,7 +155,7 @@ export default {
     },
     // 회원가입
     moveMberSbscrb() {
-      this.$router.push({ name: 'sbscrb' })
+      this.$router.push({ name: 'mberSbscrb' })
     },
     rePassword() {
       console.log('rePassword')

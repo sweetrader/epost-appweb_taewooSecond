@@ -46,9 +46,15 @@ import { validEmail } from '@/utils/validate'
 export default {
   name: 'CreateIndvSbscrb',
   directives: { waves },
+  props: {
+  // 유형(등록: add, 수정: edit)
+    subAgreCheakYn4: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
-      subAgreCheakYn_4: false,
       indvInsertData: {
         mberNm: '',
         birth: '',
@@ -74,7 +80,6 @@ export default {
     }
   },
   created() {
-    this.subAgreCheakYn_4 = this.$route.params.subAgreCheakYn_4
     this.indvInsertData.mberNm = '성춘향'
     this.indvInsertData.birth = '17540804'
     this.indvInsertData.gender = '여'

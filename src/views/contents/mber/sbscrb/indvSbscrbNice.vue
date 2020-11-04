@@ -15,13 +15,20 @@ import waves from '@/directive/waves'
 export default {
   name: 'IndvSbscrbNice',
   directives: { waves },
+  props: {
+  // 유형(등록: add, 수정: edit)
+    subAgreCheakYn4: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
-      subAgreCheakYn_4: false
+
     }
   },
   created() {
-    this.subAgreCheakYn_4 = this.$route.params.subAgreCheakYn_4
+    console.log(this.subAgreCheakYn_4)
   },
   methods: {
     moveCreateIndvSbscrb() {

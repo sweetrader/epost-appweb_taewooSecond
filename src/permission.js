@@ -9,7 +9,7 @@ NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 // 권한을 체크하지 않을 Url 목록
 
-const whiteList = ['/login', '/mber/sbscrb', '/mber/sbscrb/indvStplatAgre', '/mber/sbscrb/indvSbscrbNice', '/kms/index', '/mber/sbscrb/createIndvSbscrb', '/mber/sbscrb/totalSbscrb']
+const whiteList = ['/login', '/mber/sbscrb/mberSbscrb', '/kms/index']
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar

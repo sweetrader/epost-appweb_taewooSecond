@@ -30,7 +30,7 @@
           <span>동의 거부시 상품 할인 및 이벤트 정보 안내 서비스가<br>제한될 수 있습니다.</span>
         </div>
       </div>
-      <a href="#" :class="{ 'next_btn' : !nextBtnActive, 'next_btn itsok' : nextBtnActive }" @click="moveIndvSbscrbNice()">다음</a>
+      <a href="#" :class="{ 'next_btn' : !nextBtnActive, 'next_btn itsok' : nextBtnActive }" @click="moveCertiNice()">다음</a>
     </div>
   </div>
 </template>
@@ -44,11 +44,11 @@ export default {
     return {
       totalAgreCheakYn: false,
       nextBtnActive: false,
-      subAgreCheakYn: [false, false, false, false]
+      subAgreCheakYn: [false, false, false, false],
+      subAgreCheakYn_4: ''
     }
   },
   created() {
-    console.log('불러요')
   },
   methods: {
     historyBack() {
@@ -117,12 +117,19 @@ export default {
           break
       }
     },
-    moveIndvSbscrbNice() {
+    moveCertiNice() {
       if (!this.nextBtnActive) {
         alert('동의서에 확인 해주셈')
       // this.$message.error('동의서에 확인하지 않으면 가입이 진행 되지 않습니다.')
       } else {
-        this.$router.push({ name: 'indvSbscrbNice', params: { subAgreCheakYn_4: this.subAgreCheakYn[3] }})
+        if (this.subAgreCheakYn[3] === true) {
+          this.subAgreCheakYn_4 = 'Y'
+        } else {
+          this.subAgreCheakYn_4 = 'N'
+        }
+        // 상위 겍체로 값 올려주는 함수(부모쪽 함수로 변수를 전달해 주는 중요하 함수 기능이다.)
+        this.$emit('certiNice', this.subAgreCheakYn_4)
+        // this.$router.push({ name: 'indvSbscrbNice', params: { subAgreCheakYn_4: this.subAgreCheakYn[3] }})
       }
     }
   }

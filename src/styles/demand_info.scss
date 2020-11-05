@@ -1,0 +1,398 @@
+// 수요정보 리스트
+#demand_info {
+    background-color: white;
+    .region_filter_section{
+        margin-top: rem(20);
+        display: flex;
+        padding-left: rem(20);
+        box-sizing: border-box;
+        padding-bottom: rem(20);
+        .address-wraper{
+            height: rem(82);
+            line-height: rem(82);
+            width: rem(342);
+            border: 1px solid $border;
+            text-align: left;
+            border-radius: rem(10);    
+            margin-right: rem(20);           
+            @include background('../assets/image/space/icons/map.png', rem(26.6) rem(31.92), rem(20) 50%);
+            @include font-style(28, $bk, NotoSans-Regular);
+            @include sidePadding(20);
+            padding-left: rem(60);
+        }
+        .select-wraper{
+            flex-grow: 1;
+            select {
+                text-align: left;
+                line-height: rem(82);
+                height: rem(82);
+                border: 1px solid $border;
+                border-radius: rem(10);
+
+                @include font-style(28, #ADB5BD, NotoSans-Regular);
+                @include sidePadding(20);
+            }
+        }
+        .filter-wraper{
+            width: rem(82);
+            height: rem(82);
+            @include background('../assets/image/space/icons/filter.png', rem(82) rem(82), 0 50%);
+        }
+    }   
+    .list-section{
+        .list-top-aria{
+            height: rem(72);
+            background-color: #F5F5F5;
+            display: flex;         
+
+            @include sidePadding(30);   
+            dt{
+                flex: 1;
+                display: flex;
+                align-items: center;
+                p{
+                    @include font-style(24, $gy, NotoSans-Regular);
+                }
+
+            }
+            .toggle-wraper{
+                justify-content: flex-end;
+                div{
+                    height: max-content;
+                    display: flex;
+                    img{
+                        width: rem(71);
+                        margin-left: rem(20);
+                    }
+                }
+               
+            }
+        }   
+        .list-aria{
+            .each-list{
+                display: flex;
+                padding-top: rem(41);
+                padding-bottom: rem(35);
+                border-top: 1px solid $border;
+                @include sidePadding(30);
+                p{
+                    line-height: normal;
+                    @include font-style(24, $gy, NotoSans-Regular);
+                }
+                .item-left-wraper{
+                    flex-grow: 1;
+                    .left-top-aria{
+                        display: flex;
+                        margin-bottom: rem(10);
+                        .space-type{
+                            width: rem(74);
+                            border: 1px solid $blue;
+                            text-align: center;
+                            line-height: rem(31);
+                            height: rem(31);
+                            border-radius: rem(5);
+                            margin-right: rem(20);
+                            @include font-style(20, $blue, NotoSans-Regular);
+                        }
+                    }
+                    .left-title-aria{
+                        .title{
+                            margin-bottom: rem(10);
+                            @include font-style(30, $bk, NotoSans-Regular);
+                            @include ellipsis(504);
+                        }
+                    }
+                    .left-middle-aria, .left-bottom-aria{
+                        display: flex;
+                        
+                        p{
+                            &:last-child{
+                                margin-left: rem(32); 
+                            } 
+                        }  
+                    }
+                }
+                .item-right-wraper{
+                    display: flex;
+                    align-items: center;
+                    img{
+                        width: rem(92);
+                        height: rem(92);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 수요정보 상세
+#demand_detail{
+    line-height: normal;
+    padding-bottom: rem(100);
+    .top-section{
+        background-color: white;
+        text-align: center;
+        padding-top: rem(40);  
+        padding-bottom: rem(45);     
+        dl {
+            padding-bottom: rem(37);
+            border-bottom: 1px solid $border;
+            @include sidePadding(30);
+            .space-type{
+                margin: 0 auto;
+                width: rem(74);
+                border: 1px solid $blue;
+                text-align: center;
+                line-height: rem(31);
+                height: rem(31);
+                border-radius: rem(5);
+                margin-bottom: rem(10);
+                p{
+                    @include font-style(20, $blue, NotoSans-Regular);
+                }
+            }
+            .title{
+                margin-bottom: rem(10);
+                @include font-style(32, $bk, NotoSans-Regular);
+            }
+            .register-date{
+                @include font-style(24, $gy, NotoSans-Regular);
+            }
+        }
+        .suggestion-contents{
+            padding-top: rem(40);  
+            text-align: left;
+            @include sidePadding(30);
+            @include font-style(28, $bk, NotoSans-Regular);
+        }
+    }
+    .bottom-section{
+        background-color: white;
+        margin-top: rem(14);
+        dl {
+            border-bottom: 1px solid $border;
+            padding: rem(36) 0 rem(34) 0;
+            @include sidePadding(30);
+            dt{
+                display: flex;
+                margin-bottom: rem(10);
+                .left {
+                    flex: 1;
+                    @include font-style(24, $gy, NotoSans-Regular);
+                }
+                .right {
+                    width: rem(468);
+                    @include font-style(24, $bk, NotoSans-Regular);
+                }
+                &:last-child{
+                    margin-bottom: 0;
+                }
+            }
+            &:last-child{
+                border-bottom: none;
+
+            }
+        }
+    }
+}
+
+// 제안 선택
+#suggest_space{
+    background-color: white;
+    padding-bottom: rem(100);
+    .search-section {
+        padding-top: rem(20);
+        @include sidePadding(20);
+        .input-wraper {
+            display: flex;
+            align-items: center;
+            input {
+                flex: 1;
+            }
+            .search-button-wraper{
+                display: grid;
+                align-items: center;
+                padding-left: rem(20);
+                img {
+                    width: rem(25.39);
+                }
+            }
+        }
+    }
+
+    dl {
+        .eachPost{
+            .areaname{
+                display: flex;
+                .radiobutton-wraper{
+                    margin-right: rem(10);
+                    width: rem(42);
+                    height: rem(42);
+                    @include background('../assets/image/space/icons/check-off.png', rem(42) rem(42), 0 50%);
+                }
+            }
+            
+        }
+    }
+}
+
+// 제안 상세
+#suggestion_detail {
+    line-height: normal;
+    .suggestion-info-wraper{
+        background-color: $header-bg;
+        padding-bottom: rem(61);
+        @include sidePadding(30);
+        .inner-wraper{
+            background-color: white;
+            border-radius: rem(10);
+            overflow: hidden;
+            .top-area{
+                display: flex;
+                background-color: #F9F4EB;
+                height: rem(112);
+                line-height: rem(112);
+                @include sidePadding(30);
+                *{
+                    flex: 1;
+                }
+                .suggestion-status{
+                    @include font-style(32, $red, NotoSans-Regular);
+                }
+                .date{
+                    text-align: right;
+                    @include font-style(22, #ADB5BD, NotoSans-Regular);
+                }
+            }
+            .middle-aria{
+                display: flex;
+                align-items: center;
+                padding: rem(40) 0;
+                padding-left: rem(30);
+                box-sizing: border-box;
+                @include background('../assets/image/space/icons/path-right-bk.png', rem(72) rem(72), 100% 50%);
+
+                .middle-left{
+                    img{
+                        width: rem(150);
+                    }
+                }
+                .middle-right{
+                    flex-grow: 1;
+                    text-align: center;
+                    .space-name{
+                        margin-bottom: rem(10);
+                        @include font-style(28, $purple, NotoSans-Regular);
+                    }
+                    .space-type {
+                        margin: 0 auto;
+                        width: rem(74);
+                        border: 1px solid $blue;
+                        text-align: center;
+                        line-height: rem(31);
+                        height: rem(31);
+                        border-radius: rem(5);
+                        margin-bottom: rem(10);
+                        p{
+                            @include font-style(20, $blue, NotoSans-Regular);
+                        }
+                    }
+                    .price{
+                        @include font-style(30, $bk, NotoSans-Regular);
+                    }
+                }
+               
+            }
+            .bottom-aria{
+                border-top: 1px solid $border;
+                padding-top: rem(39.5);
+                padding-bottom: rem(60);
+                @include sidePadding(30);
+                
+                div {
+                    display: flex;
+                    margin-bottom: rem(10);
+                    .left {
+                        flex: 1;
+                        @include font-style(24, $gy, NotoSans-Regular);
+                    }
+                    .right {
+                        width: rem(468);
+                        @include font-style(24, $bk, NotoSans-Regular);
+                    }
+                    &:last-child{
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+    .demand-info-wraper{
+        margin-top: rem(14);
+        .top-section{
+            background-color: white;
+            text-align: center;
+            padding-top: rem(40);  
+            padding-bottom: rem(45);     
+            dl {
+                padding-bottom: rem(37);
+                border-bottom: 1px solid $border;
+                @include sidePadding(30);
+                .space-type{
+                    margin: 0 auto;
+                    width: rem(74);
+                    border: 1px solid $blue;
+                    text-align: center;
+                    line-height: rem(31);
+                    height: rem(31);
+                    border-radius: rem(5);
+                    margin-bottom: rem(10);
+                    p{
+                        @include font-style(20, $blue, NotoSans-Regular);
+                    }
+                }
+                .title{
+                    margin-bottom: rem(10);
+                    @include font-style(32, $bk, NotoSans-Regular);
+                }
+                .register-date{
+                    @include font-style(24, $gy, NotoSans-Regular);
+                }
+            }
+            .suggestion-contents{
+                padding-top: rem(40);  
+                text-align: left;
+                @include sidePadding(30);
+                @include font-style(28, $bk, NotoSans-Regular);
+            }
+        }
+        .bottom-section{
+            background-color: white;
+            margin-top: rem(14);
+            dl {
+                border-bottom: 1px solid $border;
+                padding: rem(36) 0 rem(34) 0;
+                @include sidePadding(30);
+                dt{
+                    display: flex;
+                    margin-bottom: rem(10);
+                    .left {
+                        flex: 1;
+                        @include font-style(24, $gy, NotoSans-Regular);
+                    }
+                    .right {
+                        width: rem(468);
+                        @include font-style(24, $bk, NotoSans-Regular);
+                    }
+                    &:last-child{
+                        margin-bottom: 0;
+                    }
+                }
+                &:last-child{
+                    border-bottom: none;
+    
+                }
+            }
+        }
+    }
+}

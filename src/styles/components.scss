@@ -108,10 +108,13 @@
         cursor: pointer;
         justify-content: center;
         .left-button{
-            border-right: 1px solid white;
+            border-top: 1px solid $border;
+            height: rem(99);
+            line-height: rem(99);
+            background-color: white;
             text-align: center;
             align-self: center;
-            @include font-style(28, white, NotoSans-Regular);
+            @include font-style(28, $gy, NotoSans-Regular);
         }
         .right-button{
             text-align: center;
@@ -155,4 +158,38 @@
             color: #CED4DA!important;
         }
     }
+}
+
+
+// ----------------------
+// slide
+// ----------------------
+#slide-component {
+    width:   100%;
+    height: rem(480);
+    position: relative;
+    img{
+        height: rem(480);
+    }
+    .nav-button-left, .nav-button-right{
+        cursor: pointer;
+        z-index: 90;
+        width: rem(35);
+        height: rem(68);
+        position: absolute;
+        top: rem(171); 
+        border-radius: rem(5);
+        &:hover {
+            background-color: rgba(#141414, 0.3);
+        }
+    }
+    .nav-button-left{
+        left: rem(470);
+        // @include background('../assets/image/icons/path-left-white.png', rem(12) rem(24), 50% 50%);
+    }
+    .nav-button-right{
+        right: rem(470);
+        // @include background('../assets/image/icons/path-right-white.png', rem(12) rem(24), 50% 50%);
+    }
+    
 }

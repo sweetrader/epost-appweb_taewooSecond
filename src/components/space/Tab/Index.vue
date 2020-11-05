@@ -1,11 +1,11 @@
 <template>
   <div id="tab">
-    <section>
+    <section @click="onChangeFocusing(true)">
       <p :class="leftOn ? 'active' : ''">
         공간공유
       </p>
     </section>
-    <section>
+    <section @click="onChangeFocusing(false)">
       <p :class="!leftOn ? 'active' : ''">
         회의실예약
       </p>
@@ -15,10 +15,14 @@
 
 <script>
 export default {
-  props: {
-    leftOn: {
-      type: Boolean,
-      default: true
+  data() {
+    return {
+      leftOn: true
+    }
+  },
+  methods: {
+    onChangeFocusing(value) {
+      this.leftOn = value
     }
   }
 }

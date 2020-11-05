@@ -1,0 +1,100 @@
+#enrollment-list{
+    background: white;
+    .all-content-box{
+        .topcontainer{
+            width: rem(720);
+            height: rem(122);
+            line-height: rem(122);
+            display: grid;
+            grid-template-columns: 55% 1fr 1fr;
+            .text-box{
+                padding-left: rem(30);
+                @include font-style(24, $gy-text, NotoSans-Regular);
+            }
+            .select-text-container{
+                width: rem(236);
+                height: rem(82);
+                line-height: rem(82);
+                margin: rem(20) 0 rem(20) 0;
+                border: 1px solid $placehorder;
+                border-radius: rem(5);
+                .select-text{
+                    margin-left: rem(20);
+                    @include font-style(28, $placehorder, NotoSans-Regular);
+                }
+            }
+            .reset-button{
+                justify-self: center;
+                img{
+                    width: rem(60);
+                    height: rem(60);
+                }
+            }
+            
+        }
+    }
+}
+dl {
+    .eachPost{
+                line-height: normal;
+                border-top: 1px solid $border;
+                padding: rem(41) 0;
+                text-align: left;
+                @include sidePadding(30);
+                    .areaname{
+                        margin-bottom: rem(25);
+                        @include font-style(28, $purple, NotoSans-Regular);
+                    }
+                    .left-content-container{
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        .left-aria{
+                            margin-right: rem(25);
+                            img{
+                                width: rem(150);
+                            }
+                        }
+                        .right-aria{
+                            flex-grow: 1;
+                            .right-top{
+                                display: flex;
+                                .facility-ctgr{
+                                    border: 1px solid $blue;
+                                    margin-right: rem(10);
+                                    border-radius: rem(5);
+                                    @include sidePadding(5);
+                                    @include font-style(20, $blue, NotoSans-Regular);
+                                }
+                                .facility-size{
+                                    @include font-style(24, $gy-text, NotoSans-Regular);
+                                }
+                            }
+                            .right-title{
+                                margin: rem(10) 0;
+                                p{
+                                    @include font-style(30, $bk, NotoSans-Regular);
+                                }
+                            }
+                            .right-middle{
+                                p{
+                                    @include font-style(24, $gy-text, NotoSans-Regular);
+                                    span{
+                                        padding-right: rem(10);
+                                        margin-right: rem(10);
+                                        border-right: 1px solid #CED4DA;
+                                        &:last-child {
+                                            border-right: none;
+                                            padding-right: 0;
+                                            margin-right: 0;
+                                        }
+                                    }
+                                }
+                            }
+                            .right-bottom{
+                                @include ellipsis(460);
+                                @include font-style(24, $gy-text, NotoSans-Regular);
+                            }
+                    }
+                }
+            }
+        }

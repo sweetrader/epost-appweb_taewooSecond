@@ -1,0 +1,507 @@
+#interests {
+    background-color: white;
+    .region_filter_section{
+        margin-top: rem(20);
+        display: flex;
+        padding-left: rem(20);
+        box-sizing: border-box;
+        padding-bottom: rem(20);
+        .address-wraper{
+            height: rem(82);
+            line-height: rem(82);
+            width: rem(342);
+            border: 1px solid $border;
+            text-align: left;
+            border-radius: rem(10);    
+            margin-right: rem(20);           
+            @include background('../assets/image/space/icons/map.png', rem(26.6) rem(31.92), rem(20) 50%);
+            @include font-style(28, $bk, NotoSans-Regular);
+            @include sidePadding(20);
+            padding-left: rem(60);
+        }
+        .select-wraper{
+            flex-grow: 1;
+            select {
+                text-align: left;
+                line-height: rem(82);
+                height: rem(82);
+                border: 1px solid $border;
+                border-radius: rem(10);
+
+                @include font-style(28, #ADB5BD, NotoSans-Regular);
+                @include sidePadding(20);
+            }
+        }
+        .filter-wraper{
+            width: rem(82);
+            height: rem(82);
+            @include background('../assets/image/space/icons/filter.png', rem(82) rem(82), 0 50%);
+        }
+    }  
+    
+    .list-section{
+        .list-top-aria{
+            height: rem(72);
+            background-color: #F5F5F5;
+            display: flex;         
+            @include sidePadding(30);   
+            dt{
+                flex: 1;
+                display: flex;
+                align-items: center;
+                p{
+                    @include font-style(24, $gy, NotoSans-Regular);
+                }
+
+            }
+            .select-wraper{
+                justify-content: flex-end;
+               section {
+                   
+               }
+               
+            }
+        }   
+        .list-aria {
+            .each-post-wrap {
+                border-bottom: 1px solid $border;
+                padding: rem(41) 0;
+                @include sidePadding(30);
+                .eachPost{
+                    border: 0;
+                    padding: 0;
+                    line-height: normal;
+                    display: flex;
+                    text-align: left;
+                    .left-aria{
+                        margin-right: rem(25);
+                        img{
+                            width: rem(150);
+                        }
+                    }
+                    .right-aria{
+                        flex-grow: 1;
+                        .right-top{
+                            display: flex;
+                            .facility-ctgr{
+                                border: 1px solid $blue;
+                                margin-right: rem(10);
+                                border-radius: rem(5);
+                                @include sidePadding(5);
+                                @include font-style(20, $blue, NotoSans-Regular);
+                            }
+                            .facility-size{
+                                @include font-style(24, $gy, NotoSans-Regular);
+                            }
+                        }
+                        .right-title{
+                            margin: rem(20) 0;
+                            p{
+                                @include font-style(30, $bk, NotoSans-Regular);
+                            }
+                        }
+                        .right-middle{
+                            p{
+                                @include font-style(24, $gy, NotoSans-Regular);
+                                span{
+                                    padding-right: rem(10);
+                                    margin-right: rem(10);
+                                    border-right: 1px solid #CED4DA;
+                                    &:last-child {
+                                        border-right: none;
+                                        padding-right: 0;
+                                        margin-right: 0;
+                                    }
+                                }
+                            }
+                        }
+                        .right-bottom{
+                            @include ellipsis(460);
+                            @include font-style(24, $gy, NotoSans-Regular);
+                        }
+                    }
+                   
+                }
+                .status-wraper{
+                    text-align: center;
+                    height: rem(62);
+                    line-height: rem(62);
+                    background-color: #F5F5F5;
+                    border-radius: rem(30);
+                    margin-top: rem(20);
+                    @include font-style(24, $gy, NotoSans-Regular);
+                    .contain-blue-txt{
+                        span {
+                            color: $blue;
+                        }
+                    }
+                    .contain-red-txt{
+                        span {
+                            color: $red;
+                        }
+                    }
+                }
+
+                &:last-child{
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}
+
+#interest_detail, #request_detail{
+    .document-container{
+        padding-bottom: rem(300);
+        background-color: white;
+        .document-image{
+            text-align: center;
+            img{
+                width: 100%;
+            }
+        }
+        .document-icon-title-subtitle{
+            margin-top: rem(60);
+            text-align: center;
+            .icon-box{
+                width: rem(74);
+                height: rem(31);
+                line-height: rem(31);
+                border: 1px solid $oceanblue;
+                border-radius: rem(5);
+                margin: 0 auto;
+                .document-icon{
+                    @include font-style(20, $oceanblue, NotoSans-Regular);
+                }
+            }
+            .document-title{
+                @include font-style(32, $bk, NotoSans-Regular);
+            }
+            .document-subtitle{
+                margin-bottom: rem(55);
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+        }
+        .room-sub-info{
+            padding: rem(50);
+            margin: rem(50) rem(30) rem(40) rem(30);
+            justify-items: center;
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr 1fr 1fr;
+            background-color: $btn-bg;
+            border: 1px;
+            border-radius: rem(10);
+            text-align: center;
+            .room-area-info{
+                
+                .room-area-icon{
+                    img{
+                        width: rem(53);
+                        height: rem(53);
+                    }
+                }
+                .room-area-text{
+                    @include font-style(24, $gy, NotoSans-Regular);
+                }
+                .room-area{
+                    @include font-style(28, $deepGy, NotoSans-Regular);
+                }
+            }
+        }
+        .room-space-info{
+            .room-space-icon{
+                img{
+                    width: rem(53);
+                    height: rem(53);
+                }
+            }
+            .room-space-text{
+                @include font-style(24, $gy, NotoSans-Regular);
+            }
+            .room-space{
+                @include font-style(28, $deepGy, NotoSans-Regular);
+            }
+        }
+        .room-floors-info{
+            .room-floors-icon{
+                img{
+                    width: rem(53);
+                    height: rem(53);
+                }
+            }
+            .room-floors-text{
+                @include font-style(24, $gy, NotoSans-Regular);
+            }
+            .room-fllors{
+                @include font-style(28, $deepGy, NotoSans-Regular);
+            }
+        }
+        .room-cost-info{
+            .room-cost-icon{
+                img{
+                    width: rem(53);
+                    height: rem(53);
+                }
+            }
+            .room-cost-text{
+                @include font-style(24, $gy, NotoSans-Regular);
+            }
+            .room-cost{
+                @include font-style(28, $deepGy, NotoSans-Regular);
+            }
+        }
+        .map-chat-call{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr 1fr;
+            justify-items: center;
+            margin: 4%;
+            .map{
+                justify-items: center;
+                img{
+                    height: rem(34);
+                    width: rem(34);
+                    padding: rem(11)
+                }
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+            .chat{
+                img{
+                    height: rem(34);
+                    width: rem(34);
+                    padding: rem(11)
+                }
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+            .call{
+                img{
+                    height: rem(34);
+                    width: rem(34);
+                    padding: rem(11)
+                }
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+        }
+        .room-detail-info-day{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 10%;
+            -ms-grid-columns: 1fr 1fr 10%;
+            border-top: 14px solid $gray;
+            border-bottom: 1px solid $gray;
+            padding-left: rem(30);
+            padding-right: rem(10);
+            .room-detail-info{
+                line-height: rem(100);
+                text-align: left;
+                @include font-style(28, $bk, NotoSans-Regular);
+                
+            }
+            .room-detail-day{
+                align-self: center;
+                text-align: right;
+                @include font-style(22, $placehorder, NotoSans-Regular);
+            }
+            .room-detail-arrow{
+                align-self: center;
+                justify-self: end;
+                img{
+                    width: rem(72);
+                    height: rem(72);
+                }
+            }
+        }
+        .room-detail-info-content{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: rem(130) 1fr;
+            -ms-grid-columns: rem(130) 1fr;
+            text-align: left;
+            line-height: rem(54);
+            margin: rem(39) 0 rem(76) 0;
+            @include sidePadding(30)
+            .room-detail-title{
+                @include font-style(24, $gy-text, NotoSans-Regular);
+            }
+            .room-detail-content{
+                margin-left: rem(49);
+                @include font-style(24, $deepgray, NotoSans-Regular);
+            }
+        }
+        .producer-info{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr;
+            border-top: 14px solid $gray;
+            border-bottom: 1px solid $gray;
+            padding-left: rem(30);
+            padding-right: rem(10);
+            line-height: rem(100);
+            .producer-title{
+                align-self: center;
+                text-align: left;
+                @include font-style(32, $bk, NotoSans-Regular);
+            }
+            .producer-arrow{
+                align-self: center;
+                justify-self: end;
+                img{
+                    width: rem(72);
+                    height: rem(72);
+                }
+            }
+        }
+        .producer-title-content{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: rem(130) 1fr;
+            -ms-grid-columns: rem(130) 1fr;
+            line-height: rem(54);
+            margin-top: rem(39);
+            @include sidePadding(30)
+
+            .producer-title{
+                @include font-style(24, $gy-text, NotoSans-Regular);
+            }
+            .producer-content{
+                margin-left: rem(49);
+                @include font-style(24, $deepgray, NotoSans-Regular);
+            }
+        }
+        
+    }
+}
+
+#request_detail{
+    line-height: normal;
+    .additional-info-wraper { 
+        padding-top: rem(55);    
+        padding-bottom: rem(80);    
+        @include sidePadding(30);   
+        .inner-wraper{
+            border: 3px solid $red;
+            border-radius: rem(20);
+            overflow: hidden;
+            .top-area{
+                display: flex;
+                height: rem(112);
+                line-height: rem(112);
+                background-color: #F9F4EB;
+                @include sidePadding(30);   
+                .top-left{
+                    display: flex;
+                    div{
+                        display: grid;
+                        align-items: center;
+                        img{
+                            margin-right: rem(20);
+                            width: rem(32)
+                        }
+                    }
+                    p{
+                        @include font-style(32, $red, NotoSans-Regular);
+                    }
+                }
+                .top-right{
+                    flex: 1;
+                    text-align: right;
+                    @include font-style(24, #ADB5BD, NotoSans-Regular);
+                }
+                
+            }
+            .bottom-area{
+                padding-top: rem(39);
+                padding-bottom: rem(40);
+                @include sidePadding(30);   
+                @include font-style(24, $gy, NotoSans-Regular);
+                div {
+                    display: flex;
+                    margin-bottom: rem(20);
+                    .left{
+                        flex: 1;
+                    }
+                    .right{
+                        width: rem(437);
+                        @include font-style(24, $bk, NotoSans-Regular);
+                    }
+                }
+            }
+        }
+    }
+}
+
+#request_field_pic{
+    background-color: white;
+    height: 100vh;
+    @include sidePadding(30);
+    .each-text-of-two{
+        // width: max-content;
+        height: rem(82);
+        line-height: rem(82);
+        text-align: right;
+        @include sidePadding(15);
+        @include font-style(28, $gy, NotoSans-Regular);
+    }
+    .contents-wraper{
+        margin-top: rem(50);
+        .two-button-wrap{
+            width: 100%;
+            display: flex;
+            height: rem(82);
+            line-height: rem(82);
+            border-radius: rem(10);
+            margin-bottom: rem(20);
+            background-color: $btn-bg;
+            @include font-style(24, $gy, NotoSans-Regular);
+            .each-button{
+                border: 1px solid $border;
+                text-align: center;
+                flex: 1;
+            }
+            .on{
+                background-color: white;
+                border: 1px solid $red;
+                color: $red;
+                img{
+                    width: rem(22);
+                    margin-right: rem(10);
+                }
+            }
+            .left {
+                border-left: none;
+                border-radius: 0 rem(10) rem(10) 0;
+            }
+            .right {
+                border-right: none;
+                border-radius: rem(10) 0 0 rem(10);
+            }
+            .border-radius-left {
+                border-radius: rem(10) 0 0 rem(10);
+            }
+            .border-radius-right {
+                border-radius: 0 rem(10) rem(10) 0;
+            }
+        }
+        .check-available-party {
+            @include font-style(24, $gy, NotoSans-Regular);
+        }
+    }
+    .title {
+        @include font-style(28, $purple, NotoSans-Regular);
+
+    }
+    .two-input-area{
+        display: flex;
+        .inner-input-area{
+            display: flex;
+        }
+    }
+    .input-area, .two-input-area{
+        margin-bottom: rem(20);
+    }
+    
+}

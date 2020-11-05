@@ -36,7 +36,7 @@
         <input id="address" type="text" placeholder="기본주소 입력" readonly><button @click="execDaumPostSearch">찾기</button>
       </div>
       <div>
-        <input id="postNumber" type="text" placeholder="우편번호" style="width: 25%;" readonly>
+        <input id="postNumber" ref="postNumber" type="text" placeholder="우편번호" style="width: 25%;" readonly>
         <input id="detailAddress" v-model="indvInsertData.addrDtl" type="text" placeholder="상세주소 입력" style="width: 74%;">
       </div>
       <a href="#" :class="{ 'next_btn2' : !nextBtnActive, 'next_btn2 itsok' : nextBtnActive }" @click="nextBtnClick()">다음</a>
@@ -49,6 +49,12 @@ import { validEmail } from '@/utils/validate'
 export default {
   name: 'IndvSbscrb',
   directives: { waves },
+  props: {
+    index: {
+      type: Object,
+      default: () => ({})
+    }
+  },
   data() {
     return {
       nextBtnActive: true,
@@ -57,14 +63,14 @@ export default {
         birth: '',
         gender: '',
         mbtlNo: '',
-        mberPassword: '',
-        mberSeCd: '',
-        mberRePassword: '',
-        emailAddr: '',
+        mberPassword: this.index.mberPassword,
+        mberSeCd: this.index.mberSeCd,
+        mberRePassword: this.index.mberRePassword,
+        emailAddr: this.index.emailAddr,
         sbscrbDe: '',
-        addr: '',
-        addrDtl: '',
-        zip: ''
+        addr: this.index.addr,
+        addrDtl: this.index.addrDtl,
+        zip: this.index.zip
       },
       valirule: {
         emailAddrCheak: false,
@@ -87,12 +93,15 @@ export default {
       const recaptchaScript = document.createElement('script')
       recaptchaScript.setAttribute('src', 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js')
       document.head.appendChild(recaptchaScript)
-    })
 
-    this.indvInsertData.mberNm = '성춘향'
-    this.indvInsertData.birth = '17540804'
-    this.indvInsertData.gender = '여'
-    this.indvInsertData.mbtlNo = '01017540804'
+      this.indvInsertData.mberNm = '성춘향'
+      this.indvInsertData.birth = '17540804'
+      this.indvInsertData.gender = '여'
+      this.indvInsertData.mbtlNo = '01017540804'
+
+      document.getElementById('address').value = this.indvInsertData.addr
+      document.getElementById('postNumber').value = this.indvInsertData.zip
+    })
   },
   methods: {
     execDaumPostSearch() {
@@ -155,6 +164,7 @@ export default {
       this.indvInsertData.addr = document.getElementById('address').value
       this.indvInsertData.addrDtl = document.getElementById('detailAddress').value
       this.indvInsertData.zip = document.getElementById('postNumber').value
+
       if (this.indvInsertData.mberPassword === null || this.indvInsertData.mberPassword === '' || this.indvInsertData.mberRePassword === null || this.indvInsertData.mberRePassword === '') {
         alert('비밀 번호와 비밀번호 확인이 공백이면 안됩니다.')
         // this.$message.error('비밀 번호와 비밀번호 확인이 공백이면 안됩니다.')

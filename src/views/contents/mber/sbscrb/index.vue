@@ -2,8 +2,9 @@
   <chooseMberSbscrb v-if="step_1" @mberSe="chooseMberSbscrb"/>
   <stplatAgre v-else-if="step_2" @historyback="historyBackGo" @stplatAgre="stplatAgreSbscrb"/>
   <sbscrbNice v-else-if="step_3" @nextStep="certiNiceSbscrb"/>
-  <indvSbscrb v-else-if="step_IndvSbscrb_4" @indvSbscrb="indvSbscrbData" @historyback="historyBackGo"/>
-  <easyLogin v-else-if="step_5" @historyback="historyBackGo"/>
+  <indvSbscrb v-else-if="step_IndvSbscrb_4" :index="insertMberSbscrb" @indvSbscrb="indvSbscrbData" @historyback="historyBackGo"/>
+  <easyLogin v-else-if="step_5" :index="insertMberSbscrb" @easyLogin="easyLoginData" @historyback="historyBackGo"/>
+  <sbscrbComplete v-else-if="step_6" :index="insertMberSbscrb"/>
 </template>
 <script>
 import waves from '@/directive/waves'
@@ -11,7 +12,9 @@ import chooseMberSbscrb from '@/views/contents/mber/sbscrb/sbscrb'
 import stplatAgre from '@/views/contents/mber/sbscrb/stplatAgre'
 import sbscrbNice from '@/views/contents/mber/sbscrb/sbscrbNice'
 import indvSbscrb from '@/views/contents/mber/sbscrb/indvSbscrb'
+
 import easyLogin from '@/views/contents/mber/sbscrb/easyLogin'
+import sbscrbComplete from '@/views/contents/mber/sbscrb/sbscrbComplete'
 // import chooseMberSbscrb from '@/views/contents/mber/sbscrb/sbscrb'
 export default {
   name: 'SbsCrbindex',
@@ -21,7 +24,8 @@ export default {
     stplatAgre,
     sbscrbNice,
     indvSbscrb,
-    easyLogin
+    easyLogin,
+    sbscrbComplete
   },
   data() {
     return {
@@ -32,7 +36,6 @@ export default {
       step_BizSbscrb_4: false,
       step_5: false,
       step_6: false,
-      step_7: false,
       insertMberSbscrb: {
         mberSeCd: '',
         subAgreCheakYn: '',
@@ -46,12 +49,13 @@ export default {
         sbscrbDe: '',
         addr: '',
         addrDtl: '',
-        zip: ''
+        zip: '',
+        pinNoUseYn: '',
+        bmtRcgnUseYn: ''
       }
     }
   },
   created() {
-
   },
   methods: {
     historyBackGo(num) {
@@ -64,6 +68,15 @@ export default {
           this.step_2 = true
           this.step_IndvSbscrb_4 = false
           this.step_BizSbscrb_4 = false
+          break
+        case 5:
+          if (this.insertMberSbscrb.mberSeCd === 'P') {
+            this.step_IndvSbscrb_4 = true
+            this.step_5 = false
+          } else if (this.insertMberSbscrb.mberSeCd === 'B') {
+            this.step_BizSbscrb_4 = true
+            this.step_5 = false
+          }
           break
       }
     },
@@ -101,6 +114,10 @@ export default {
 
       this.step_IndvSbscrb_4 = false
       this.step_5 = true
+    },
+    easyLoginData() {
+      this.step_5 = false
+      this.step_6 = true
     }
   }
 }

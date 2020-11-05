@@ -27,7 +27,7 @@ const kms = {
       component: () => import('@/views/contents/kms/ranking')
     },
     {
-      path: 'ranking/list',
+      path: 'ranking/list/:registerId',
       name: 'KmsRankingList',
       props: true,
       hidden: true,

@@ -1,10 +1,7 @@
 /** When your routing table is too long, you can split it into small modules **/
 
-import Layout from '@/layout'
-
 const dashboard = {
   path: '/main',
-  component: Layout,
   redirect: '/main/dashboard',
   meta: {
     icon: 'dashboard',

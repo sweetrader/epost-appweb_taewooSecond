@@ -3,9 +3,6 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-/* Layout */
-import Layout from '@/layout'
-
 /* Router Modules */
 import dashboard from './modules/dashboard'
 import org from './modules/org'
@@ -65,7 +62,6 @@ export const constantRoutes = [
   },
   {
     path: '/redirect',
-    component: Layout,
     hidden: true,
     children: [
       {

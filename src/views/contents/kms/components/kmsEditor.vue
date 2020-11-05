@@ -199,7 +199,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.bw input[type="text"] { height:40px;width:100%;box-sizing:border-box;border:1px solid #adb5bd;border-radius:3px;padding-left:10px;color:black;font-size:14px;font-weight:normal; font-family: 'Noto Sans KR', sans-serif !important; margin-bottom:10px; }
+.bw input[type="text"]::placeholder { font-size:14px;font-weight:normal; font-family: 'Noto Sans KR', sans-serif !important; color:#ADB5BD }
+
 .quill-editor {
   height: 229px;
   padding: 0px;

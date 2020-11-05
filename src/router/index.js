@@ -15,6 +15,7 @@ import myInfo from './modules/myInfo'
 import mberInfo from './modules/mberInfo'
 import space from './modules/space'
 import kms from './modules/kms'
+import homeBoard from './modules/homeBoard'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -95,6 +96,7 @@ export const asyncRoutes = [
   mberInfo,
   space,
   kms,
+  homeBoard,
 
   /** 라우터에 명시하지 않은 url 처리 **/
   { path: '*', redirect: '/404', hidden: true }

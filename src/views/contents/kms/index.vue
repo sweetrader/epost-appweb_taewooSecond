@@ -70,7 +70,7 @@ export default {
       myKmsListQuery: {
         page: 1,
         size: 5,
-        searchType: SEARCH_TYPE.REG_ID,
+        searchType: SEARCH_TYPE.REG_ID.value,
         searchKeyword: this.$store.getters.mberId,
         categoryList: CATEGORY_TYPE.ALL,
         delYn: 'Y',

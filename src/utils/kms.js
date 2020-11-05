@@ -4,15 +4,16 @@ export const KMS_CONTENTS_MAX = 3990
 export const KMS_TITLE_MAX = 250
 
 export const SEARCH_TYPE = Object.freeze({
-  REG_NM: 'REG_NM',
-  REG_ID: 'REG_ID',
-  TITLE: 'TITLE',
-  CONTENTS: 'CONTENTS'
+  REG_NM: { value: 'REG_NM', label: '이름' },
+  REG_ID: { value: 'REG_ID', label: '아이디' },
+  TITLE: { value: 'TITLE', label: '제목' },
+  CONTENTS: { value: 'CONTENTS', label: '내용' }
 })
 
-export const BOARD_TYPE = Object.freeze({
-  ALL: 'ALL',
-  MY_KMS_LIST: 'MY_KMS_LIST'
+export const EVENT_TYPE = Object.freeze({
+  ALL: { value: 'ALL', label: '전체' },
+  ING: { value: 'ING', label: '진행중' },
+  END: { value: 'END', label: '종료' }
 })
 
 export const CATEGORY_TYPE = Object.freeze({
@@ -26,6 +27,14 @@ export const CATEGORY_TYPE = Object.freeze({
   ALL: 'ALL'
 })
 
+export const HOME_BOARD_TYPE = Object.freeze({
+  SC: { value: 'SC', label: '지원센터' },
+  SB: { value: 'SB', label: '지원사업' },
+  SP: { value: 'SP', label: '사업홍보' },
+  CP: { value: 'CP', label: '업체홍보' },
+  EV: { value: 'EV', label: '이벤트' }
+})
+
 export function isEmpty(value) {
   if (value === '' || value === null || value === undefined ||
     (value !== null && typeof value === 'object' && !Object.keys(value).length)) {
@@ -33,11 +42,6 @@ export function isEmpty(value) {
   } else {
     return false
   }
-}
-
-export function getDateStr(value) {
-  const strArr = value.split(' ')[0]
-  return strArr
 }
 
 export function getCategory() {
@@ -76,4 +80,33 @@ export function getCategory() {
   }
 
   return categoryList
+}
+
+export function getBoardTypeStr(value) {
+  let boardTypeStr = '지원센터'
+
+  switch (value) {
+    case HOME_BOARD_TYPE.SC.value:
+      boardTypeStr = HOME_BOARD_TYPE.SC.label
+      break
+    case HOME_BOARD_TYPE.SB.value:
+      boardTypeStr = HOME_BOARD_TYPE.SB.label
+      break
+    case HOME_BOARD_TYPE.SP.value:
+      boardTypeStr = HOME_BOARD_TYPE.SP.label
+      break
+    case HOME_BOARD_TYPE.CP.value:
+      boardTypeStr = HOME_BOARD_TYPE.CP.label
+      break
+    case HOME_BOARD_TYPE.EV.value:
+      boardTypeStr = HOME_BOARD_TYPE.EV.label
+      break
+  }
+
+  return boardTypeStr
+}
+
+export function getDateStr(value) {
+  const strArr = value.split(' ')[0]
+  return strArr
 }

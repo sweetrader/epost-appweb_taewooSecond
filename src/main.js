@@ -20,6 +20,11 @@ import './permission' // permission control
 import './utils/filters/global-function' // global Function
 import * as filters from './utils/filters/global-filter' // global Filter
 
+import '@babel/polyfill' // IE 지원
+
+import jQuery from 'jquery' // eslint-disable-line // npm i jquery
+window.$ = jQuery // eslint-disable-line
+
 Vue.use(Element, {
   size: Cookies.get('size') || 'mini', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)

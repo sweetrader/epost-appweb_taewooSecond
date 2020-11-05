@@ -1,386 +1,247 @@
 <template>
-  <div v-loading="dataLoading" class="has-head-container">
-    <sticky :class-name="'sub-navbar'">
-      <el-row type="flex" align="middle" justify="space-between">
-        <p>{{ $t('title.spc.rent') }}</p>
+  <div id="resister-post">
+    <Header title="게시글 등록"/>
+    <Tab/>
+    <section class="section">
+      <div class="title"><p>기본정보</p><p class="button">공간정보 불러오기</p></div>
+      <div class="contents-wraper">
+        <dl class="inner-content">
+          <div class="input-wraper"><input v-model="spaceNm" type="text" placeholder="공간명 입력"></div>
+          <div class="input-wraper two-wraper">
+            <input v-model="basicAddr" type="text" placeholder="기본 주소">
+            <div class="search">찾기</div>
+          </div>
+          <div class="input-wraper"><input v-model="specificAddr" type="text" placeholder="상세 주소"></div>
+        </dl>
+        <dl class="inner-content">
+          <dt class="input-wraper">
+            <select v-model="selectedSpaceType">
+              <option selected>업무시설 선택</option>
+            </select>
+          </dt>
+          <dt class="wraper-two-div">
+            <div class="input-wraper"><input v-model="privateCapacity_01" type="text" placeholder="전용면적"></div><p class="each-text-of-two">m2 또는</p>
+            <div class="input-wraper"><input v-model="privateCapacity_02" type="text" placeholder="전용면적"></div><p class="each-text-of-two">평</p>
+          </dt>
+          <dt class="input-wraper">
+            <select v-model="selectedSpaceEachAmount">
+              <option selected>분리공간 개수 선택</option>
+            </select>
+          </dt>
 
-        <!--<el-button
-          v-waves
-          type="info"
-          class="filter-item"
-          icon="el-icon-edit"
-          @click="handleDelete">
-          {{ $t('btn.list') }}
-        </el-button>-->
+        </dl>
+        <dl class="inner-content">
+          <dt class="wraper-two-div">
+            <div class="input-wraper"><input v-model="selecteFloor" type="text" placeholder="해당층"></div><p class="each-text-of-two">층/</p>
+            <div class="input-wraper"><input v-model="entireFloor" type="text" placeholder="전체층"></div><p class="each-text-of-two">층</p>
+          </dt>
+          <dt class="input-wraper">
+            <select v-model="selectDirection">
+              <option selected>방향 선택</option>
+            </select>
+          </dt>
+          <dt class="wraper-two-div">
+            <div class="input-wraper"><input v-model="capabilityParking" type="text" placeholder="주차가능대수"></div><p class="each-text-of-two">대/</p>
+            <div class="input-wraper"><input v-model="parkAmount" type="text" placeholder="주차수"></div><p class="each-text-of-two">대</p>
+          </dt>
+        </dl>
+        <dl class="inner-content">
+          <DatePicker v-model="permitDate" input-class="mx-input" type="date" placeholder="준공인가일" format="YY.MM.DD"/>
+          <dt class="input-wraper">
+            <select v-model="usageConstructure">
+              <option selected>건축물 용도 선택</option>
+            </select>
+          </dt>
+          <dt class="textarea-wraper"><textarea v-model="remark01" type="text" placeholder="비공개 비고 입력(선택)"/></dt>
+          <p class="check-available-party">- 공급자만 확인 가능합니다.</p>
+        </dl>
 
-        <!-- 공간자원목록 -->
-        <el-select v-show="rentRsrcId === ''" v-model="spcRsrcId" clearable style="width: 65%;" class="filter-item" @change="selectedSpace()">
-          <el-option v-for="item in spaceOptions" :key="item.spcRsrcId" :label="item.sj + '(' + item.addr + '-' + item.useClNm + ')'" :value="item.spcRsrcId"/>
-        </el-select>
+      </div>
 
-      </el-row>
-    </sticky>
+    </section>
+    <section class="section">
+      <div class="title"><p>추가정보(선택)</p></div>
+      <div class="contents-wraper">
+        <dl class="inner-content">
+          <dt class="input-wraper">
+            <select v-model="elevatorAmount">
+              <option selected>엘리베이터 대수 선택</option>
+            </select>
+          </dt>
+          <dt class="input-wraper">
+            <select v-model="heaterAmount">
+              <option selected>난방종류 선택</option>
+            </select>
+          </dt>
+        </dl>
+        <div class="inner-content">
+          <div class="two-checkbox-wraper">
+            <dl>
+              <p>상하차 여부</p>
+              <div class="checkbox-inner">
+                <div :class=" updown ? 'on' : ''" @click="updown = true">가능</div>
+                <div :class=" !updown ? 'on' : ''" @click="updown = false">불가능</div>
+              </div>
+            </dl>
+            <dl>
+              <p>택배 바로 접수</p>
+              <div class="checkbox-inner">
+                <div :class=" shipRegisterOk ? 'on' : ''" @click="shipRegisterOk = true">가능</div>
+                <div :class=" !shipRegisterOk ? 'on' : ''" @click="shipRegisterOk = false">불가능</div>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="title"><p>임대정보</p></div>
+      <div class="contents-wraper">
+        <dl class="inner-content">
+          <dt class="content-title"><p>임대기본정보</p><p class="guide">게시글 제목</p></dt>
+          <dt class="input-wraper"><input v-model="postNm" type="text" placeholder="게시글 제목 입력(예: 명동역3번출구1분거리/신축)"></dt>
+          <dt class="two-button-wrap">
+            <div :class="isMonthlyRent ? 'each-button on border-radius-left' :'each-button right'" @click="isMonthlyRent = true">
+              <img v-if="isMonthlyRent" src="@/assets/image/space/icons/path-red.png">월세
+            </div>
+            <div :class="!isMonthlyRent ? 'each-button on border-radius-right' :'each-button left'" @click="isMonthlyRent = false">
+              <img v-if="!isMonthlyRent" src="@/assets/image/space/icons/path-red.png">전세
+            </div>
+          </dt>
+          <dt class="wraper-two-div">
+            <div class="input-wraper"><input v-model="deposit" type="text" placeholder="보증금 입력"></div><p class="each-text-of-two">원/</p>
+            <div class="input-wraper"><input v-model="rentalFee" type="text" placeholder="월세 입력"></div><p class="each-text-of-two">원</p>
+          </dt>
+          <dt class="wraper-two-div"> <div class="input-wraper"><input v-model="maintanaceFee" type="text" placeholder="관리비 입력"></div><p class="each-text-of-two">원</p></dt>
+        </dl>
+        <dl class="inner-content">
+          <dt class="content-title"><p>임대기간</p></dt>
+          <dt class="wraper-two-div">
+            <DatePicker v-model="rentalPeriodStart" input-class="mx-input" type="date" placeholder="임대기간 입력" format="YY.MM.DD"/>
+            <p class="each-text-of-two">~</p>
+            <DatePicker v-model="rentalPeriodEnd" input-class="mx-input" type="date" placeholder="임대기간 입력" format="YY.MM.DD"/>
 
-    <div class="app-container">
-      <el-form ref="ruleForm" :rules="rules" :model="rent" label-position="left" label-width="80px">
+          </dt>
+          <dt class="wraper-two-div">
+            <div class="define-width">
+              <DatePicker v-model="rentalAvailableDate" input-class="mx-input" type="date" placeholder="임대기간 입력" format="YY.MM.DD"/>
+            </div>
+            <p class="each-text-of-two">이후</p>
+            <div :class="availableDirectlyMove ? 'checkbox on' : 'checkbox'" @click="availableDirectlyMove = !availableDirectlyMove"><p>즉시 입주 가능</p></div>
+          </dt>
+        </dl>
+        <dl class="inner-content">
+          <dt class="content-title"><p>사진등록(선택)</p></dt>
+          <dt class="input-wraper upload-picture">
+            <div>
+              <img src="@/assets/image/space/icons/image.png" alt="">
+              <p>사진첨부<span> {{ photoList.length }}</span></p>
+            </div>
+          </dt>
+          <ul class="notice">
+            <li>사진 최소 5장 최대 15장 까지 등록할 수 있습니다.</li>
+            <li>직접 찍은 실제 사진의 원본을 등록해야 합니다.</li>
+            <li>워터마크, 날짜, 전화번호 등이 포함된 사진이나 관련 없는 사진을 등록할 경우 글 게시가 종료될 수 있습니다.</li>
+          </ul>
+          <dt class="photo-list-area">
+            <div v-for="photo in photoList" :key="photo.index" class="each-photo"><p>{{ photo.name }}</p>
+              <div><img src="@/assets/image/space/icons/x.png"></div>
+            </div>
+          </dt>
+          <dl class="inner-content"><dt class="textarea-wraper"><textarea v-model="explain" type="text" placeholder="상세설명 입력(선택)"/></dt>
+          </dl>
 
-        <div style="color: red; font-weight: bold; margin-top: 10px; margin-bottom: 10px">기본정보</div>
-
-        <!-- 제목 -->
-        <el-form-item :label="$t('spc.sj')" prop="sj">
-          <el-input v-model="rent.sj" maxlength="50"/>
-        </el-form-item>
-
-        <!-- 주소 -->
-        <el-form-item :label="$t('spc.addr')" prop="addr">
-          <el-input v-model="rent.addr" maxlength="50"/>
-        </el-form-item>
-
-        <!-- 주소상세 -->
-        <el-form-item :label="$t('spc.addrDtl')" prop="addrDtl">
-          <el-input v-model="rent.addrDtl" maxlength="50"/>
-        </el-form-item>
-
-        <!-- 사용분류 -->
-        <el-form-item :label="$t('spc.useCl')" prop="useCl">
-          <el-radio v-for="item in useClOptions" :key="item.codeDtl" v-model="rent.useCl" :label="item.codeDtl">{{ item.dtlNm }}</el-radio>
-        </el-form-item>
-
-        <!-- 면적 -->
-        <el-form-item :label="$t('spc.area')" prop="area">
-          <el-input v-model="rent.area" maxlength="40" style="width: 40%"/> ㎡
-        </el-form-item>
-
-        <!-- 내용 -->
-        <el-form-item :label="$t('spc.dscrp')" prop="dscrp">
-          <el-input v-model="rent.dscrp" type="textarea" maxlength="500" :rows="3"/>
-        </el-form-item>
-
-        <div style="color: red; font-weight: bold; margin-top: 10px; margin-bottom: 10px">추가정보</div>
-
-        <!-- 주차대수 -->
-        <el-form-item :label="$t('spc.parking')" prop="parkingPosblCnt">
-          <el-input v-model="rent.parkingPosblCnt" maxlength="40" style="width: 40%"/> / <el-input v-model="rent.parkingAllCnt" maxlength="40" style="width: 40%"/>
-        </el-form-item>
-
-        <!-- 엘리베이터 -->
-        <el-form-item :label="$t('spc.elevt')" prop="elevtCnt">
-          <el-input v-model="rent.elevtCnt" maxlength="40" style="width: 40%"/> 대
-        </el-form-item>
-
-        <div style="color: red; font-weight: bold; margin-top: 10px; margin-bottom: 10px">임대정보</div>
-
-        <!-- 임대유형 -->
-        <el-form-item :label="$t('spc.rentType')" prop="rentType">
-          <el-radio v-for="item in rentTypeOptions" :key="item.codeDtl" v-model="rent.rentType" :label="item.codeDtl">{{ item.dtlNm }}</el-radio>
-        </el-form-item>
-
-        <!-- 보증금 -->
-        <el-form-item :label="$t('spc.dpst')" prop="dpst">
-          <el-input v-model="rent.dpst" maxlength="40" style="width: 40%"/> 원
-        </el-form-item>
-
-        <!-- 월세 -->
-        <el-form-item :label="$t('spc.mtyRent')" prop="mtyRent">
-          <el-input v-model="rent.mtyRent" maxlength="40" style="width: 40%"/> 원
-        </el-form-item>
-
-        <!-- 임대기간 -->
-        <el-form-item :label="$t('spc.rentDe')" prop="rentBgnDe">
-          <el-date-picker v-model="rent.rentBgnDe" value-format="yyyy-MM-dd" style="width: 45%"/> ~ <el-date-picker v-model="rent.rentEndDe" value-format="yyyy-MM-dd" style="width: 45%"/>
-        </el-form-item>
-
-      </el-form>
-    </div>
-
-    <!-- 버튼 영역 -->
-    <div class="drawer-footer">
-      <el-button
-        v-if="rentRsrcId === ''"
-        v-waves
-        :loading="confirmLoading"
-        size="medium"
-        type="primary"
-        class="button_style"
-        @click="handleAdd">
-        {{ $t('btn.add') }}
-      </el-button>
-      <el-button
-        v-else
-        v-waves
-        :loading="confirmLoading"
-        size="medium"
-        type="info"
-        class="button_style"
-        @click="handleEdit">
-        {{ $t('btn.edit') }}
-      </el-button>
-    </div>
-
+        </dl>
+      </div>
+    </section>
+    <section class="section">
+      <div class="title"><p>공급자정보</p></div>
+      <div class="contents-wraper">
+        <dl class="inner-content">
+          <dt class="input-wraper">
+            <p>서울중앙우체국 담당자</p>
+          </dt>
+          <dt class="input-wraper">
+            <p>02-1234-5678</p>
+          </dt>
+        </dl>
+      </div>
+    </section>
+    <BottomButton one-button="등록" :is-valid="false"/>
+    <section v-if="modalOn" class="modal">
+      <img class="xButton" src="@/assets/image/space/icons/x.png">
+      <img class="explainImg" src="@/assets/image/space/icons/no-image.png">
+      <p>
+        게시글 제목은 구체적인 내용으로<br>간단하게 작성해주시면 좀 더 빠르게<br>매칭이 이루어집니다.
+      </p>
+      <dl>
+        <div>예시)</div>
+        <ul>
+          <li>신논현역1분거리/내부수리완료</li>
+          <li>강남역세권/주차장보유/고층뷰</li>
+          <li>명동역/관리비X/회의실·카페공유O</li>
+          <li>삼성역/빌딩형사무실/구내식당有</li>
+        </ul>
+      </dl>
+    </section>
   </div>
 </template>
 
 <script>
-import waves from '@/directive/waves'
-import Sticky from '@/components/Sticky'
-import { insertRent, fetchRentDetail, editRent, fetchSpaceOptions } from '@/api/spcRent'
-import { fetchSpaceDetail } from '@/api/spcSpace'
-import { selectCodeList } from '@/api/com'
-import { insertMch } from '@/api/spcMch'
-import tinymce from '@/components/Tinymce/index.vue'
+import Header from '@/components/space/Header/Index'
+import Tab from '@/components/space/Tab/Index'
+import BottomButton from '@/components/space/BottomButton/Index'
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css'
 
 export default {
-  name: 'RentMng',
-  directives: { waves },
-  // eslint-disable-next-line vue/no-unused-components
-  components: { Sticky, tinymce },
-  props: {
-    // edit Seq Info
-    rentRsrcId: {
-      type: String,
-      default: ''
-    },
-    // 공급자, 수요자 구분
-    auth: {
-      type: String,
-      default: ''
-    },
-    // Drawer 열렸을 때 체크하는 값
-    drawerOpenChecker: {
-      type: Boolean,
-      default: false
-    },
-    // Drawer 닫기 함수
-    closeDrawer: {
-      type: Function,
-      default: null
-    }
+  components: {
+    Header, Tab, BottomButton, DatePicker
   },
   data() {
     return {
-      dataLoading: false,
-      confirmLoading: false,
-      preFncDiv: '',
-      orgList: null,
-      rent: {
-        rentRsrcId: '',
-        spcRsrcId: '',
-        mberId: '',
-        fileId: '',
-        sj: '',
-        addr: '',
-        addrDtl: '',
-        useCl: '',
-        useClNm: '',
-        area: 0,
-        areaPyeong: 0,
-        sepratSpcCnt: 0,
-        allFloor: 0,
-        crrspndFloor: 0,
-        drc: '',
-        manageAmt: 0,
-        comptConfmDe: '',
-        dscrp: '',
-        parkingAllCnt: 0,
-        parkingPosblCnt: 0,
-        elevtCnt: 0,
-        heatType: '',
-        dlvryYn: '',
-        rentType: '',
-        rentTypeNm: '',
-        dpst: 0,
-        mtyRent: 0,
-        rentBgnDe: '',
-        rentEndDe: '',
-        mvPosblBgnDe: '',
-        immediatelyYn: '',
-        rentState: ''
-      },
-      rules: {
-        sj: [{ required: true, message: this.$t('message.valid_required'), trigger: 'blur' }]
-      },
-      spcRsrcId: '',
-      rentTypeOptions: null,
-      useClOptions: null,
-      spaceOptions: null
-    }
-  },
-  watch: {
-    drawerOpenChecker(val) {
-      // 2번째 호출 시 데이터 초기화
-      if (val) {
-        this.$nextTick(() => {
-          this.resetData()
-          this.editCheck()
-          this.$refs['ruleForm'].resetFields()
-        })
-      }
+      modalOn: false,
+      shipRegisterOk: true,
+      updown: true,
+      isMonthlyRent: true,
+      availableDirectlyMove: false,
+      photoList: [
+        { name: '명동사무실1.jpg' },
+        { name: '명동사무실2.jpg' },
+        { name: '명동사무실3.jpg' }
+      ],
+
+      // v-model
+      spaceNm: '',
+      basicAddr: '',
+      specificAddr: '',
+      selectedSpaceType: '업무시설 선택',
+      selectedSpaceEachAmount: '분리공간 개수 선택',
+      privateCapacity_01: '',
+      privateCapacity_02: '',
+      selecteFloor: '',
+      entireFloor: '',
+      selectDirection: '방향 선택',
+      capabilityParking: '',
+      parkAmount: '',
+      permitDate: '',
+      usageConstructure: '건축물 용도 선택',
+      remark01: '',
+      elevatorAmount: '엘리베이터 대수 선택',
+      heaterAmount: '난방종류 선택',
+      postNm: '',
+      deposit: '',
+      rentalFee: '',
+      maintanaceFee: '',
+      rentalPeriodStart: '',
+      rentalPeriodEnd: '',
+      rentalAvailableDate: '',
+      explain: ''
+
     }
   },
   created() {
-    // 처음 호출 시 수정 데이터 체크
-    // this.dataLoading = true
-    this.editCheck()
-  },
-  mounted() {
 
-  },
-  methods: {
-    handleCancel() {
-      this.closeDrawer()
-    },
-    // 데이터 초기화
-    resetData() {
-      this.preFncDiv = ''
-      this.rent.js = ''
-      this.rent.dscrp = ''
-      this.rent.addr = ''
-      this.rent.addrDtl = ''
-      this.rent.rentBgnDe = ''
-    },
-    // edit 체크
-    async editCheck() {
-      if (this.rentRsrcId !== '') {
-        const response = await fetchRentDetail(this.rentRsrcId)
-        this.preFncDiv = response.baseFncDiv
-        this.rent = response
-      }
-
-      this.spaceOptions = (await fetchSpaceOptions({ mberId: this.$store.getters.id })).list
-      this.rentTypeOptions = (await selectCodeList('RENT_TYPE')).list
-      this.useClOptions = (await selectCodeList('USE_CL')).list
-
-      setTimeout(() => {
-        this.dataLoading = false
-      }, 300)
-    },
-    selectedSpace(event) {
-      fetchSpaceDetail(this.spcRsrcId).then(response => {
-        this.confirmLoading = false
-        this.rent = response
-      }).catch(() => {
-        this.confirmLoading = false
-      })
-    },
-    // 등록 / 수정 버튼
-    handleAdd() {
-      this.$refs['ruleForm'].validate((valid) => {
-        if (valid) {
-          this.confirmLoading = true
-          this.$confirm(this.$t('message.addConfirm'), {
-            confirmButtonText: this.$t('btn.confirm'),
-            cancelButtonText: this.$t('btn.cancel'),
-            type: 'warning'
-          }).then(() => {
-            insertRent(this.rent).then(response => {
-              this.confirmLoading = false
-              this.$message.success(this.$t('message.success'))
-              this.$router.push({ name: 'RentList' })
-            }).catch(() => {
-              this.confirmLoading = false
-            })
-          }).catch(() => {
-            this.confirmLoading = false
-          })
-        }
-      })
-    },
-    handleEdit() {
-      this.$refs['ruleForm'].validate((valid) => {
-        if (valid) {
-          this.confirmLoading = true
-          this.$confirm(this.$t('message.editConfirm'), {
-            confirmButtonText: this.$t('btn.confirm'),
-            cancelButtonText: this.$t('btn.cancel'),
-            type: 'warning'
-          }).then(() => {
-            editRent(this.rent).then(response => {
-              this.confirmLoading = false
-              this.$message.success(this.$t('message.success'))
-              this.$router.push({ name: 'RentListSupler' })
-            }).catch(() => {
-              this.confirmLoading = false
-            })
-          }).catch(() => {
-            this.confirmLoading = false
-          })
-        }
-      })
-    },
-    handleMch() {
-      this.$refs['ruleForm'].validate((valid) => {
-        if (valid) {
-          this.confirmLoading = true
-          this.$confirm(this.$t('message.rent.addMch'), {
-            confirmButtonText: this.$t('btn.confirm'),
-            cancelButtonText: this.$t('btn.cancel'),
-            type: 'warning'
-          }).then(() => {
-            this.rent.rentState = '02'
-            this.rent.registerId = this.$store.getters.id
-            insertMch(this.rent).then(response => {
-              this.confirmLoading = false
-              this.$message.success(this.$t('message.success'))
-              this.closeDrawer()
-            }).catch(() => {
-              this.confirmLoading = false
-            })
-          }).catch(() => {
-            this.confirmLoading = false
-          })
-        }
-      })
-    },
-    // 숫자만 입력 함수
-    handleNumber(event) {
-      if (event.keyCode === 190) {
-        event.preventDefault()
-      }
-    }
   }
 }
 </script>
-
-<style rel="stylesheet/scss" lang="scss">
-  .drawer-container {
-    padding: 0 10px 0 10px;
-  }
-  .drawer-footer {
-    .button_style {
-      margin-top: 30px;
-      width: 100%;
-    }
-  }
-  .pit_card_list {
-    margin-top: 60px;
-    margin-bottom: 30px;
-  }
-  .el-tag {
-    margin-right: 10px;
-  }
-  .button-new-tag {
-    margin-right: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .input-new-tag {
-    width: 120px;
-    margin-right: 10px;
-    vertical-align: bottom;
-  }
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-  .el-date-editor.el-input{
-    width: 150px;
-  }
-  .el-checkbox:last-of-type{
-    margin-left: 20px;
-  }
-  .el-input--suffix .el-input__inner{
-    padding-right: 10px;
-  }
-</style>

@@ -6,6 +6,11 @@ import router from './router' // 라우터
 import store from './store' // Vuex 스토어
 import HanaLoading from './components/hanaLoading/index.js'
 
+import '@babel/polyfill' // IE 지원
+
+import jQuery from 'jquery' // eslint-disable-line // npm i jquery
+window.$ = jQuery // eslint-disable-line
+
 Vue.config.productionTip = false
 Vue.use(HanaLoading)
 

@@ -33,6 +33,7 @@ export default {
   methods: {
     moveStplatAgre(mberSeCd) {
       // 상위 겍체로 값 올려주는 함수(부모쪽 함수로 변수를 전달해 주는 중요하 함수 기능이다.)
+
       this.$emit('mberSe', mberSeCd)
     },
     historyBack() {

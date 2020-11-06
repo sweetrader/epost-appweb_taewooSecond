@@ -14,3 +14,15 @@ export function selectMberInfo(data) {
   const config = req_config
   return request.get(url, config)
 }
+
+// 개인 회원 가입
+export function insertIndvSbscrb(data) {
+  const url = url_prefix + '/sbscrb/indv'
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  console.log(url)
+  return request.post(url, data, config)
+}

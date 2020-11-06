@@ -53,6 +53,11 @@ export const constantRoutes = [
     hidden: true
   },
   {
+    path: '/spc/rent',
+    component: () => import('@/views/contents/spc/rentManageForm'),
+    hidden: true
+  },
+  {
     path: '/mber/sbscrb/mberSbscrb',
     name: 'mberSbscrb',
     component: () => import('@/views/contents/mber/sbscrb/index'),

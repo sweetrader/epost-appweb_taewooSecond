@@ -7,7 +7,7 @@
       간편 로그인을 사용하시겠습니까?<br>간편 로그인에 사용할 방법을 선택해 주세요.<br><br>
       <a href="#" class="on onning"><div/><br>지문 등록</a>
       <a href="#" class="on"><div/><br>핀번호 등록</a>
-      <a href="#" class="next_btn2 itsok" @click="nextBtnActiveCheak()">확인</a>
+      <a href="#" class="next_btn2 itsok" @click="nextBtn()">확인</a>
     </div>
   </div>
 </template>
@@ -25,22 +25,24 @@ export default {
   },
   data() {
     return {
-      pinNoUseYn: this.index.pinNoUseYn,
-      bmtRcgnUseYn: this.index.bmtRcgnUseYn
+      easyLoginRegist: {
+        pinNoUseYn: this.index.pinNoUseYn,
+        bmtRcgnUseYn: this.index.bmtRcgnUseYn
+      }
     }
   },
   created() {
-    console.log(this.index)
   },
   methods: {
     historyBack() {
       this.$emit('historyback', 5)
     },
     easyLoginPass() {
-      alert('그냥 건너뛰고 회원 가입 할거임?')
+      alert('그냥 건너뛰고 회원 가입 하실건가요?')
+      this.$emit('easyLoginPass', this.easyLoginRegist)
     },
-    nextBtnActiveCheak() {
-      alert('트럼프 좃됨 ㅋㅋ')
+    nextBtn() {
+      alert('다음으로 진행하시겠습니까')
       this.$emit('easyLogin')
     }
   }

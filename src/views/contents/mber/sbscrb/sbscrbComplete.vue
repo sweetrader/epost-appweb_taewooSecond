@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     nextBtnActiveCheak() {
-      this.$router.push({ name: 'login' })
+      this.$router.push({ path: '/login' })
     }
   }
 }

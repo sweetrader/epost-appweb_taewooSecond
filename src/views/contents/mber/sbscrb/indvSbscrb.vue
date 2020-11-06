@@ -93,12 +93,10 @@ export default {
       const recaptchaScript = document.createElement('script')
       recaptchaScript.setAttribute('src', 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js')
       document.head.appendChild(recaptchaScript)
-
       this.indvInsertData.mberNm = '성춘향'
       this.indvInsertData.birth = '17540804'
       this.indvInsertData.gender = '여'
       this.indvInsertData.mbtlNo = '01017540804'
-
       document.getElementById('address').value = this.indvInsertData.addr
       document.getElementById('postNumber').value = this.indvInsertData.zip
     })

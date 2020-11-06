@@ -5,24 +5,18 @@
     </header>
     <div class="faq_header">
       <div class="faq_header_cell_wrap">
-        <a href="#" :class="isFaqCategory(0) ? 'faq_on' : ''" @click="changeFaqCategory(0)">{{ getFaqCategoryNm(0) }}</a>
-        <a href="#" :class="isFaqCategory(1) ? 'faq_on' : ''" @click="changeFaqCategory(1)">{{ getFaqCategoryNm(1) }}</a>
-        <a href="#" :class="isFaqCategory(2) ? 'faq_on' : ''" @click="changeFaqCategory(2)">{{ getFaqCategoryNm(2) }}</a>
-        <a href="#" :class="isFaqCategory(3) ? 'faq_on' : ''" @click="changeFaqCategory(3)">{{ getFaqCategoryNm(3) }}</a>
-        <a href="#" :class="isFaqCategory(4) ? 'faq_on' : ''" @click="changeFaqCategory(4)">{{ getFaqCategoryNm(4) }}</a>
-        <a href="#" :class="isFaqCategory(5) ? 'faq_on' : ''" @click="changeFaqCategory(5)">{{ getFaqCategoryNm(5) }}</a>
-        <a href="#" :class="isFaqCategory(6) ? 'faq_on' : ''" @click="changeFaqCategory(6)">{{ getFaqCategoryNm(6) }}</a>
-        <a href="#" :class="isFaqCategory(7) ? 'faq_on' : ''" @click="changeFaqCategory(7)">{{ getFaqCategoryNm(7) }}</a>
+        <a :class="isFaqCategory(ctgryAll) ? 'faq_on' : ''" @click="changeFaqCategory(ctgryAll)">{{ ctgryAll }}</a>
+        <a v-for="ctgry in faqCategoryList" :key="ctgry" href="#" :class="isFaqCategory(ctgry) ? 'faq_on' : ''" @click="changeFaqCategory(ctgry)">{{ ctgry }}</a>
       </div>
     </div>
     <div class="faq_list_wrap">
       <div v-for="faq in list" :key="faq.faqId">
         <div class="faq_list_wrap_cell" @click="showDetailFaq(faq.faqId)">
-          <span>{{ getFaqCategoryNm(faq.ctgry) }}</span><b>{{ faq.Sj }}</b>
+          <span>{{ faq.ctgry }}</span><b>{{ faq.sj }}</b>
           <div :class="(detailFaqId === faq.faqId) ? 'open closed' : 'open'"/>
         </div>
         <div v-show="(detailFaqId === faq.faqId)" class="faq_list_wrap_cell_answer">
-          <pre class="answer">{{ faq.Cn }}</pre>
+          <pre class="answer">{{ faq.cn }}</pre>
         </div>
       </div>
     </div>
@@ -30,16 +24,8 @@
 </template>
 
 <script>
-const faqCategoryOption = [
-  { key: 0, label: '전체' },
-  { key: 1, label: '택배배송' },
-  { key: 2, label: '소포분류' },
-  { key: 3, label: '택배픽업' },
-  { key: 4, label: '차량운송' },
-  { key: 5, label: '공간임대' },
-  { key: 6, label: '회의실 예약' },
-  { key: 7, label: '기타' }
-]
+import { selectFaqList } from '@/api/admCommunity'
+import { selectCodeDtlList } from '@/api/admCode'
 
 export default {
   name: 'FaqList',
@@ -48,59 +34,49 @@ export default {
       listQuery: {
         searchKeyword: '',
         searchType: '',
+        ctgry: null,
         page: 1,
         size: 10
       },
+      adm: {
+        codeId: 'FAQ_CT',
+        ordr: 1,
+        size: 999
+      },
       totCnt: 0,
       list: null,
-      faqCategory: faqCategoryOption[0].key,
+      ctgryAll: '전체',
+      faqCategory: '',
+      faqCategoryList: [],
       detailFaqId: 0,
+      getCodeDtl: null,
       dataLoading: false
     }
   },
   created() {
+    this.dataLoading = true
+    this.faqCategory = this.ctgryAll
+    this.selectCodeDtlList()
     this.selectFaqList()
+    setTimeout(() => {
+      this.dataLoading = false
+    }, 300)
   },
   methods: {
-    async selectFaqList() {
-      this.dataLoading = true
-      // const response = await selectFaqList(this.listQuery)
-      // this.list = response.list
-      // this.totCnt = response.totCnt
-      this.list = [
-        { faqId: 1, Sj: '택배픽업입니다. 택배픽업입니다. 택배픽업입니다. 택배픽업입니다. 택배픽업입니다. 1111', Cn: '\'택배픽업입니다. 답변\n' +
-            '\n' +
-            '택배픽업입니다. 답변\n' +
-            '\n' +
-            '택배픽업입니다. 답변\n' +
-            '\n' +
-            '택배픽업입니다. 답변택배픽업입니다. 답변택배픽업입니다. 답변택배픽업입니다. 답변 111111111111111111111111111111111111\n' +
-            '\n' +
-            '택배픽업입니다. 답변\n' +
-            '\'', ctgry: 1 },
-        { faqId: 2, Sj: '2.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 1 },
-        { faqId: 3, Sj: '3.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 2 },
-        { faqId: 4, Sj: '1.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 1 },
-        { faqId: 5, Sj: '2.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 1 },
-        { faqId: 6, Sj: '3.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 3 },
-        { faqId: 7, Sj: '1.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 4 },
-        { faqId: 8, Sj: '2.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 5 },
-        { faqId: 9, Sj: '3.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 6 },
-        { faqId: 10, Sj: '1.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 7 },
-        { faqId: 11, Sj: '2.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 3 },
-        { faqId: 12, Sj: '3.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 4 },
-        { faqId: 13, Sj: '1.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 5 },
-        { faqId: 14, Sj: '2.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 6 },
-        { faqId: 15, Sj: '3.회원가입은 어떻게 하나요?', Cn: '1. [회원가입]을 클릭합니다.\n\n 회원종류를 선택하여 이용약관에 동의하신 후 해당하는 버튼을 클릭합니다.\n\n 본인확인을 위한 실명확인을 합니다.\n\n 해당 회원가입페이지에서 회원정보를 순서대로 입력합니다. 모든 항목을 입력한 후 [확인]버튼을 클릭합니다.', ctgry: 7 }
-      ]
-      this.totCnt = 1
-      this.detailFaqId = 0
-      setTimeout(() => {
-        this.dataLoading = false
-      }, 300)
+    async selectCodeDtlList() {
+      const response = await selectCodeDtlList(this.adm)
+      this.getCodeDtl = response.list
+      this.getCodeDtl.forEach((code, i) => {
+        this.faqCategoryList.push(code.dtlNm)
+      })
+      // console.log(this.faqCategoryList)
     },
-    getFaqCategoryNm(key) {
-      return faqCategoryOption[key].label
+    async selectFaqList() {
+      const response = await selectFaqList(this.listQuery)
+      this.list = response.list
+      this.totCnt = response.totCnt
+      this.detailFaqId = 0
+      // console.log(response)
     },
     isFaqCategory(key) {
       if (this.faqCategory === key) {
@@ -111,6 +87,11 @@ export default {
     },
     changeFaqCategory(key) {
       this.faqCategory = key
+      if (this.faqCategory === this.ctgryAll) {
+        this.listQuery.ctgry = null
+      } else {
+        this.listQuery.ctgry = key
+      }
       this.selectFaqList()
     },
     showDetailFaq(faqId) {

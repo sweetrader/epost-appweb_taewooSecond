@@ -32,7 +32,8 @@ export default {
     }
   },
   created() {
-    // Android.initFingerPrint()
+    // eslint-disable-next-line no-undef
+    Android.initFingerPrint()
   },
   methods: {
     historyBack() {

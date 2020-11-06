@@ -1,10 +1,8 @@
 /** When your routing table is too long, you can split it into small modules **/
 
-import Layout from '@/layout'
-
 const calculate = {
   path: '/calculate',
-  component: Layout,
+  component: () => import('@/views/contents/calculate/index'),
   redirect: '/calculate/info',
   meta: {
     icon: '',

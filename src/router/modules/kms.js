@@ -2,6 +2,7 @@
 
 const kms = {
   path: '/kms',
+  component: () => import('@/views/contents/kms/index'),
   redirect: '/kms/index',
   children: [
     {

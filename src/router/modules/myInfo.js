@@ -1,10 +1,8 @@
 /** When your routing table is too long, you can split it into small modules **/
 
-import Layout from '@/layout'
-
 const myInfo = {
   path: '/myInfo',
-  component: Layout,
+  component: () => import('@/views/contents/system/manager/myInfo'),
   hidden: true,
   children: [
     {

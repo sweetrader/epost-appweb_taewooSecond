@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 /* Layout */
-import Layout from '@/layout'
+// import Layout from '@/layout'
 
 /* Router Modules */
 import dashboard from './modules/dashboard'
@@ -71,7 +71,7 @@ export const constantRoutes = [
   },
   {
     path: '/redirect',
-    component: Layout,
+    component: () => import('@/views/redirect/index'),
     hidden: true,
     children: [
       {
@@ -95,6 +95,7 @@ export const asyncRoutes = [
 
   /** 메뉴 별 모듈 단위로 라우터 관리 **/
   dashboard,
+
   org,
   mcht,
   pointCard,

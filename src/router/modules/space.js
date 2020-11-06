@@ -1,10 +1,8 @@
 /** When your routing table is too long, you can split it into small modules **/
 
-import Layout from '@/layout'
-
 const spc = {
   path: '/spc',
-  component: Layout,
+  component: () => import('@/views/contents/spc/spaceList'),
   redirect: '/spc/list',
   name: 'Spc',
   meta: {

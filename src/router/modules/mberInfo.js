@@ -1,10 +1,8 @@
 /** When your routing table is too long, you can split it into small modules **/
 
-import Layout from '@/layout'
-
 const mberInfo = {
   path: '/mber/info',
-  component: Layout,
+  component: () => import('@/views/contents/mber/info/mberInfo'),
   redirect: '/mber/info/mberInfo',
   name: 'MberInfo',
   meta: {

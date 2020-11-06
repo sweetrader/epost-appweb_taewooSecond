@@ -2,6 +2,7 @@
 
 const homeBoard = {
   path: '/homeBoard',
+  component: () => import('@/views/contents/homboard/homeBoardList'),
   redirect: '/homeBoard/jiwon',
   children: [
     {

@@ -7,7 +7,7 @@
     <div class="bn"><!--<div class="x"/>--></div>
     <div class="jisik_list">
       <div class="total">
-        총 {{ kmsListTotCnt }}건 <!-- <div class="filter"/> -->
+        총 {{ kmsListTotCnt | toThousandFilter }}건 <!-- <div class="filter"/> -->
       </div>
       <template>
         <div v-for="kmsBoard in kmsList" :key="kmsBoard.kmsId" class="jisik_list_cell">
@@ -18,7 +18,7 @@
       <a href="#" class="seemorethings">더보기</a>
     </div>
     <div class="jisik_list">
-      <div class="mytotal">내가 등록한 지식<span>{{ myKmsListTotCnt }}</span></div>
+      <div class="mytotal">내가 등록한 지식<span>{{ myKmsListTotCnt | toThousandFilter }}</span></div>
       <div v-for="myKmsBoard in myKmsList" :key="myKmsBoard.kmsId" class="jisik_list_cell">
         <b>{{ myKmsBoard.kmsSj }}</b><span>{{ getDateStr(myKmsBoard.registerDt) }}</span><span>{{ myKmsBoard.registerNm }}</span>
         <div class="divv"><div>답변<br><em>{{ myKmsBoard.replyCnt }}</em></div></div>

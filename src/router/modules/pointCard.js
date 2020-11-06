@@ -1,7 +1,10 @@
 /** When your routing table is too long, you can split it into small modules **/
 
+import Layout from '@/layout'
+
 const pointCard = {
   path: '/pointCard',
+  component: Layout,
   redirect: '/pointCard/list',
   name: 'PointCard',
   meta: {

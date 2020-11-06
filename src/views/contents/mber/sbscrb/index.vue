@@ -31,12 +31,12 @@ export default {
   },
   data() {
     return {
-      step_1: true,
+      step_1: false,
       step_2: false,
       step_3: false,
       step_IndvSbscrb_4: false,
       step_BizSbscrb_4: false,
-      step_5: false,
+      step_5: true,
       step_6: false,
       insertMberSbscrb: {
         mberSeCd: '',

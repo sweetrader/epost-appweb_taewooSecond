@@ -17,7 +17,7 @@
           <dt class="input-wraper">
             <select v-model="rent.useCl">
               <option :value="null" disabled>업무시설 선택</option>
-              <option v-for="item in useClOptions" :key="item.codeDtl">{{ item.dtlNm }}</option>
+              <option v-for="item in useClOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
           <dt class="wraper-two-div">
@@ -27,7 +27,7 @@
           <dt class="input-wraper">
             <select v-model="rent.sepratSpcCnt">
               <option :value="null" disabled>분리공간 개수 선택</option>
-              <option v-for="item in sepratSpcOptions" :key="item.codeDtl">{{ item.dtlNm }}</option>
+              <option v-for="item in sepratSpcOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
         </dl>
@@ -39,7 +39,7 @@
           <dt class="input-wraper">
             <select v-model="rent.drc">
               <option :value="null" disabled>방향 선택</option>
-              <option v-for="item in drcOptions" :key="item.codeDtl">{{ item.dtlNm }}</option>
+              <option v-for="item in drcOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
           <dt class="wraper-two-div">
@@ -48,11 +48,11 @@
           </dt>
         </dl>
         <dl class="inner-content">
-          <DatePicker v-model="rent.comptConfmDe" input-class="mx-input" type="date" placeholder="준공인가일" format="YYYY-MM-DD"/>
+          <DatePicker v-model="rent.comptConfmDe" input-class="mx-input" value-type="format" type="date" placeholder="준공인가일" format="YYYY-MM-DD"/>
           <dt class="input-wraper">
             <select v-model="rent.bildPrpos">
               <option :value="null" disabled>건축물 용도 선택</option>
-              <option v-for="item in bildPrposOptions" :key="item.codeDtl">{{ item.dtlNm }}</option>
+              <option v-for="item in bildPrposOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
           <dt class="textarea-wraper"><textarea v-model="rent.note" type="text" placeholder="비공개 비고 입력(선택)"/></dt>
@@ -69,13 +69,13 @@
           <dt class="input-wraper">
             <select v-model="rent.elevtCnt">
               <option :value="null" disabled>엘리베이터 대수 선택</option>
-              <option v-for="item in elevtCntOptions" :key="item.codeDtl">{{ item.dtlNm }}</option>
+              <option v-for="item in elevtCntOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
           <dt class="input-wraper">
             <select v-model="rent.heatType">
               <option :value="null" disabled>난방종류 선택</option>
-              <option v-for="item in heatTypeOptions" :key="item.codeDtl">{{ item.dtlNm }}</option>
+              <option v-for="item in heatTypeOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
         </dl>
@@ -103,7 +103,7 @@
       <div class="title"><p>임대정보</p></div>
       <div class="contents-wraper">
         <dl class="inner-content">
-          <dt class="content-title"><p>임대기본정보</p><p class="guide">게시글 제목</p></dt>
+          <dt class="content-title"><p>임대기본정보</p><p class="guide" @click="modalOn ? modalOn=false : modalOn=true">게시글 제목</p></dt>
           <dt class="input-wraper"><input v-model="rent.sj" type="text" placeholder="게시글 제목 입력(예: 명동역3번출구1분거리/신축)"></dt>
           <dt class="two-button-wrap">
             <div :class="rent.rentType === '1' ? 'each-button on border-radius-left' :'each-button right'" @click="rent.rentType = '1'">
@@ -122,14 +122,14 @@
         <dl class="inner-content">
           <dt class="content-title"><p>임대기간</p></dt>
           <dt class="wraper-two-div">
-            <DatePicker v-model="rent.rentBgnDe" input-class="mx-input" type="date" placeholder="임대기간 입력" format="YYYY-MM-DD"/>
+            <DatePicker v-model="rent.rentBgnDe" input-class="mx-input" value-type="format" type="date" placeholder="임대기간 입력" format="YYYY-MM-DD"/>
             <p class="each-text-of-two">~</p>
-            <DatePicker v-model="rent.rentEndDe" input-class="mx-input" type="date" placeholder="임대기간 입력" format="YYYY-MM-DD"/>
+            <DatePicker v-model="rent.rentEndDe" input-class="mx-input" value-type="format" type="date" placeholder="임대기간 입력" format="YYYY-MM-DD"/>
 
           </dt>
           <dt class="wraper-two-div">
             <div class="define-width">
-              <DatePicker v-model="rent.mvPosblBgnDe" input-class="mx-input" type="date" placeholder="임대기간 입력" format="YYYY-MM-DD"/>
+              <DatePicker v-model="rent.mvPosblBgnDe" input-class="mx-input" value-type="format" type="date" placeholder="임대기간 입력" format="YYYY-MM-DD"/>
             </div>
             <p class="each-text-of-two">이후</p>
             <div :class="rent.immediatelyYn ? 'checkbox on' : 'checkbox'" @click="rent.immediatelyYn = !rent.immediatelyYn"><p>즉시 입주 가능</p></div>
@@ -173,9 +173,9 @@
         </dl>
       </div>
     </section>
-    <BottomButton one-button="등록" :is-valid="true" @click="rent"/>
+    <BottomButton one-button="등록" :is-valid="true" @click="handleAdd"/>
     <section v-if="modalOn" class="modal">
-      <img class="xButton" src="@/assets/image/space/icons/x.png">
+      <img class="xButton" src="@/assets/image/space/icons/x.png" @click="modalOn=false">
       <img class="explainImg" src="@/assets/image/space/icons/no-image.png">
       <p>
         게시글 제목은 구체적인 내용으로<br>간단하게 작성해주시면 좀 더 빠르게<br>매칭이 이루어집니다.
@@ -204,6 +204,7 @@ import { insertRent } from '@/api/spcRent'
 import { fileUpload } from '@/api/fileupload'
 
 export default {
+  name: 'RentManageForm',
   components: {
     Header, Tab, BottomButton, DatePicker
   },
@@ -265,10 +266,10 @@ export default {
     }
   },
   created() {
-    this.editCheck()
+    this.dataCheck()
   },
   methods: {
-    async editCheck() {
+    async dataCheck() {
       this.useClOptions = (await selectCodeList('USE_CL')).list
       this.sepratSpcOptions = (await selectCodeList('SEPRAT_SPC')).list
       this.drcOptions = (await selectCodeList('DRC_CD')).list
@@ -292,6 +293,7 @@ export default {
     },
     handleAdd() {
       const formData = new FormData()
+      /*
       if (this.upload.file.length < 5) {
         alert('사진은 최소 5장 이상 등록하여야 합니다.')
         return
@@ -300,22 +302,47 @@ export default {
         alert('사진은 최소 15장 미만으로 등록하여야 합니다.')
         return
       }
-      for (let i = 0; i < this.upload.file.length; i++) {
-        formData.append('img', this.upload.file[i])
-      }
-      fileUpload(formData).then(response => {
-        for (let i = 0; i < response.result.length; i++) {
-          this.rent.fileStreCours.push(response.result[i].fileUrl)
-          this.rent.originalFileName.push(response.result[i].originalFileName)
-          this.rent.fileSize.push(response.result[i].fileSize)
+      */
+      this.Alert({
+        content: '등록 하시겠습니까?',
+        leftBtn: '취소',
+        rightBtn: '확인',
+        leftsuccess: () => {},
+        rightsuccess: () => {
+          for (let i = 0; i < this.upload.file.length; i++) {
+            formData.append('img', this.upload.file[i])
+          }
+          if (this.rent.immediatelyYn === true) {
+            this.rent.immediatelyYn = 'Y'
+          } else {
+            this.rent.immediatelyYn = 'N'
+          }
+          fileUpload(formData).then(response => {
+            for (let i = 0; i < response.result.length; i++) {
+              this.rent.fileStreCours.push(response.result[i].fileUrl)
+              this.rent.originalFileName.push(response.result[i].originalFileName)
+              this.rent.fileSize.push(response.result[i].fileSize)
+            }
+            insertRent(this.rent).then(response => {
+              this.Alert({
+                content: '등록 하였습니다.',
+                success: () => {
+                  this.$router.push({ name: 'RentListSupler' })
+                }
+              })
+            }).catch(() => {
+              this.Alert({
+                content: '등록을 실패하였습니다.',
+                success: () => {}
+              })
+            })
+          }).catch(() => {
+            this.Alert({
+              content: '파일업로드를 실패하였습니다.',
+              success: () => {}
+            })
+          })
         }
-        insertRent(this.rent).then(response => {
-          this.$router.push({ name: 'RentList' })
-        }).catch(() => {
-
-        })
-      }).catch(() => {
-
       })
     }
   }

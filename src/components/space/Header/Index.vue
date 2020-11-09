@@ -12,16 +12,19 @@
     <section class="right-aria">
       <template v-if="!isBackDark">
         <img v-if="onClose" class="btnX" src="@/assets/image/space/icons/x.png">
-        <img v-if="onMenu" class="btnMenu" src="@/assets/image/space/icons/menu-dots.png">
+        <img v-if="onMenu" class="btnMenu" src="@/assets/image/space/icons/menu-dots.png" @click="menuOpen = true">
       </template>
 
       <template v-else>
         <img v-if="onClose" class="btnX" src="@/assets/image/space/icons/x-white.png">
-        <img v-if="onMenu" class="btnMenu" src="@/assets/image/space/icons/menu-dots-white.png">
+        <img v-if="onMenu" class="btnMenu" src="@/assets/image/space/icons/menu-dots-white.png" @click="menuOpen = true">
       </template>
       <p v-if="onResister" class="btnRegister" :class="isBackDark ? 'white' : ''">등록</p>
     </section>
-    <div class="menu-box"/>
+    <dl v-show="menuOpen" class="menu-box">
+      <dt><p>수정</p></dt>
+      <dt><p>중단</p></dt>
+    </dl>
   </div>
 </template>
 
@@ -47,12 +50,20 @@ export default {
     onResister: {
       type: Boolean,
       default: false
+    },
+    menuClose: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
     return {
-
+      menuOpen: false
     }
+  },
+  watch: {
+  },
+  created() {
   }
 }
 </script>

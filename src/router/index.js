@@ -54,8 +54,22 @@ export const constantRoutes = [
   },
   {
     path: '/spc/rent',
+    name: 'RentManagement',
     component: () => import('@/views/contents/spc/rentManageForm'),
     hidden: true
+  },
+  {
+    path: '/spc/rent/list/supler',
+    name: 'RentListSupler',
+    component: () => import('@/views/contents/spc/rentListSupler'),
+    hidden: true
+  },
+  {
+    path: '/spc/rent/info',
+    name: 'RentInfo',
+    component: () => import('@/views/contents/spc/rentInfo'),
+    hidden: true,
+    props: true
   },
   {
     path: '/mber/sbscrb/mberSbscrb',

@@ -1,198 +1,108 @@
 <template>
-  <div v-loading="dataLoading" class="has-head-container">
-    <sticky :class-name="'sub-navbar'">
-      <el-row type="flex" align="middle" justify="space-between">
-        <p>{{ $t('title.spc.rent') }}</p>
-
-        <el-button
-          v-waves
-          class="filter-item"
-          type="info"
-          icon="el-icon-edit"
-          @click="goCreate()">
-          {{ $t('btn.add') }}
-        </el-button>
-      </el-row>
-    </sticky>
-
-    <div class="app-container">
-      <div class="filter-container">
-        <el-row class="filter-item">
-          &lt;!&ndash; 제목검색 &ndash;&gt;
-          <el-input
-            v-model="listQuery.searchKeyword"
-            :placeholder="$t('placeholder.titleSearch')"
-            style="width: 200px;"
-            class="filter-item"
-            @keyup.enter.native="getList"/>
-
-          &lt;!&ndash; 사용분류 &ndash;&gt;
-          <el-select v-model="listQuery.useCl" clearable style="width: 100px" class="filter-item">
-            <el-option v-for="item in useClOptions" :key="item.codeDtl" :label="item.dtlNm" :value="item.codeDtl"/>
-          </el-select>
-
-          <el-button
-            v-waves
-            class="filter-item"
-            type="info"
-            plain
-            icon="el-icon-search"
-            @click="getList()">
-            {{ $t('btn.search') }}
-          </el-button>
-        </el-row>
+  <div id="enrollment-list">
+    <div class="all-content-box">
+      <Header title="등록내역" :is-back-dark="true" :on-register="true"/>
+      <div class="topcontainer">
+        <div class="text-box">{{ topContainer.textBox }}</div>
+        <div class="select-text-container">
+          <dt class="select-wraper" @click="optionOpen = true">
+            <p class="place-holder">{{ selectNm }}</p>
+          </dt>
+        </div>
+        <div class="reset-button">
+          <img src="@/assets/image/space/icons/filter.png">
+        </div>
       </div>
 
-      <el-table :data="list" border style="max-width: 1400px !important;">
-        <el-table-column :label="$t('spc.sj')" align="left" min-width="150">
-          <template slot-scope="scope">
-            <span>{{ scope.row.useClNm }}</span> | <span class="edit_button" style="font-size: large" @click="goEdit(scope.row.rentRsrcId)">{{ scope.row.rentTypeNm + ' ' + scope.row.rent }}</span>
-            <span v-if="scope.row.sj !== ''" style="font-size: smaller"><br>{{ scope.row.sj }}</span>
-            <span style="font-size: smaller"><br>{{ scope.row.addr }} {{ scope.row.addrDtl }}  | 면적 {{ scope.row.area }}㎡</span>
-          </template>
-        </el-table-column>
-
-        &lt;!&ndash;<el-table-column v-if="listQuery.auth === 'supler'" :label="$t('orgManagement.action')" align="center" width="120" class-name="small-padding fixed-width">
-          <template slot-scope="scope">
-            <el-button type="warning" size="mini" @click="handleDelete(scope.row.rentRsrcId)">{{ $t('btn.delete') }}</el-button>
-          </template>
-        </el-table-column>&ndash;&gt;
-      </el-table>
-      <pagination v-show="totCnt>0" :total="totCnt" :page.sync="listQuery.page" :limit.sync="listQuery.size" @pagination="getList"/>
+      <dl>
+        <dt v-for="post in postList" :key="post.index" class="eachPost">
+          <div class="areaname">{{ post.sj }}</div>
+          <div class="left-content-container" @click="goInfo(post.rentRsrcId)">
+            <div class="left-aria">
+              <img :src="post.fileUrl">
+            </div>
+            <div class="right-aria">
+              <dl class="right-top">
+                <dt class="facility-ctgr">{{ post.useClNm }}</dt>
+                <dt class="facility-size">{{ post.area }} ㎡</dt>
+              </dl>
+              <div class="right-title">
+                <p>{{ post.title }}</p>
+              </div>
+              <div class="right-middle">
+                <p>
+                  <span>분리공간{{ post.sepratSpcCnt }}개</span>
+                  <span>{{ post.crrspndFloor + '/' + post.allFloor }}층</span>
+                  <span>관리비 {{ post.manageAmt | comma }}만원</span>
+                </p>
+              </div>
+              <div class="right-bottom">{{ post.dscrp }}</div>
+            </div>
+          </div>
+        </dt>
+      </dl>
     </div>
-
-    &lt;!&ndash; 우측 사이드 바 수정 폼 &ndash;&gt;
-    <el-drawer
-      :title="drawerInfo.title"
-      :visible.sync="drawerInfo.rightDrawer"
-      direction="rtl"
-      size="40%">
-      <manage-form
-        :confirm-type="drawerInfo.confirmType"
-        :rent-rsrc-id="drawerInfo.rentRsrcId"
-        :drawer-open-checker.sync="drawerInfo.rightDrawer"
-        :close-drawer="handleDrawerClose"/>
-    </el-drawer>
+    <SelectBox :open="optionOpen" :header="listHeader" :option-list="optionList" @select="onClickOptionItem"/>
   </div>
 </template>
 
 <script>
-import waves from '@/directive/waves'
-import { fetchSuplerRentList, editRentDel } from '@/api/spcRent'
+import Header from '@/components/space/Header/Index'
+import SelectBox from '@/components/space/SelectBox/Index'
+import { fetchSuplerRentList } from '@/api/spcRent'
 import { selectCodeList } from '@/api/com'
 
 export default {
-  name: 'RentManagement',
-  directives: { waves },
+  name: 'RentListSupler',
+  components: {
+    Header, SelectBox
+  },
+  filters: {
+    comma(val) {
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    }
+  },
   data() {
     return {
-      isRegisteredFavorJob: false,
-      isMapView: false,
-      tabOn: [false, false, true],
-      postList: [
-        {
-          img: require('@/assets/image/space/temp/space1.png'),
-          ctgr: '사무실',
-          size: 84,
-          title: '전세 1억 7,000',
-          seperationAmount: 3,
-          floor: '5/11',
-          maintenanceFee: 35,
-          explain: '명동역 5번 출구에서 도보3분 걸립니다. 오셔서번...'
-        },
-        {
-          img: require('@/assets/image/space/temp/space1.png'),
-          ctgr: '유해물보관창고',
-          size: 860,
-          title: '월세 1,000/70',
-          seperationAmount: 3,
-          floor: '5/11',
-          maintenanceFee: 35,
-          explain: '명동역 5번 출구에서 도보3분 걸립니다. 오셔서번...'
-        }
-      ],
-      dataLoading: false,
+      selectNm: '업무시설',
+      optionOpen: false,
+      listHeader: '업무시설',
+      optionList: ['전체', '현장실사요청', '임대조건 조정요청', '임대조건 조정완료', '계약서작성', '계약대기', '계약서변경요청', '계약파기', '임대조건 조정요청', '임대조건 조정완료', '계약서작성', '계약대기', '계약서변경요청', '계약파기'],
+      topContainer: {
+        textBox: ''
+      },
       listQuery: {
         searchKeyword: '',
-        addr: '',
         useCl: '',
+        addr: '',
         page: 1,
         size: 10
       },
-      totCnt: 0,
-      list: null,
-      drawerInfo: {
-        title: '',
-        rightDrawer: false,
-        confirmType: 'add',
-        rentRsrcId: ''
-      },
-      rent: {
-        rentRsrcId: ''
-      },
-      useClOptions: null
+      postList: [],
+      useClOptions: []
     }
   },
   watch: {
-
   },
   created() {
-    this.getList()
+    this.dataCheck()
   },
   methods: {
-    async getList() {
-      this.dataLoading = true
-
-      const response = await fetchSuplerRentList(this.listQuery)
-      this.list = response.list
-      this.totCnt = response.totCnt
-
+    async dataCheck() {
       this.useClOptions = (await selectCodeList('USE_CL')).list
-
-      setTimeout(() => {
-        this.dataLoading = false
-      }, 300)
+      const response = await fetchSuplerRentList(this.listQuery)
+      this.postList = response.list
+      this.topContainer.textBox = '총' + response.totCnt + '건'
+    },
+    onClickOptionItem(option) {
+      this.optionOpen = false
+      this.selectNm = option
     },
     goCreate() {
       this.$router.push({ name: 'RentManagement' })
     },
-    goEdit(id) {
-      this.$router.push({ name: 'RentManagement', params: { rentRsrcId: id }})
-    },
-    handleCreate() {
-      this.drawerInfo.confirmType = 'add'
-      this.drawerInfo.rentRsrcId = ''
-      this.drawerInfo.title = this.$t('title.spc.rentInsert')
-      this.drawerInfo.rightDrawer = true
-    },
-    handleEdit(row) {
-      this.drawerInfo.confirmType = 'edit'
-      this.drawerInfo.rentRsrcId = row
-      this.drawerInfo.title = this.$t('title.spc.rentEdit')
-      this.drawerInfo.rightDrawer = true
-    },
-    handleDelete(id) {
-      this.confirmLoading = true
-      this.rent.rentRsrcId = id
-      this.$confirm(this.$t('message.deleteConfirm'), {
-        confirmButtonText: this.$t('btn.confirm'),
-        cancelButtonText: this.$t('btn.cancel'),
-        type: 'warning'
-      }).then(() => {
-        editRentDel(this.rent).then(response => {
-          this.confirmLoading = false
-          this.$message.success(this.$t('message.success'))
-          this.getList()
-        }).catch(() => {
-          this.confirmLoading = false
-        })
-      }).catch(() => {
-        this.confirmLoading = false
-      })
-    },
-    handleDrawerClose() {
-      this.drawerInfo.rightDrawer = false
-      this.getList()
+    goInfo(id) {
+      this.$router.push({ name: 'RentInfo', params: { rentRsrcId: id }})
     }
   }
 }

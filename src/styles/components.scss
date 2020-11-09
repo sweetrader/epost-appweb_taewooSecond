@@ -1,3 +1,34 @@
+
+// ----------------------
+// 슬라이드 업
+// ----------------------
+.slide-enter-active {
+    animation: slide-up 0.8s ease-in-out;
+  }
+  .slidedown-leave-active {
+    animation: slide-down 1s ease-in-out;
+  }
+  
+  @keyframes slide-up {
+  
+   0%{
+    bottom: rem(-480);
+   }
+  
+   100%{
+    bottom: rem(100);
+  
+   }
+  }
+  @keyframes slide-down {
+    from{
+      bottom: rem(100);
+    }
+    to {
+      bottom: rem(-700);
+    }
+  }
+
 // ----------------------
 // header
 // ----------------------
@@ -10,14 +41,41 @@
     height:rem(96);
     line-height:rem(96);
     background:white;   
-    position: relative;
+    position: fixed;
     top:0px;
     left:0px;
-    z-index:80;
+    z-index:70;
     font-weight:normal;
     display: flex;
     align-items: center;
-    
+    .menu-box{
+        line-height: normal;
+        width: rem(160);
+        height: rem(169);
+        border: 1px solid #868E96;
+        border-radius: rem(20);
+        background-color: white;
+        position: absolute;
+        top: rem(82);
+        right: rem(30);
+        display: flex;
+        flex-direction: column;
+        -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.11);
+        -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.11);
+        box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.11);
+        @include font-style(24, $bk, NotoSans-Regular);            
+        @include sidePadding(20.5);
+            dt {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:last-child{
+                    border-top: 1px solid $border;
+                }
+            }
+
+    }
     .left-aria {
         flex: 1;
         img{
@@ -151,6 +209,11 @@
             line-height: rem(100);
             text-align: center;
             @include font-style(28, white, NotoSans-Regular);
+            img {
+                width: rem(28);
+                height: rem(28);
+                vertical-align: auto;
+            }
         }
 
         .invalid{
@@ -192,4 +255,168 @@
         // @include background('../assets/image/icons/path-right-white.png', rem(12) rem(24), 50% 50%);
     }
     
+}
+
+
+// 쓰리 토글
+
+#toggle-button{
+    display: flex;
+    padding-top: rem(20);
+    text-align: center;
+    .each-button{
+        flex: 1;
+        height: rem(82);
+        line-height: rem(82);
+        background: $btn-bg;
+        border: 1px solid $border;
+        @include font-style(28, $bk, NotoSans-Regular);
+        img{
+            margin-right: rem(10);
+            width: rem(22.51);
+        }
+    }
+    .on{
+        color: $red;
+        background: white;
+        border: 1px solid $red;
+    }
+    .border-radius-left{
+        border-radius: rem(10) 0 0 rem(10);
+    }
+    .border-radius-right{
+        border-radius: 0 rem(10) rem(10) 0;
+    }           
+    .middle{
+        border-right: none;
+        border-left: none;
+    }
+    .border-left-none{
+        border-left: none;
+    }
+    .border-right-none{
+        border-right:none;
+    }
+}
+
+
+// 필터바
+#filter_bar{
+    .region_filter_section{
+        padding-top: rem(20);
+        display: flex;
+        padding-left: rem(20);
+        box-sizing: border-box;
+        padding-bottom: rem(20);
+        border-bottom: 1px solid $border;
+        background-color: white;
+        .address-wraper{
+            height: rem(82);
+            line-height: rem(82);
+            width: rem(342);
+            border: 1px solid $border;
+            text-align: left;
+            border-radius: rem(10);    
+            margin-right: rem(20);           
+            @include background('../assets/image/space/icons/map.png', rem(26.6) rem(31.92), rem(20) 50%);
+            @include font-style(28, $bk, NotoSans-Regular);
+            @include sidePadding(20);
+            padding-left: rem(60);
+        }
+        .select-wraper{
+            border: 1px solid $border;
+            border-radius: rem(10);   
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: left;
+            @include sidePadding(10);
+            @include background('../assets/image/space/icons/path-below.png', rem(36) rem(36), 95% 50%);
+            .place-holder{
+                text-align: left;
+                @include font-style(28, $gy, NotoSans-Regular);
+                @include ellipsis(200);
+
+            }
+
+        }
+        .filter-wraper{
+            width: rem(82);
+            height: rem(82);
+            @include background('../assets/image/space/icons/filter.png', rem(82) rem(82), 0 50%);
+        }
+        .total-amount{
+            line-height: normal;
+            display: flex;
+            align-items: center;
+            width: rem(350);
+            @include font-style(24, $gy, NotoSans-Regular);
+        }
+    }   
+
+ 
+}
+
+#select-box{
+    text-align: center;
+    .dim{
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 900;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba($color: #000000, $alpha: 0.3);
+    }
+    .select-list-wraper{
+        border-radius: rem(30) rem(30) 0 0; 
+        overflow: scroll;
+        background-color: white;
+        width: 100vw;
+        z-index: 999;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: rem(686);
+        .header{
+            position: fixed;
+            border-radius: rem(30) rem(30) 0 0; 
+            z-index: 99;
+            background-color: white;
+            width: 100%;
+            height: rem(100);
+            line-height: rem(100);
+            border-bottom: 1px solid $border;
+            @include font-style(28, $bk, NotoSans-Regular);
+                img {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    right: rem(10);
+                    width: rem(52);
+                }           
+        }
+
+        dl {
+            position: absolute;
+            top: rem(100);
+            height: rem(589);
+            width: 100%;
+            .each-option{
+                margin-top: rem(50);
+                p {
+                    @include font-style(28, $gy, NotoSans-Regular);        
+                }
+                
+                &:last-child {
+                    padding-bottom: rem(50);
+                }
+            }
+            .on {
+               p {
+                color: $red;
+               }
+            }
+        }
+    }
 }

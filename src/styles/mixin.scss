@@ -23,10 +23,10 @@
 
 //<--------------------- Background --------------------->
 @mixin background($url, $size, $position, $color:transparent) {
-    background-image: url($url);
-    background-repeat: no-repeat;
-    background-position: $position;
-    background-size: $size;
+    background-image: url($url)!important;
+    background-repeat: no-repeat!important;
+    background-position: $position!important;
+    background-size: $size!important;
     background-color: $color;
 }
 

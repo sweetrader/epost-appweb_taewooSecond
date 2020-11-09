@@ -16,7 +16,9 @@
 
     <template v-else>
       <div class="one-button">
-        <div :class="isValid ? 'one-button-click' : 'one-button-click invalid'" @click="onClickOneButton()">{{ oneButton }}</div>
+        <div :class="isValid ? 'one-button-click' : 'one-button-click invalid'" @click="onClickOneButton()">
+          <img v-show="oneButton === '관심등록'" src="@/assets/image/space/icons/bookclip.png">
+          {{ oneButton }}</div>
       </div>
     </template>
   </div>
@@ -55,8 +57,14 @@ export default {
     }
   },
   methods: {
+    onClickLeftButton() {
+      this.$emit('action', 'LEFT')
+    },
+    onClickRightButton() {
+      this.$emit('action', 'RIGHT')
+    },
     onClickOneButton() {
-      this.$emit('click')
+      this.$emit('click', 'SINGLE')
     }
   }
 }

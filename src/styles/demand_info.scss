@@ -1,44 +1,7 @@
 // 수요정보 리스트
 #demand_info {
+    padding-top: rem(96);
     background-color: white;
-    .region_filter_section{
-        margin-top: rem(20);
-        display: flex;
-        padding-left: rem(20);
-        box-sizing: border-box;
-        padding-bottom: rem(20);
-        .address-wraper{
-            height: rem(82);
-            line-height: rem(82);
-            width: rem(342);
-            border: 1px solid $border;
-            text-align: left;
-            border-radius: rem(10);    
-            margin-right: rem(20);           
-            @include background('../assets/image/space/icons/map.png', rem(26.6) rem(31.92), rem(20) 50%);
-            @include font-style(28, $bk, NotoSans-Regular);
-            @include sidePadding(20);
-            padding-left: rem(60);
-        }
-        .select-wraper{
-            flex-grow: 1;
-            select {
-                text-align: left;
-                line-height: rem(82);
-                height: rem(82);
-                border: 1px solid $border;
-                border-radius: rem(10);
-
-                @include font-style(28, #ADB5BD, NotoSans-Regular);
-                @include sidePadding(20);
-            }
-        }
-        .filter-wraper{
-            width: rem(82);
-            height: rem(82);
-            @include background('../assets/image/space/icons/filter.png', rem(82) rem(82), 0 50%);
-        }
-    }   
     .list-section{
         .list-top-aria{
             height: rem(72);
@@ -129,6 +92,7 @@
 #demand_detail{
     line-height: normal;
     padding-bottom: rem(100);
+    padding-top: rem(96);
     .top-section{
         background-color: white;
         text-align: center;
@@ -200,6 +164,7 @@
 #suggest_space{
     background-color: white;
     padding-bottom: rem(100);
+    padding-top: rem(96);
     .search-section {
         padding-top: rem(20);
         @include sidePadding(20);
@@ -239,9 +204,10 @@
 // 제안 상세
 #suggestion_detail {
     line-height: normal;
+    padding-top: rem(96);
     .suggestion-info-wraper{
-        background-color: $header-bg;
         padding-bottom: rem(61);
+        padding-top: rem(60);
         @include sidePadding(30);
         .inner-wraper{
             background-color: white;

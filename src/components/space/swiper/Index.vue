@@ -1,31 +1,24 @@
 <template>
   <div id="slide-component">
-    <div class="inner-slide">
-      <img v-for="slide in slideList" :key="slide.index" :src="slide" :style="slideSize">
-    </div>
+    <swiper ref="mySwiper">
+      <swiperSlide v-for="slide in slideList" :key="slide.index"><img :src="slide"></swiperSlide>
+    </swiper>
   </div>
 </template>
 
 <script>
-import "@/assets/slick/slick-theme.scss"; // eslint-disable-line
-import "@/assets/slick/slick.scss"; // eslint-disable-line
-import slick from "@/assets/slick/slick.min.js"; // eslint-disable-line
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
 export default {
   components: {
+    swiper,
+    swiperSlide
   },
   props: {
-    slideSize: {
-      type: String,
-      default: ''
-    },
     getList: {
       type: Array,
       default: null
-    },
-    dotsClass: {
-      type: String,
-      default: 'slick-dots'
     }
   },
   data() {
@@ -34,19 +27,13 @@ export default {
       currentSlide: 0
     }
   },
+  computed: {
+    swiper() {
+      return this.$refs.mySwiper.swiper
+    }
+  },
   created() {
     this.slideList = this.getList
-    this.$nextTick(() => {
-      window.$(`.inner-slide`).slick({
-        infinite: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        swipeToSlide: true,
-        arrows: false,
-        dots: false,
-        dotsClass: false
-      })
-    })
   },
   mounted() {
 

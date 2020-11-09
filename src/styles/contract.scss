@@ -1,5 +1,6 @@
-#conditions{
+#contract_detail{
     padding-top: rem(96);
+
     .document-container{
         padding-bottom: rem(300);
         background-color: white;
@@ -8,13 +9,6 @@
             img{
                 width: 100%;
             }
-        }
-        .space-name {
-            height: rem(81);
-            line-height: rem(81);
-            border-bottom: 1px solid $border;
-            text-align: center;
-            @include font-style(28, $purple, NotoSans-Regular);
         }
         .document-icon-title-subtitle{
             margin-top: rem(60);
@@ -239,40 +233,14 @@
         .blue-style{
             border: 3px solid $blue;
             .top-area {
-                background-color: #EBF4FC;
-            }
-            .top-left{            
-                p{
-                    color: $blue;
-                }
+                background-color: $blue;
             }
         }
         .red-style{
             border: 3px solid $red;
             .top-area {
-                background-color: #F9F4EB;
+                background-color: $red;
             }
-            .top-left{            
-                p{
-                    color: $red;
-                }
-            }
-        }
-        .gray-style{
-            border: 3px solid #868E96;
-            .top-area {
-                background-color: #F5F5F5;
-            }
-            .top-left{            
-                p{
-                    color:  #868E96;
-                }
-            }
-        }
-        .red-text { color: $red!important; display: inline-block;}
-        .text-line-through{ text-decoration: line-through; color: $gy!important; }
-        .second-wraper{
-            margin-top: rem(30);
         }
         .inner-wraper{
             border-radius: rem(20);
@@ -281,6 +249,7 @@
                 display: flex;
                 height: rem(112);
                 line-height: rem(112);
+                color: white;
                 @include sidePadding(30);   
                 .top-left{
                     display: flex;
@@ -296,7 +265,7 @@
                 .top-right{
                     flex: 1;
                     text-align: right;
-                    @include font-style(24, #ADB5BD, NotoSans-Regular);
+                    @include font-style(24, white, NotoSans-Regular);
                 }
                 
             }
@@ -317,87 +286,46 @@
                     }
                 }
             }
-
-            .buttons-wraper {
-                display: flex;
-                height: rem(100);
-                align-items: center;
-                border-top: 1px solid $border;
-                dt{
-                    flex: 1;
-                    text-align: center;
-                    @include font-style(28, #495057, NotoSans-Regular);
-                    p{
-                        display: inline-block;
-                    }
-                    img{
-                        width: rem(34);
-                        vertical-align: middle;
-                        margin-bottom: rem(10);
-                        margin-right: rem(10);
-                    }
-                    &:last-child{
-                        border-left: 1px solid $border;
-                    }
-                }
-            }
-        }
-        .contract_button{
-            text-align: center;
-            height: rem(82);
-            border: 1px solid $border;
-            border-radius: rem(5);
-            display: flex;
-            justify-content: center;
-            margin-top: rem(30);
-            @include font-style(28, #495057, NotoSans-Regular);
-
-            img{
-                width: rem(24);
-                vertical-align: middle;
-                margin-right: rem(10);
-            }
-            p, div{
-                display: flex ;
-                align-items: center;
-
-            }
-
         }
        
     }
 }
 
-#contract-document{
+#write-contract {
+    line-height: normal;
     padding-top: rem(96);
-    overflow: hidden;
-    background-color: white;
-    height: 100vh;
-    padding-bottom: rem(100);
-    .document-image{
-        img{
-            width: 100%;
-        }
-    }
-    .agreebutton{
-        position: fixed;
-        bottom: rem(100);
-        left: 0;
-        width: rem(720);
-        height: rem(80);
-        display: grid;
-        grid-template-columns: auto 80%;
-        background-color: $header-bg;
-        .checkimage{
-            margin: 0 rem(17) 0 rem(217);
-            img{
-                width: rem(42);
-                height: rem(42);
+
+    .contents-wraper{
+        height: calc(100vh - 1.3888rem);
+        display: flex;
+        flex-direction: column;
+        .top-section{
+            text-align: center;
+            padding-top: rem(35);
+            padding-bottom: rem(31);
+            .space-name{
+                margin-bottom: rem(10);
+                @include font-style(28, $bk, NotoSans-Regular);
+            }
+            .date{
+                @include font-style(22, $gy, NotoSans-Regular);
             }
         }
-        .checktext{
-            line-height: rem(80);
-            @include font-style(24, white, NotoSans-Regular);
+        .bottom-section{
+            flex: 1;
+            background-color: white;
+            padding-top: rem(30);
+            @include sidePadding(30);
+            .text-aria-wraper{
+                border: 1px solid $border;
+                border-radius: rem(20);
+                padding: rem(30) 0;
+                @include sidePadding(30);
+                textarea {
+                    height: rem(460);
+                }
+            }
         }
     }
 }
+

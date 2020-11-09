@@ -1,0 +1,61 @@
+#space-list{
+    line-height: normal;
+    .list-section{
+        @include font-style(28, $gy, NotoSans-Regular);
+        .each-list-section{
+            background-color: white;
+            padding-top: rem(40);
+            margin-bottom: rem(14);
+            dt{
+                @include background('../assets/image/space/icons/path-right-bk.png', rem(72) rem(72), 100% 50%);
+                @include sidePadding(30);
+                .top-aria{
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: rem(10);
+                    .space-type{
+                        border: 1px solid $blue;
+                        border-radius: rem(5);
+                        margin-right: rem(20);
+                        @include sidePadding(10);
+                        @include font-style(20, $blue, NotoSans-Regular);
+                    }
+                    .space-name{
+                        flex-grow: 1;
+                        @include font-style(28, $purple, NotoSans-Regular);
+                    }
+                }
+                .addr{
+                    margin-bottom: rem(10);
+                }
+                .message{
+                    padding-bottom: rem(35.5);
+                    
+                }
+            }
+            .each-button{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-top: 1px solid $border;
+                background: none!important;
+                text-align: center;
+                height: rem(94);
+                line-height: rem(94);
+                @include font-style(28, $bk, NotoSans-Regular);
+                div {
+                    display: flex;
+                    align-items: center;
+                    img{
+                        vertical-align: middle;
+                        margin-right: rem(10);
+                        width: rem(28);
+                    }
+                }
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

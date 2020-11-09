@@ -3,6 +3,7 @@
     height: 100vh;
     text-align: center;
     line-height: normal;
+    padding-top: rem(96);
     .register-alert{
         padding-top: rem(150);
         background-color: white;
@@ -185,44 +186,6 @@
     }
     .search-region-section{
         background-color: white;
-        padding-top: rem(20);
-        dl{
-            display: flex;
-            padding-left: rem(20);
-            box-sizing: border-box;
-            padding-bottom: rem(20);
-            .address-wraper{
-                height: rem(82);
-                line-height: rem(82);
-                width: rem(342);
-                border: 1px solid $border;
-                text-align: left;
-                border-radius: rem(10);    
-                margin-right: rem(20);           
-                @include background('../assets/image/space/icons/map.png', rem(26.6) rem(31.92), rem(20) 50%);
-                @include font-style(28, $bk, NotoSans-Regular);
-                @include sidePadding(20);
-                padding-left: rem(60);
-            }
-            .select-wraper{
-                flex-grow: 1;
-                select {
-                    text-align: left;
-                    line-height: rem(82);
-                    height: rem(82);
-                    border: 1px solid $border;
-                    border-radius: rem(10);
-    
-                    @include font-style(28, #ADB5BD, NotoSans-Regular);
-                    @include sidePadding(20);
-                }
-            }
-            .filter-wraper{
-                width: rem(82);
-                height: rem(82);
-                @include background('../assets/image/space/icons/filter.png', rem(82) rem(82), 0 50%);
-            }
-        }
         .map-aria{
             img{
                 width: 100%;
@@ -247,44 +210,7 @@
 
 #post_list_filter {
     background-color: white;
-    .region_filter_section{
-            display: flex;
-            padding-left: rem(20);
-            box-sizing: border-box;
-            padding-bottom: rem(20);
-            border-bottom: 1px solid $border;
-            .address-wraper{
-                height: rem(82);
-                line-height: rem(82);
-                width: rem(342);
-                border: 1px solid $border;
-                text-align: left;
-                border-radius: rem(10);    
-                margin-right: rem(20);           
-                @include background('../assets/image/space/icons/map.png', rem(26.6) rem(31.92), rem(20) 50%);
-                @include font-style(28, $bk, NotoSans-Regular);
-                @include sidePadding(20);
-                padding-left: rem(60);
-            }
-            .select-wraper{
-                flex-grow: 1;
-                select {
-                    text-align: left;
-                    line-height: rem(82);
-                    height: rem(82);
-                    border: 1px solid $border;
-                    border-radius: rem(10);
-    
-                    @include font-style(28, #ADB5BD, NotoSans-Regular);
-                    @include sidePadding(20);
-                }
-            }
-            .filter-wraper{
-                width: rem(82);
-                height: rem(82);
-                @include background('../assets/image/space/icons/filter.png', rem(82) rem(82), 0 50%);
-            }
-    }   
+    padding-top: rem(96);
     .sharing_available_area{
         margin-top: rem(40);
         @include sidePadding(30);
@@ -356,6 +282,8 @@
 #select_region{
     background-color: white;
     min-height: 100vh;
+    padding-top: rem(96);
+
     .tab-aria{
         height: rem(96);
         display: flex;
@@ -366,14 +294,19 @@
             flex: 1;
             line-height: rem(96);     
             p{  
+               
                 height: rem(93);
                 width: max-content;
                 margin: 0 auto;
                 padding: 0 rem(10);
             }
             .on {
-                border-bottom: 3px solid $red; 
+               
+                border-bottom: 3px solid $red;                
             }       
+            .red-text {
+                color: red!important;
+            }
         }
     }
     .ctgr-list-section{
@@ -397,47 +330,12 @@
 #filter {
     text-align: center;
     line-height: normal;
+    padding-top: rem(96);
+
     .filter-top-section{
         background-color: white;
         padding-bottom: rem(80);
         @include sidePadding(30);
-        .tab-aria{
-                display: flex;
-                padding-top: rem(20);
-                .each-button{
-                    flex: 1;
-                    height: rem(82);
-                    line-height: rem(82);
-                    background: $btn-bg;
-                    border: 1px solid $border;
-                    @include font-style(28, $bk, NotoSans-Regular);
-                    img{
-                        margin-right: rem(10);
-                        width: rem(22.51);
-                    }
-                }
-                .on{
-                    color: $red;
-                    background: white;
-                    border: 1px solid $red;
-                }
-                .border-radius-left{
-                    border-radius: rem(10) 0 0 rem(10);
-                }
-                .border-radius-right{
-                    border-radius: 0 rem(10) rem(10) 0;
-                }           
-                .middle{
-                    border-right: none;
-                    border-left: none;
-                }
-                .border-left-none{
-                    border-left: none;
-                }
-                .border-right-none{
-                    border-right:none;
-                }
-        }
         .slider-aria{
             
             .each-slider-wraper{
@@ -445,6 +343,7 @@
                 .title{
                     text-align: left;
                     display: flex;
+                    margin-bottom: rem(10);
                     span{
                         flex: 1;
                         &:last-child{
@@ -544,6 +443,7 @@
         background-color: white;
         margin-top:rem(14);
         padding-bottom: rem(220);
+        
         .bottom-title-aria{
             height: rem(112);
             line-height: rem(112);
@@ -555,14 +455,24 @@
             @include background('../assets/image/space/icons/path-above.png', rem(72) rem(72), 100% 50%);
         }
         .each-tab-wraper{
+            margin: 0 auto;
             margin-top: rem(60);
             @include sidePadding(30);
+
+            // display: table;
+            // table-layout: fixed;
+            // width: rem(660);
+            // border-collapse: collapse;
             .wrap-title{
                 text-align: left;
-                @include font-style(28, $purple, NotoSans-Regular);           
+                margin-bottom: rem(10);
+                @include font-style(28, $purple, NotoSans-Regular);   
             }
             dl{
                 margin-top: rem(15);
+
+                // display: table-row;
+       
 
                 @include font-style(32, $bk, NotoSans-Regular);
                 dt {
@@ -570,6 +480,8 @@
                     line-height: rem(82);
                     background-color: #F5F5F5;
                     border: 1px solid $border;
+                    display: table-cell;
+                    
                     img{
                         margin-right: rem(10);
                         width: rem(22);
@@ -577,10 +489,21 @@
                     }
                 }
                 .on {
-                    border: 1px solid $red;
+                    border: 1px solid $red!important;
                     background-color: white;
                     color: $red;
                 }
+                .radius-left-top { border-top-left-radius: rem(10); }
+                .radius-left-bottom { border-bottom-left-radius: rem(10);}
+                .radius-right-top {border-top-right-radius: rem(10);}
+                .radius-right-bottom { border-bottom-left-radius: rem(10);}
+                .radius-left {border-radius: rem(10) 0 0 ram(10);}
+                .radius-right {border-radius: 0 rem(10) ram(10) 0;}
+                .middle{ border-right: none; border-left: none; }
+                .border-left-none{ border-left: none; }
+                .border-right-none{ border-right:none; }
+                .border-top-none {border-top: none;}
+                .border-bottom-none {border-bottom: none;}
 
             }
             @mixin grid($column) {
@@ -592,8 +515,6 @@
                 display: -ms-grid;
                 grid-template-columns: $column;
                 -ms-grid-columns: $column;
-                row-gap: rem(10);
-                column-gap: rem(10);
                 dt{
                     margin: 0;
                 }
@@ -610,6 +531,135 @@
             }
             .two-grid{
                 @include grid(repeat(2, 1fr));
+            }
+        }
+    }
+}
+
+
+#filterin-quiry-container{
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+    padding-top: rem(96);
+    .top-container{
+        @include sidePadding(30);
+
+    .space-text-bar{
+        margin: rem(20) 0 rem(20) 0;
+        width: rem(640);
+        padding-left: rem(20);
+            height: rem(82);
+            border-radius: rem(5);
+            line-height: rem(82);
+            border: 1px solid $placehorder;
+            @include font-style(28, $placehorder, NotoSans-Regular);
+            
+    }
+    .local-pick{
+        // display: grid;
+        // grid-template-columns: 1fr 1fr;
+        margin: rem(20) 0 rem(60) 0;
+        width: rem(640);
+        padding-left: rem(20);
+            height: rem(82);
+            line-height: rem(82);
+            border: 1px solid $placehorder;
+            border-radius: rem(5);
+            @include font-style(28, $placehorder, NotoSans-Regular);
+            img{
+                padding-right: rem(10);
+                width: rem(26);
+                height: rem(31);
+            }
+    }
+}
+    .line{
+        border-top: 1px solid $border;
+    }
+    .bottom-container{
+        @include sidePadding(30);
+    .subtitle{
+        margin-top: rem(60);
+        margin-bottom: rem(15);
+        @include font-style(28, $purple, NotoSans-Regular);
+    }
+        .choice-day{       
+            width: rem(660);
+            height: rem(82);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            line-height: rem(82);
+            text-align: center;
+            .choice-today{
+                border: 1px solid $placehorder;
+                border-radius: rem(5) 0 0 rem(5);
+                @include font-style(28, $gy-text, NotoSans-Regular);
+            }
+            .choice-oneweek{
+                border-top: 1px solid $placehorder;
+                border-bottom: 1px solid $placehorder;
+                @include font-style(28, $gy-text, NotoSans-Regular);
+            }
+            .choice-onemonth{
+                border: 1px solid $placehorder;
+                border-radius: 0 rem(5) rem(5) 0;
+                @include font-style(28, $gy-text, NotoSans-Regular);
+            }
+        }
+        .each-text-of-two{
+            // width: max-content;
+            height: rem(82);
+            line-height: rem(82);
+            text-align: right;
+            @include sidePadding(15);
+            @include font-style(28, $gy, NotoSans-Regular);
+        }
+        .input-container{
+            display: grid;
+            margin-top: rem(20);
+            line-height: rem(82);
+            display: flex;
+            .input-text1{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                border: 1px solid $placehorder;
+                border-radius: rem(5);
+                width: rem(280);
+                height: rem(82);
+                padding-left: rem(20);
+                @include font-style(28, $placehorder, NotoSans-Regular);
+                img{
+                    padding-right: rem(20);
+                    justify-self: end;
+                    align-self: center;
+                    width: rem(33);
+                    height: rem(30);
+                }
+            }
+            .input-image{
+                text-align: center;
+                img{
+                    width: rem(17);
+                    height: rem(28);
+                }
+            }
+            .input-text2{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                border: 1px solid $placehorder;
+                border-radius: rem(5);
+                width: rem(280);
+                height: rem(82);
+                padding-left: rem(20);
+                @include font-style(28, $placehorder, NotoSans-Regular);
+                img{
+                    padding-right: rem(20);
+                    justify-self: end;
+                    align-self: center;
+                    width: rem(33);
+                    height: rem(30);
+                }
             }
         }
     }

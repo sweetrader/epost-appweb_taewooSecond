@@ -33,7 +33,7 @@ const spc = {
     },
     {
       path: 'rent/list/supler',
-      name: 'RentListSupler',
+      name: 'RentListSupler2',
       component: () => import('@/views/contents/spc/rentListSupler'),
       meta: {
         icon: 'component',
@@ -51,13 +51,13 @@ const spc = {
     },
     {
       path: 'rent',
-      name: 'RentManagement',
+      name: 'RentManagement2',
       component: () => import('@/views/contents/spc/rentManageForm'),
       props: true
     },
     {
       path: 'rent/info',
-      name: 'RentInfo',
+      name: 'RentInfo2',
       component: () => import('@/views/contents/spc/rentInfo'),
       props: true
     },

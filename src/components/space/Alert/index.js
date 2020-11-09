@@ -1,7 +1,4 @@
 import Alert from './index.vue'
-/*
-import Vue from 'vue'
-*/
 
 Alert.install = function(Vue) {
   Vue.component(Alert.name, Alert)

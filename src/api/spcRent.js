@@ -42,6 +42,16 @@ export function fetchRentDetail(data) {
   return request.get(url, config)
 }
 
+export function fetchRentImgList(data) {
+  const url = '/demo/v1/spc/rent/img' + objectToParam(data)
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+  return request.get(url, config)
+}
+
 export function editRent(data) {
   const url = '/demo/v1/spc/rent/' + data.rentRsrcId
   const config = {

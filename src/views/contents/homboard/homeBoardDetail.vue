@@ -7,7 +7,7 @@
       <div class="jisik_list_cell">
         <span class="bluing">{{ getBoardTypeStr(homeBoard.boardType) }}</span>
         <b>{{ homeBoard.boardSj }}</b>
-        <br><a v-if="homeBoard.attFileUrl !== null && homeBoard.attFileUrl !== ''" :href="homeBoard.attFileUrl" class="download"><span> {{ homeBoard.attFileNm }}</span></a>
+        <br><a v-for="homeBoardAtchDtl in homeBoard.homeBoardAtchDtlList" :key="homeBoardAtchDtl.ordr" :href="homeBoardAtchDtl.fileStreCours" class="download"><span> {{ homeBoardAtchDtl.orignlFileNm }}</span></a>
       </div>
       <div class="fixing_answer" v-html="homeBoard.boardCn"/>
     </div>

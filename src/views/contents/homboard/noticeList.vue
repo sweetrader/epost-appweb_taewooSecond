@@ -5,7 +5,9 @@
     </header>
     <div class="jisik_list mtop59">
       <div v-for="notice in list" :key="notice.noticeId" class="jisik_list_cell">
-        <b>{{ notice.sj }} </b><span>{{ notice.registDe }}</span>
+        <router-link :to="{ name: 'NoticeDetail', params: { id: notice.noticeId }}">
+          <b>{{ notice.sj }} </b><span>{{ notice.registDe }}</span>
+        </router-link>
       </div>
     </div>
   </div>

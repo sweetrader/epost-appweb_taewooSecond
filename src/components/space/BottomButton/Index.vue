@@ -55,7 +55,9 @@ export default {
     }
   },
   methods: {
-
+    onClickOneButton() {
+      this.$emit('click')
+    }
   }
 }
 </script>

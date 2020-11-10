@@ -2,16 +2,34 @@
   <div class="app-container">
     <header>
       <a href="#" class="back" @click="$router.back()"/>
-      <h1>질문 등록</h1>
+      <h1>{{ isReply ? '답변 등록' : '질문 등록' }}</h1>
     </header>
-    <div class="bw">
-      <input v-if="isReply === false" v-model.trim="title" maxlength="250" type="text" placeholder="제목 입력">
-      <quill-editor
-        :content="contents"
-        :options="editorOption"
-        @change="onEditorChange($event)"/>
-    </div>
-    <a href="#" class="next_btn2" @click="completeEditor">등록</a>
+    <template v-if="isReply">
+      <div class="answer_window">
+        <div class="question_title2">
+          <b>{{ kmsBoard.kmsSj }}</b>
+          <span>{{ kmsBoard.registerNm }}</span><span>{{ getDateStr(kmsBoard.registerDt) }}</span>
+        </div>
+        <div class="padding15">
+          <quill-editor
+            :content="contents"
+            :options="editorOption"
+            @change="onEditorChange($event)"/>
+        </div>
+        <a href="#" class="next_btn2" @click="completeEditor">등록</a>
+      </div>
+    </template>
+    <template v-else>
+      <div class="bw">
+        <input v-model="title" maxlength="250" type="text" placeholder="제목 입력">
+        <quill-editor
+          :content="contents"
+          :options="editorOption"
+          @change="onEditorChange($event)"/>
+      </div>
+      <a href="#" class="next_btn2" @click="completeEditor">등록</a>
+    </template>
+
   </div>
 </template>
 
@@ -25,7 +43,7 @@ const categoryOptions = [
   { key: CATEGORY_TYPE.ROOM_RES, name: '회의실', show: false }
 ]
 
-import { KMS_CONTENTS_MAX, CATEGORY_TYPE, getCategory, isEmpty } from '@/utils/kms'
+import { KMS_CONTENTS_MAX, CATEGORY_TYPE, getCategory, isEmpty, getDateStr } from '@/utils/kms'
 import { registerKmsBoard, getKmsBoard, registerKmsBoardReply, getKmsBoardReply, updateKmsBoardReply, updateKmsBoard } from '@/api/kms'
 
 export default {
@@ -81,10 +99,14 @@ export default {
       },
       editorOption: {
         theme: 'snow',
-        placeholder: '내용 입력',
+        placeholder: this.isReply ? '답변 입력' : '내용 입력',
         modules: {
           toolbar: false
         }
+      },
+      alertOption: {
+        show: true,
+        content: ''
       },
       categoryOptions,
       dataLoading: false
@@ -110,22 +132,33 @@ export default {
         }, 300)
       }
     } else {
+      this.dataLoading = true
       if (this.isEdit === true) {
-        this.dataLoading = true
         this.getKmsBoardReply()
-        setTimeout(() => {
-          this.dataLoading = false
-        }, 300)
+      } else {
+        this.getKmsBoard()
       }
+      setTimeout(() => {
+        this.dataLoading = false
+      }, 300)
     }
   },
   methods: {
     async getKmsBoard() {
+      if (this.isReply) {
+        this.kmsBoardParams.kmsId = this.kmsId
+        this.kmsBoardParams.rPage = 0
+        this.kmsBoardParams.rSize = 0
+      }
       const response = await getKmsBoard(this.kmsBoardParams)
       console.log(response)
       const responseKmsBoard = response.resData.kmsBoard
-      this.title = responseKmsBoard.kmsSj
-      this.contents = responseKmsBoard.kmsCn
+      if (this.isReply) {
+        this.kmsBoard = responseKmsBoard
+      } else {
+        this.title = responseKmsBoard.kmsSj
+        this.contents = responseKmsBoard.kmsCn
+      }
     },
     async getKmsBoardReply() {
       const response = await getKmsBoardReply(this.kmsBoardReplyParams)
@@ -134,13 +167,14 @@ export default {
       this.contents = this.kmsBoardReply.rplCn
     },
     async completeEditor() {
-      if (isEmpty(this.title) || isEmpty(this.contents)) {
-        alert('제목 또는 내용을 입력해 주세요.')
-        return
-      }
-
       let response = null
       if (this.isReply === false) {
+        if (isEmpty(this.title) || isEmpty(this.contents)) {
+          this.alertOption.content = '제목 또는 내용을 입력해 주세요.'
+          this.alertOption.show = true
+          this.Alert(this.alertOption)
+          return
+        }
         this.kmsBoard.kmsSj = this.title
         this.kmsBoard.kmsCn = this.contents
         this.kmsBoard.registerId = this.registerId
@@ -152,21 +186,29 @@ export default {
         console.log(response)
         this.$router.back()
       } else {
+        if (isEmpty(this.contents)) {
+          this.alertOption.content = '내용을 입력해 주세요.'
+          this.alertOption.show = true
+          this.Alert(this.alertOption)
+          return
+        }
         this.kmsBoardReply.rplCn = this.contents
         this.kmsBoardReply.kmsId = this.kmsId
         this.kmsBoardReply.registerId = this.registerId
         if (this.isEdit === false) {
           response = await registerKmsBoardReply(this.kmsBoardReply)
           if (response.resCode === 1004) {
-            alert('1번의 답글만 가능합니다. 추가 의견은 댓글을 작성해주세요.')
+            this.alertOption.content = '1번의 답글만 가능합니다. 추가 의견은 댓글을 작성해주세요.'
+            this.alertOption.show = true
+            this.Alert(this.alertOption)
           }
         } else {
           this.kmsBoardReply.rplId = this.id
           response = await updateKmsBoardReply(this.kmsBoardReply)
         }
+        console.log(response)
+        this.$router.back()
       }
-      console.log(response)
-      this.$router.back()
     },
     onEditorBlur(quill) {
       console.log('editor blur!', quill)
@@ -194,6 +236,9 @@ export default {
           }
         }
       }
+    },
+    getDateStr(value) {
+      return getDateStr(value)
     }
   }
 }

@@ -107,6 +107,5 @@ export function getBoardTypeStr(value) {
 }
 
 export function getDateStr(value) {
-  const strArr = value.split(' ')[0]
-  return strArr
+  return isEmpty(value) ? '' : value.split(' ')[0]
 }

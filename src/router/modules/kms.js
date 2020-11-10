@@ -3,6 +3,7 @@
 const kms = {
   path: '/kms',
   component: () => import('@/views/contents/kms/index'),
+  name: 'KmsMain',
   redirect: '/kms/index',
   children: [
     {
@@ -10,13 +11,6 @@ const kms = {
       name: 'KmsMain',
       component: () => import('@/views/contents/kms/index'),
       hidden: true
-    },
-    {
-      path: 'create',
-      name: 'CreateKmsEditor',
-      hidden: true,
-      props: true,
-      component: () => import('@/views/contents/kms/create')
     },
     {
       path: 'ranking',

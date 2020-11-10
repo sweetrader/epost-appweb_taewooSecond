@@ -11,8 +11,10 @@
       </div>
       <template>
         <div v-for="kmsBoard in kmsList" :key="kmsBoard.kmsId" class="jisik_list_cell">
-          <b>{{ kmsBoard.kmsSj }}</b><span>{{ getDateStr(kmsBoard.registerDt) }}</span><span>{{ kmsBoard.registerNm }}</span>
-          <div class="divv"><div>답변<br><em>{{ kmsBoard.replyCnt }}</em></div></div>
+          <router-link :to="{ name: 'KmsDetail', params: { id: kmsBoard.kmsId }}" class="link-type">
+            <b>{{ kmsBoard.kmsSj }}</b><span>{{ getDateStr(kmsBoard.registerDt) }}</span><span>{{ kmsBoard.registerNm }}</span>
+            <div class="divv"><div>답변<br><em>{{ kmsBoard.replyCnt }}</em></div></div>
+          </router-link>
         </div>
       </template>
       <a href="#" class="seemorethings">더보기</a>

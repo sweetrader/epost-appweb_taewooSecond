@@ -1,7 +1,8 @@
 <template>
   <div id="filter_bar">
     <dl class="region_filter_section">
-      <dt class="address-wraper">지역선택</dt>
+      <dt v-if="totalAmount > 0" class="total-amount">총 {{ totalAmount }} 건</dt>
+      <dt v-else class="address-wraper">지역선택</dt>
       <dt class="select-wraper">
         <p class="place-holder" @click="open = true">{{ selectNm }}</p>
       </dt>
@@ -30,6 +31,10 @@ export default {
     selectPlaceHolder: {
       type: String,
       default: ''
+    },
+    totalAmount: {
+      type: Number,
+      default: 0
     }
   },
   data() {
@@ -44,7 +49,9 @@ export default {
   methods: {
     onClickOptionBtn(option) {
       this.open = false
-      this.selectNm = option
+      if (option !== '') {
+        this.selectNm = option
+      }
     }
   }
 }

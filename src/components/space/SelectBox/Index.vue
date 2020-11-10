@@ -1,17 +1,17 @@
 <template>
-  <div id="select-box">
-    <template v-if="open">
+  <transition name="slides">
+    <div v-show="open" id="select-box">
       <div class="dim"/>
       <section class="select-list-wraper">
-        <div class="header">{{ header }}<img src="@/assets/image/space/icons/x.png" @click="open = false"></div>
+        <div class="header">{{ header }}<img src="@/assets/image/space/icons/x.png" @click="$emit('select', '')"></div>
         <dl>
-          <dt v-for="( option, index ) in optionList" :key="option.index" :class="activeArray[index] ? 'each-option on' : 'each-option'" @click="onClickOptionBtn(index)">
-            <p class="">{{ option }}</p>
+          <dt v-for="( option, index ) in optionList" :key="option.codeDtl" :value="option.codeDtl" :class="activeArray[index] ? 'each-option on' : 'each-option'" @click="onClickOptionBtn(index)">
+            <p class="">{{ option.dtlNm }}</p>
           </dt>
         </dl>
       </section>
-    </template>
-  </div>
+    </div>
+  </transition>
 </template>
 
 <script>

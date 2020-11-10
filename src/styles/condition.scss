@@ -20,12 +20,14 @@
             margin-top: rem(60);
             text-align: center;
             .icon-box{
-                width: rem(74);
+                width: max-content;
                 height: rem(31);
                 line-height: rem(31);
                 border: 1px solid $oceanblue;
                 border-radius: rem(5);
                 margin: 0 auto;
+                @include sidePadding(5);
+
                 .document-icon{
                     @include font-style(20, $oceanblue, NotoSans-Regular);
                 }
@@ -108,12 +110,13 @@
                 @include font-style(28, $deepGy, NotoSans-Regular);
             }
         }
+        .map-chat-call > div {
+            flex: 1;
+        }
         .map-chat-call{
-            display: grid;
-            display: -ms-grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            -ms-grid-columns: 1fr 1fr 1fr;
-            justify-items: center;
+            display: flex;
+            text-align: center;
+            justify-content: center;
             margin: 4%;
             .map{
                 justify-items: center;

@@ -1,6 +1,13 @@
 #enrollment-list{
     background: white;
     padding-top: rem(96);
+    .more-button{
+        border-top: 1px solid $border;
+        text-align: center;
+        height: rem(80);
+        line-height: rem(80);
+        @include font-style(28, $bk, NotoSans-Regular);
+    }
     .all-content-box{
         .topcontainer{
             width: rem(720);

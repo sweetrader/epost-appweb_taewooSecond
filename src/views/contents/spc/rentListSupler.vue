@@ -1,7 +1,7 @@
 <template>
   <div id="enrollment-list">
     <div class="all-content-box">
-      <Header title="등록내역" :is-back-dark="true" :on-register="true"/>
+      <Header title="등록내역" :is-back-dark="true" :on-register="true" @click="goCreate"/>
       <div class="topcontainer">
         <div class="text-box">{{ topContainer.textBox }}</div>
         <div class="select-text-container">
@@ -27,13 +27,14 @@
                 <dt class="facility-size">{{ post.area }} ㎡</dt>
               </dl>
               <div class="right-title">
-                <p>{{ post.title }}</p>
+                <p v-if="post.rentType === '1'">{{ post.rentTypeNm }} {{ post.dpst | numberToKorean }}원</p>
+                <p v-else>{{ post.rentTypeNm }} {{ post.dpst | numberToKorean }} / {{ post.mtyRent | numberToKorean }}원</p>
               </div>
               <div class="right-middle">
                 <p>
                   <span>분리공간{{ post.sepratSpcCnt }}개</span>
                   <span>{{ post.crrspndFloor + '/' + post.allFloor }}층</span>
-                  <span>관리비 {{ post.manageAmt | comma }}만원</span>
+                  <span>관리비 {{ post.manageAmt | numberToKorean }}원</span>
                 </p>
               </div>
               <div class="right-bottom">{{ post.dscrp }}</div>
@@ -51,6 +52,7 @@ import Header from '@/components/space/Header/Index'
 import SelectBox from '@/components/space/SelectBox/Index'
 import { fetchSuplerRentList } from '@/api/spcRent'
 import { selectCodeList } from '@/api/com'
+import { numberToKorean } from '@/utils/space'
 
 export default {
   name: 'RentListSupler',
@@ -58,8 +60,8 @@ export default {
     Header, SelectBox
   },
   filters: {
-    comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    numberToKorean(val) {
+      return numberToKorean(val)
     }
   },
   data() {
@@ -82,8 +84,6 @@ export default {
       useClOptions: []
     }
   },
-  watch: {
-  },
   created() {
     this.dataCheck()
   },
@@ -92,7 +92,7 @@ export default {
       this.useClOptions = (await selectCodeList('USE_CL')).list
       const response = await fetchSuplerRentList(this.listQuery)
       this.postList = response.list
-      this.topContainer.textBox = '총' + response.totCnt + '건'
+      this.topContainer.textBox = '총 ' + response.totCnt + '건'
     },
     onClickOptionItem(option) {
       this.optionOpen = false
@@ -107,3 +107,8 @@ export default {
   }
 }
 </script>
+<style>
+dl .eachPost .left-content-container .left-aria img{
+  height: 2.1rem
+}
+</style>

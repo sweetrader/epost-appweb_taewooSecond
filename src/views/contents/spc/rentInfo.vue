@@ -1,7 +1,7 @@
 <template>
   <div id="post-detail">
     <div class="document-container">
-      <Header title="게시글 상세" :on-menu="true" :menu-close="menuClose"/>
+      <Header title="게시글 상세" :on-menu="true" :menu-close="menuClose" @click="goEdit(rentRsrcId)"/>
       <div @click="onCloseMenu()">
         <div class="document-image">
           <Swiper :get-list="imgList"/>
@@ -10,7 +10,8 @@
           <div class="icon-box">
             <p class="document-icon">{{ rent.useClNm }}</p>
           </div>
-          <div class="document-title">{{ rent.rentTypeNm + ' ' + rent.rent }}</div>
+          <div v-if="rent.rentType === '1'" class="document-title">{{ rent.rentTypeNm }} {{ rent.dpst | numberToKorean }}원</div>
+          <div v-else class="document-title">{{ rent.rentTypeNm }} {{ rent.dpst | numberToKorean }} / {{ rent.mtyRent | numberToKorean }}원</div>
           <div class="document-subtitle">{{ rent.sj }}</div>
         </div>
         <div class="room-sub-info">
@@ -19,14 +20,14 @@
               <img src="@/assets/image/space/icons/areaImage.png">
             </div>
             <p class="room-area-text">전용면적</p>
-            <div class="room-area">{{ rent.area }}</div>
+            <div class="room-area">{{ rent.area }}㎡</div>
           </div>
           <div class="room-space-info">
             <div class="room-space-icon">
               <img src="@/assets/image/space/icons/spaceImage.png">
             </div>
             <p class="room-space-text">공간</p>
-            <div class="room-space">{{ rent.sepratSpcCnt }}</div>
+            <div class="room-space">{{ rent.sepratSpcCntNm }}</div>
           </div>
           <div class="room-floors-info">
             <div class="room-floors-icon">
@@ -40,12 +41,12 @@
               <img src="@/assets/image/space/icons/costImage.png">
             </div>
             <p class="room-cost-text">관리비</p>
-            <div class="room-cost">{{ rent.manageAmt | comma }}만원</div>
+            <div class="room-cost">{{ rent.manageAmt | numberToKorean }}원</div>
           </div>
         </div>
         <div class="map-chat-call">
-          <div class="map">
-            <img src="@/assets/image/space/icons/mapImage.png">지도</div>
+          <!--<div class="map">
+            <img src="@/assets/image/space/icons/mapImage.png">지도</div>-->
           <div class="chat">
             <img src="@/assets/image/space/icons/chatImage.png">채팅</div>
           <div class="call">
@@ -68,7 +69,7 @@
               <p> 엘리베이터 </p>
               <p> 상하차여부 </p>
               <p> 난방종류 </p>
-              <p> 택배 바로 접수 여부 </p>
+              <p> 택배접수 </p>
               <p> 입주가능일 </p>
               <p> 건축물용도 </p>
               <p> 준공인가일 </p>
@@ -79,13 +80,13 @@
           <ul>
             <div class="room-detail-content"> <p> {{ rent.addr }} </p>
               <p> {{ rent.useClNm }} </p>
-              <p> {{ rent.drc }} </p>
-              <p> {{ rent.elevtCnt }} </p>
-              <p> {{ rent.hhlwYn }} </p>
-              <p> {{ rent.heatType }} </p>
-              <p> {{ rent.dlvryYn }} </p>
+              <p> {{ rent.drcNm }} </p>
+              <p> {{ rent.elevtCntNm }} </p>
+              <p v-if="rent.hhlwYn === 'Y'"> 가능 </p><p v-else> 불가 </p>
+              <p> {{ rent.heatTypeNm }} </p>
+              <p v-if="rent.dlvryYn === 'Y'"> 가능 </p><p v-else> 불가 </p>
               <p> {{ rent.mvPosblBgnDe }} </p>
-              <p> {{ rent.bildPrpos }} </p>
+              <p> {{ rent.bildPrposNm }} </p>
               <p> {{ rent.comptConfmDe }} </p>
               <p> {{ rent.dscrp }} </p>
             </div>
@@ -100,13 +101,13 @@
         </div>
         <div v-if="isOpenTabShow2" class="producer-title-content">
           <ul>
-            <div class="producer-title"><p> {{ producerTitleContent.producerTitle }}</p>
-              <p>{{ producerPhoneNumber.producerPhone }}</p>
+            <div class="producer-title"><p>이름</p>
+              <p>연락처</p>
             </div>
           </ul>
           <ul>
-            <div class="producer-content"><p>{{ producerTitleContent.producerContent }}</p>
-              <p>{{ producerPhoneNumber.producerNumber }}</p></div>
+            <div class="producer-content"><p>{{ rent.suplerNm }}</p>
+              <p>{{ rent.suplerTelno }}</p></div>
           </ul>
         </div>
       </div>
@@ -121,6 +122,7 @@ import { insertMch } from '@/api/spcMch'
 import Header from '@/components/space/Header/Index'
 import BottomButton from '@/components/space/BottomButton/Index'
 import Swiper from '@/components/space/swiper/Index'
+import { numberToKorean } from '@/utils/space'
 
 export default {
   name: 'RentInfo',
@@ -128,8 +130,8 @@ export default {
     Header, BottomButton, Swiper
   },
   filters: {
-    comma(val) {
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    numberToKorean(val) {
+      return numberToKorean(val)
     }
   },
   props: {
@@ -145,19 +147,6 @@ export default {
       imgList: [],
       isOpenTabShow1: true,
       isOpenTabShow2: true,
-      document: {
-        icon: '사무실',
-        title: '월세 1,000/100만원',
-        subtitle: '명동역 5번 출구에서 도보3분 걸립니다.'
-      },
-      producerTitleContent: {
-        producerTitle: '이름',
-        producerContent: '김첨지'
-      },
-      producerPhoneNumber: {
-        producerPhone: '연락처',
-        producerNumber: '010-2365-2365'
-      },
       listQuery: {
         rentRsrcId: ''
       },
@@ -173,18 +162,23 @@ export default {
         area: '',
         areaPyeong: '',
         sepratSpcCnt: '',
+        sepratSpcCntNm: '',
         allFloor: '',
         crrspndFloor: '',
         bildPrpos: '',
+        bildPrposNm: '',
         hhlwYn: '',
         drc: '',
+        drcNm: '',
         manageAmt: '',
         comptConfmDe: '',
         dscrp: '',
         parkingAllCnt: '',
         parkingPosblCnt: '',
         elevtCnt: '',
+        elevtCntNm: '',
         heatType: '',
+        heatTypeNm: '',
         dlvryYn: '',
         rentType: '',
         rentTypeNm: '',
@@ -218,7 +212,15 @@ export default {
         for (let i = 0; i < responseList.length; i++) {
           this.imgList.push(responseList[i].fileUrl)
         }
+      } else {
+        this.$router.push({ name: 'RentListSupler' })
       }
+    },
+    onCloseMenu() {
+      this.menuClose = true
+    },
+    goEdit(id) {
+      this.$router.push({ name: 'RentManagement', params: { rentRsrcId: id }})
     },
     handleMch() {
       this.$refs['ruleForm'].validate((valid) => {
@@ -242,56 +244,7 @@ export default {
           })
         }
       })
-    },
-    onCloseMenu() {
-      this.menuClose = true
     }
   }
 }
 </script>
-<!--
-
-<style rel="stylesheet/scss" lang="scss">
-  .drawer-container {
-    padding: 0 10px 0 10px;
-  }
-  .drawer-footer {
-    .button_style {
-      margin-top: 30px;
-      width: 100%;
-    }
-  }
-  .pit_card_list {
-    margin-top: 60px;
-    margin-bottom: 30px;
-  }
-  .el-tag {
-    margin-right: 10px;
-  }
-  .button-new-tag {
-    margin-right: 10px;
-    height: 32px;
-    line-height: 30px;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .input-new-tag {
-    width: 120px;
-    margin-right: 10px;
-    vertical-align: bottom;
-  }
-  input[type="number"]::-webkit-outer-spin-button,
-  input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
-  .el-date-editor.el-input{
-    width: 150px;
-  }
-  .el-checkbox:last-of-type{
-    margin-left: 20px;
-  }
-  .el-input&#45;&#45;suffix .el-input__inner{
-    padding-right: 10px;
-  }
-</style>
--->

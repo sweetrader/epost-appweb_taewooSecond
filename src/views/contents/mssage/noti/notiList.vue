@@ -60,15 +60,12 @@ export default {
       this.list = response.resData.list
 
       this.totCnt = response.resData.count
-      console.log(this.list)
-      console.log(this.list[0].mssageSj)
       setTimeout(() => {
 
       }, 300)
     },
     viewMore() {
       this.listQuery.size += 10
-      console.log(this.listQuery.size)
       this.getList(this.listQuery)
     },
     search() {

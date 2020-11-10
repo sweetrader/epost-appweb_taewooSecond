@@ -4,21 +4,20 @@
       <a href="#" class="back"/><h1>알림 조회</h1>
     </header>
     <div class="login_log_search">
-      <div class="search_set">
-        <div class="newi"/> <!-- 이거 뉴 표시-->
-        <input type="text" placeholder="내용검색" style="width: 340px;">
-
+      <div class="search_set" style="width: 100%;" @click="search()">
+        <input v-model="listQuery.searchKeyword" type="text" placeholder="내용검색">
       </div>
     </div>
-    <div class="login_log_list">
-      <div v-for="temp in list.slice(0,10)" :key="temp.mssageSj" class="alarm_log_list_cell">
 
+    <div class="login_log_list">
+      <div v-for="(temp) in list" :key="temp.notiRcveNo" class="alarm_log_list_cell">
+        <div v-if=" temp.readYn === 'N'" class="newi"/> <!-- 이거 뉴 표시-->
         <b>{{ temp.mssageSj }}</b>
         <span>{{ temp.mssageCn }}</span>
         <div class="dd">{{ temp.readDt }}</div>
       </div>
 
-      <a href="#" class="next_btn2 itsok">다음</a>
+      <a href="#" class="next_btn2 itsok" @click="viewMore()">다음</a>
     </div>
 
   </div>
@@ -50,20 +49,30 @@ export default {
     }
   },
   created() {
-    this.getList()
+    this.$nextTick(function() {
+      this.getList(this.listQuery)
+    })
   },
   methods: {
-    async getList() {
+    async getList(data) {
       this.dataLoading = true
-      const response = await selectNotiList(this.listQuery)
+      const response = await selectNotiList(data)
       this.list = response.resData.list
 
       this.totCnt = response.resData.count
       console.log(this.list)
       console.log(this.list[0].mssageSj)
       setTimeout(() => {
-        alert('조회실패')
+
       }, 300)
+    },
+    viewMore() {
+      this.listQuery.size += 10
+      console.log(this.listQuery.size)
+      this.getList(this.listQuery)
+    },
+    search() {
+      this.getList(this.listQuery)
     }
   }
 }

@@ -44,6 +44,9 @@
       </dl>
     </div>
     <SelectBox :open="optionOpen" :header="listHeader" :option-list="optionList" @select="onClickOptionItem"/>
+    <div class="more-button">
+      더보기
+    </div>
   </div>
 </template>
 

@@ -133,18 +133,22 @@
                 width: 100%;
             }
         }
+        .space-name{
+            line-height: rem(100);
+            text-align: center;
+            @include font-style(24, $gy, NotoSans-Regular);
+            border-bottom: 1px solid $border;
+        }
         .document-icon-title-subtitle{
             margin-top: rem(60);
             text-align: center;
             .icon-box{
-                width: max-content;
+                width: rem(74);
                 height: rem(31);
                 line-height: rem(31);
                 border: 1px solid $oceanblue;
                 border-radius: rem(5);
                 margin: 0 auto;
-                @include sidePadding(5);
-
                 .document-icon{
                     @include font-style(20, $oceanblue, NotoSans-Regular);
                 }
@@ -169,6 +173,7 @@
             border: 1px;
             border-radius: rem(10);
             text-align: center;
+            
             .room-area-info{
                 
                 .room-area-icon{
@@ -179,9 +184,11 @@
                 }
                 .room-area-text{
                     @include font-style(24, $gy, NotoSans-Regular);
+                    
                 }
                 .room-area{
                     @include font-style(28, $deepGy, NotoSans-Regular);
+                    
                 }
             }
         }

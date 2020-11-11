@@ -1,13 +1,6 @@
 #enrollment-list{
     background: white;
     padding-top: rem(96);
-    .more-button{
-        border-top: 1px solid $border;
-        text-align: center;
-        height: rem(80);
-        line-height: rem(80);
-        @include font-style(28, $bk, NotoSans-Regular);
-    }
     .all-content-box{
         .topcontainer{
             width: rem(720);
@@ -24,8 +17,8 @@
                 align-items: center;
                 .select-wraper{
                     width: rem(236);
-                    border: 1px solid $border;
-                    border-radius: rem(10);   
+                    // border: 1px solid $border;
+                    // border-radius: rem(10);
                     display: flex;
                     align-items: center;
                     justify-content: left;
@@ -34,7 +27,8 @@
                     @include sidePadding(10);
                     @include background('../assets/image/space/icons/path-below.png', rem(36) rem(36), 95% 50%);
                     .place-holder{
-                        text-align: left;
+                        text-align: right;
+                        padding-right: rem(50);
                         @include font-style(28, $gy, NotoSans-Regular);
                         @include ellipsis(180);
         
@@ -71,6 +65,7 @@ dl {
                             margin-right: rem(25);
                             img{
                                 width: rem(150);
+                                height: rem(150);
                             }
                         }
                         .right-aria{

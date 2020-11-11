@@ -17,28 +17,38 @@
           </router-link>
         </div>
       </template>
-      <a href="#" class="seemorethings">더보기</a>
+      <router-link :to="{ name: 'KmsList' }" class="seemorethings">더보기</router-link>
     </div>
     <div class="jisik_list">
       <div class="mytotal">내가 등록한 지식<span>{{ myKmsListTotCnt | toThousandFilter }}</span></div>
-      <div v-for="myKmsBoard in myKmsList" :key="myKmsBoard.kmsId" class="jisik_list_cell">
-        <b>{{ myKmsBoard.kmsSj }}</b><span>{{ getDateStr(myKmsBoard.registerDt) }}</span><span>{{ myKmsBoard.registerNm }}</span>
-        <div class="divv"><div>답변<br><em>{{ myKmsBoard.replyCnt }}</em></div></div>
-      </div>
-      <a href="#" class="seemorethings">더보기</a>
+      <template v-if="isLogin()">
+        <div v-for="myKmsBoard in myKmsList" :key="myKmsBoard.kmsId" class="jisik_list_cell">
+          <router-link :to="{ name: 'KmsDetail', params: { id: myKmsBoard.kmsId }}" class="link-type">
+            <b>{{ myKmsBoard.kmsSj }}</b><span>{{ getDateStr(myKmsBoard.registerDt) }}</span><span>{{ myKmsBoard.registerNm }}</span>
+            <div class="divv"><div>답변<br><em>{{ myKmsBoard.replyCnt }}</em></div></div>
+          </router-link>
+        </div>
+        <router-link :to="{ name: 'MyKms' }" class="seemorethings">더보기</router-link>
+      </template>
+      <template v-else>
+        <router-link :to="{ name: 'MyKms' }" class="seemorethings">로그인 후 확인 가능합니다.</router-link>
+      </template>
+      <!-- <a href="#" class="seemorethings">더보기</a> -->
     </div>
     <div class="jisik_master">
       <h5>지식마스터</h5>
       <div v-for="(kmsRanking, index) in kmsRankingList" :key="kmsRanking.registerId" class="jisik_master_cell">
-        <div class="soonwi">
-          <b>{{ index + 1 }}</b>위<br><span>{{ kmsRanking.registerNm }}</span>
-        </div>
-        <div class="det">
-          지식점수<br><span>{{ kmsRanking.kmsPointSum | toThousandFilter }} 점</span>
-        </div>
-        <div class="det">
-          답변<br><span>{{ kmsRanking.kmsBoardReplyList.length | toThousandFilter }} 개</span>
-        </div>
+        <router-link :to="{ name: 'KmsRankingList', params: { registerId: kmsRanking.registerId, registerNm: kmsRanking.registerNm }}" class="link-type">
+          <div class="soonwi">
+            <b>{{ index + 1 }}</b>위<br><span>{{ kmsRanking.registerNm }}</span>
+          </div>
+          <div class="det">
+            지식점수<br><span>{{ kmsRanking.kmsPointSum | toThousandFilter }} 점</span>
+          </div>
+          <div class="det">
+            답변<br><span>{{ kmsRanking.kmsBoardReplyList.length | toThousandFilter }} 개</span>
+          </div>
+        </router-link>
       </div>
     </div>
     <router-link :to="{ name: 'KmsRanking' }" class="seemorethings">더보기</router-link>
@@ -114,6 +124,9 @@ export default {
     },
     getDateStr(value) {
       return getDateStr(value)
+    },
+    isLogin() {
+      return !isEmpty(this.$store.getters.mberId.trim())
     }
   }
 }

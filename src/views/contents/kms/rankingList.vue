@@ -9,8 +9,10 @@
     </div>
     <div class="jisik_master_detail_list_wrap">
       <div v-for="kmsBoardReply in kmsBoardReplyList" :key="kmsBoardReply.rplId" class="jisik_master_detail_list_wrap_cell">
-        택배 수령인이 전화를 안 받을 때??<b>문앞에 두고 문자를 남깁니다~</b><span>2020-10-07</span><span>홍길동</span>
-        <div v-if="kmsBoardReply.selected === 'Y'" class="answer picked_answer">채택</div>
+        <router-link :to="{ name: 'KmsDetail', params: { id: kmsBoardReply.kmsId }}" class="link-type">
+          {{ getCnByPublicYn(kmsBoardReply.kmsBoard.kmsSj, kmsBoardReply.kmsBoard.publicYn, false) }}<b>{{ html2Text(getCnByPublicYn(kmsBoardReply.rplCn, kmsBoardReply.publicYn, true)) }}</b><span>{{ getDateStr(kmsBoardReply.registerDt) }}</span><span>{{ registerNm }}</span>
+          <div v-if="kmsBoardReply.selected === 'Y'" class="answer picked_answer">채택</div>
+        </router-link>
       </div>
     </div>
   </div>

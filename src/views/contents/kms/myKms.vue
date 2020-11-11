@@ -12,8 +12,10 @@
         총 {{ kmsListTotCnt | toThousandFilter }}건<!--<div class="filter"/>-->
       </div>
       <div v-for="kmsBoard in kmsBoardList" :key="kmsBoard.kmsId" class="jisik_list_cell">
-        <b>{{ getCnByPublicYn(kmsBoard.kmsSj, kmsBoard.publicYn, false) }}</b><span>{{ getDateStr(kmsBoard.registerDt) }}</span><span>{{ kmsBoard.registerNm }}</span>
-        <div class="divv"><div>답변<br><em>{{ kmsBoard.replyCnt }}</em></div></div>
+        <router-link :to="{ name: 'KmsDetail', params: { id: kmsBoard.kmsId }}" class="link-type">
+          <b>{{ getCnByPublicYn(kmsBoard.kmsSj, kmsBoard.publicYn, false) }}</b><span>{{ getDateStr(kmsBoard.registerDt) }}</span><span>{{ kmsBoard.registerNm }}</span>
+          <div class="divv"><div>답변<br><em>{{ kmsBoard.replyCnt }}</em></div></div>
+        </router-link>
       </div>
     </div>
     <div v-if="tabIndex === 2" class="jisik_list margin-top-100">
@@ -21,9 +23,11 @@
         총 {{ kmsBoardReplyTotCnt | toThousandFilter }}건<!--<div class="filter"/>-->
       </div>
       <div v-for="kmsBoardReply in kmsBoardReplyList" :key="kmsBoardReply.rplId" class="jisik_list_cell2">
-        <div class="answer">답변</div>
-        <b>{{ html2Text(getCnByPublicYn(kmsBoardReply.rplCn, kmsBoardReply.publicYn, true)) }}</b>
-        <span>{{ getDateStr(kmsBoardReply.registerDt) }}</span><span>{{ kmsBoardReply.registerNm }}</span>
+        <router-link :to="{ name: 'KmsDetail', params: { id: kmsBoardReply.kmsBoard.kmsId }}" class="link-type">
+          <div :class="kmsBoardReply.selected === 'Y' ? 'picked_answer' : 'answer'">{{ kmsBoardReply.selected === 'Y' ? '채택' : '답변' }}</div>
+          <b>{{ html2Text(getCnByPublicYn(kmsBoardReply.rplCn, kmsBoardReply.publicYn, true)) }}</b>
+          <span>{{ getDateStr(kmsBoardReply.registerDt) }}</span><span>{{ kmsBoardReply.registerNm }}</span>
+        </router-link>
       </div>
     </div>
   </div>

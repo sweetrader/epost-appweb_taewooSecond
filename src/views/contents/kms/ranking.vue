@@ -11,11 +11,13 @@
           <div>지식점수<a href="#"/><br><em>{{ kmsRanking.kmsPointSum | toThousandFilter }} 점</em></div>
         </div>
         <div v-for="(kmsBoardReply) in kmsRanking.kmsBoardReplyList" :key="kmsBoardReply.rplId" class="master_list_wrap">
-          <div class="master_list_wrap_cell">
-            {{ getCnByPublicYn(kmsBoardReply.kmsBoard.kmsSj, kmsBoardReply.kmsBoard.publicYn, false) }}
-            <b>{{ html2Text(getCnByPublicYn(kmsBoardReply.rplCn, kmsBoardReply.publicYn, true)) }}</b>
-            <span>{{ getDateStr(kmsBoardReply.registerDt) }}</span>
-          </div>
+          <router-link :to="{ name: 'KmsDetail', params: { id: kmsBoardReply.kmsId }}" class="link-type">
+            <div class="master_list_wrap_cell">
+              {{ getCnByPublicYn(kmsBoardReply.kmsBoard.kmsSj, kmsBoardReply.kmsBoard.publicYn, false) }}
+              <b>{{ html2Text(getCnByPublicYn(kmsBoardReply.rplCn, kmsBoardReply.publicYn, true)) }}</b>
+              <span>{{ getDateStr(kmsBoardReply.registerDt) }}</span>
+            </div>
+          </router-link>
         </div>
         <router-link :to="{ name: 'KmsRankingList', params: { registerId: kmsRanking.registerId, registerNm: kmsRanking.registerNm }}" class="seemorethings">더보기</router-link>
         <!-- <a href="#" class="seemorethings">더보기</a> -->
@@ -47,7 +49,7 @@ export default {
   methods: {
     async getKmsBoardRanking() {
       const kmsBoardRankingParams = {
-        size: 3
+        size: 10
       }
       const response = await getKmsBoardRanking(kmsBoardRankingParams)
       this.kmsRankingList = response.resData.kmsRankingList

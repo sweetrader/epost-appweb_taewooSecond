@@ -7,19 +7,19 @@ const kms = {
   redirect: '/kms/index',
   children: [
     {
-      path: 'index',
+      path: '/index',
       name: 'KmsMain',
       component: () => import('@/views/contents/kms/index'),
       hidden: true
     },
     {
-      path: 'ranking',
+      path: '/ranking',
       name: 'KmsRanking',
       hidden: true,
       component: () => import('@/views/contents/kms/ranking')
     },
     {
-      path: 'ranking/list/:registerId(\\d+)',
+      path: '/ranking/list',
       name: 'KmsRankingList',
       props: true,
       hidden: true,

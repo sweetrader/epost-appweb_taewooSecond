@@ -59,3 +59,144 @@
         }
     }
 }
+
+#space-detail{
+    padding-bottom: 40%;
+    padding-top: 10%;
+    background-color: white;
+            .space-detail-container{
+                .space-top-title-subtitle{
+                    margin-top: rem(60);
+                    @include sidePadding(30);
+            text-align: center;
+                    .space-top-title{
+                        width: rem(74);
+                height: rem(31);
+                line-height: rem(31);
+                border: 1px solid $oceanblue;
+                border-radius: rem(5);
+                margin: 0 auto;
+                @include font-style(20, $oceanblue, NotoSans-Regular);
+                    }
+                    .space-top-subtitle{
+                        margin-bottom: rem(55);
+                        @include font-style(28, $purple, NotoSans-Regular);
+                    }
+                }
+                .space-top-content{
+                    margin: rem(50) rem(30) rem(40) rem(30);
+                    padding: rem(60);
+                    justify-items: center;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    background-color: $btn-bg;
+                    border: 1px;
+                    border-radius: rem(10);
+                    text-align: center;
+                    margin-bottom: rem(60);
+                    .space-top-left-content{
+                        img{
+                            width: rem(53);
+                            height: rem(53);
+                        }
+                        .space-up-titlebox{
+                            line-height: rem(60);
+                            @include font-style(24, $gy, NotoSans-Regular);
+                        }
+                        .space-up-contentbox{
+                            line-height: rem(20);
+                            @include font-style(28, $deepGy, NotoSans-Regular);
+                        }
+                    }
+                    .space-top-right-content{
+                        .space-down-titlebox{
+                            line-height: rem(60);
+                            @include font-style(24, $gy, NotoSans-Regular);
+                        }
+                        .space-down-contentbox{
+                            line-height: rem(20);
+                            @include font-style(28, $deepGy, NotoSans-Regular);
+                        }
+                        img{
+                            width: rem(53);
+                            height: rem(53);
+                        }
+                    }
+                }
+                .topline{
+                    border-top: 14px solid $gray;
+                }
+                .space-middle-arae{
+                    .space-middle-title{
+                        padding: rem(39) 0 rem(34);
+                        border-bottom: 1px solid $border;
+                        @include sidePadding(30);
+                        @include font-style(32, $deepGy, NotoSans-Regular);
+                    }
+                    .space-middle-content-container{
+                        display: grid;
+                        grid-template-columns: rem(130) 1fr;
+                        // text-align: left;
+                        line-height: rem(54);
+                        margin: rem(39) 0 rem(76) 0;
+                        @include sidePadding(30);
+                        .space-middle-left-title{
+                            @include font-style(24, $gy-text, NotoSans-Regular);
+                        }
+                        .space-middle-right-content{
+                            margin-left: rem(49);
+                            @include font-style(24, $deepgray, NotoSans-Regular);
+                        }
+                    }
+                }
+                .bottomline{
+                    border-bottom: 14px solid $gray;
+                }
+                .space-bottom-area{
+                    .space-bottom-title{
+                        padding: rem(39) 0 rem(34);
+                        border-bottom: 1px solid $border;
+                        @include sidePadding(30);
+                        @include font-style(32, $deepGy, NotoSans-Regular);
+                    }
+                    .space-bottom-content-container{
+                        display: grid;
+                        grid-template-columns: rem(130) 1fr;
+                        // text-align: left;
+                        line-height: rem(54);
+                        margin: rem(39) 0 rem(76) 0;
+                        @include sidePadding(30);
+                        .space-bottom-left-title{
+                            @include font-style(24, $gy-text, NotoSans-Regular);
+                        }
+                        .space-bottom-right-content{
+                            margin-left: rem(49);
+                            @include font-style(24, $deepgray, NotoSans-Regular);
+                        }
+                    }
+                    .space-bottom-contract-button{
+                        margin: 0 rem(30) 0 rem(30);
+                        align-content: center;
+                        width: rem(660);
+                        height: rem(82);
+                        display: grid;
+                        grid-template-columns: 45% 1fr;
+                        border: 1px solid $border;
+                        border-radius: rem(5);
+                        @include sidePadding(30);
+                                .space-bottom-image{
+                                    margin-right: rem(15);
+                                    text-align: right;
+                                    img{
+                                        margin-bottom: rem(15);
+                                        width: rem(24);
+                                        height: rem(23);
+                                    }
+                                }
+                                .space-bottom-text{
+                                    @include font-style(28, $deepGy, NotoSans-Regular);
+                                }
+                            }
+                        }
+                    }
+                }

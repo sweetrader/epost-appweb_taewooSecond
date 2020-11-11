@@ -14,14 +14,12 @@
             margin-top: rem(60);
             text-align: center;
             .icon-box{
-                width: max-content;
+                width: rem(74);
                 height: rem(31);
                 line-height: rem(31);
                 border: 1px solid $oceanblue;
                 border-radius: rem(5);
                 margin: 0 auto;
-                @include sidePadding(5);
-
                 .document-icon{
                     @include font-style(20, $oceanblue, NotoSans-Regular);
                 }
@@ -104,13 +102,12 @@
                 @include font-style(28, $deepGy, NotoSans-Regular);
             }
         }
-        .map-chat-call > div {
-            flex: 1;
-        }
         .map-chat-call{
-            display: flex;
-            text-align: center;
-            justify-content: center;
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr 1fr;
+            justify-items: center;
             margin: 4%;
             .map{
                 justify-items: center;
@@ -225,6 +222,469 @@
                 @include font-style(24, $deepgray, NotoSans-Regular);
             }
         }
+        
+    }
+}
+
+// 우본용
+#post-detail-ubon{
+    padding-top: rem(96);
+    .document-container{
+        margin-bottom: rem(100);
+        padding-bottom: rem(100);
+        background-color: white;
+        .document-image{
+            text-align: center;
+            img{
+                width: 100%;
+            }
+        }
+        .document-icon-title-subtitle{
+            margin-top: rem(60);
+            text-align: center;
+            .icon-box{
+                width: rem(74);
+                height: rem(31);
+                line-height: rem(31);
+                border: 1px solid $oceanblue;
+                border-radius: rem(5);
+                margin: 0 auto;
+                .document-icon{
+                    @include font-style(20, $oceanblue, NotoSans-Regular);
+                }
+            }
+            .document-title{
+                @include font-style(32, $bk, NotoSans-Regular);
+            }
+            .document-subtitle{
+                margin-bottom: rem(55);
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+        }
+        .room-sub-info{
+            padding: rem(50);
+            margin: rem(50) rem(30) rem(40) rem(30);
+            justify-items: center;
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr 1fr;
+            background-color: $btn-bg;
+            border: 1px;
+            border-radius: rem(10);
+            text-align: center;
+            .room-area-info{
+                
+                .room-area-icon{
+                    img{
+                        width: rem(53);
+                        height: rem(53);
+                    }
+                }
+                .room-area-text{
+                    @include font-style(24, $gy, NotoSans-Regular);
+                }
+                .room-area{
+                    @include font-style(28, $deepGy, NotoSans-Regular);
+                }
+            }
+        }
+        .room-floors-info{
+            .room-floors-icon{
+                img{
+                    width: rem(53);
+                    height: rem(53);
+                }
+            }
+            .room-floors-text{
+                @include font-style(24, $gy, NotoSans-Regular);
+            }
+            .room-fllors{
+                @include font-style(28, $deepGy, NotoSans-Regular);
+            }
+        }
+        .room-cost-info{
+            .room-cost-icon{
+                img{
+                    width: rem(53);
+                    height: rem(53);
+                }
+            }
+            .room-cost-text{
+                @include font-style(24, $gy, NotoSans-Regular);
+            }
+            .room-cost{
+                @include font-style(28, $deepGy, NotoSans-Regular);
+            }
+        }
+        .map-chat-call{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr 1fr;
+            justify-items: center;
+            margin: 4%;
+            .map{
+                justify-items: center;
+                img{
+                    height: rem(34);
+                    width: rem(34);
+                    padding: rem(11)
+                }
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+            .chat{
+                img{
+                    height: rem(34);
+                    width: rem(34);
+                    padding: rem(11)
+                }
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+            .call{
+                img{
+                    height: rem(34);
+                    width: rem(34);
+                    padding: rem(11)
+                }
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+        }
+        .room-detail-info-day{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 10%;
+            -ms-grid-columns: 1fr 1fr 10%;
+            border-top: 14px solid $gray;
+            border-bottom: 1px solid $gray;
+            padding-left: rem(30);
+            padding-right: rem(10);
+            .room-detail-info{
+                line-height: rem(100);
+                text-align: left;
+                @include font-style(28, $bk, NotoSans-Regular);
+                
+            }
+            .room-detail-day{
+                align-self: center;
+                text-align: right;
+                @include font-style(22, $placehorder, NotoSans-Regular);
+            }
+            .room-detail-arrow{
+                align-self: center;
+                justify-self: end;
+                img{
+                    width: rem(72);
+                    height: rem(72);
+                }
+            }
+        }
+        .room-detail-info-content{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: rem(130) 1fr;
+            -ms-grid-columns: rem(130) 1fr;
+            text-align: left;
+            line-height: rem(54);
+            margin: rem(39) 0 rem(76) 0;
+            @include sidePadding(30)
+            .room-detail-title{
+                @include font-style(24, $gy-text, NotoSans-Regular);
+            }
+            .room-detail-content{
+                margin-left: rem(49);
+                @include font-style(24, $deepgray, NotoSans-Regular);
+            }
+        }
+        .producer-info{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr;
+            border-top: 14px solid $gray;
+            border-bottom: 1px solid $gray;
+            padding-left: rem(30);
+            padding-right: rem(10);
+            line-height: rem(100);
+            .producer-title{
+                align-self: center;
+                text-align: left;
+                @include font-style(32, $bk, NotoSans-Regular);
+            }
+            .producer-arrow{
+                align-self: center;
+                justify-self: end;
+                img{
+                    width: rem(72);
+                    height: rem(72);
+                }
+            }
+        }
+        .producer-title-content{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: rem(130) 1fr;
+            -ms-grid-columns: rem(130) 1fr;
+            line-height: rem(54);
+            margin-top: rem(39);
+            @include sidePadding(30);
+            padding-bottom: rem(70);
+            .producer-title{
+                @include font-style(24, $gy-text, NotoSans-Regular);
+            }
+            .producer-content{
+                margin-left: rem(49);
+                @include font-style(24, $deepgray, NotoSans-Regular);
+            }
+        }
+                .two-button{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    border: 1px solid $border;
+                    border-radius: rem(5);
+                    text-align: center;
+                    margin: 0 rem(30) 0 rem(30);
+                    .left-button{
+                        padding: rem(10) 0 rem(10) 0;
+                        border-right: 1px solid $border;
+                        @include font-style(24, $deepgray, NotoSans-Regular);
+                    }
+                    .right-button{
+                        padding: rem(10) 0 rem(10) 0;
+                        @include font-style(24, $deepgray, NotoSans-Regular);
+                    }
+                }
+        
+    }
+}
+
+// 우본용2
+#post-detail-other-ubon{
+    padding-top: rem(96);
+    .document-container{
+        padding-bottom: rem(300);
+        background-color: white;
+        .document-image{
+            text-align: center;
+            img{
+                width: 100%;
+            }
+        }
+        .document-icon-title-subtitle{
+            margin-top: rem(60);
+            text-align: center;
+            .icon-box{
+                width: rem(74);
+                height: rem(31);
+                line-height: rem(31);
+                border: 1px solid $oceanblue;
+                border-radius: rem(5);
+                margin: 0 auto;
+                .document-icon{
+                    @include font-style(20, $oceanblue, NotoSans-Regular);
+                }
+            }
+            .document-title{
+                @include font-style(32, $bk, NotoSans-Regular);
+            }
+            .document-subtitle{
+                margin-bottom: rem(55);
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+        }
+        .room-sub-info{
+            padding: rem(50);
+            margin: rem(50) rem(30) rem(40) rem(30);
+            justify-items: center;
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr 1fr;
+            background-color: $btn-bg;
+            border: 1px;
+            border-radius: rem(10);
+            text-align: center;
+            .room-area-info{
+                
+                .room-area-icon{
+                    img{
+                        width: rem(53);
+                        height: rem(53);
+                    }
+                }
+                .room-area-text{
+                    @include font-style(24, $gy, NotoSans-Regular);
+                }
+                .room-area{
+                    @include font-style(28, $deepGy, NotoSans-Regular);
+                }
+            }
+        }
+        .room-floors-info{
+            .room-floors-icon{
+                img{
+                    width: rem(53);
+                    height: rem(53);
+                }
+            }
+            .room-floors-text{
+                @include font-style(24, $gy, NotoSans-Regular);
+            }
+            .room-fllors{
+                @include font-style(28, $deepGy, NotoSans-Regular);
+            }
+        }
+        .room-cost-info{
+            .room-cost-icon{
+                img{
+                    width: rem(53);
+                    height: rem(53);
+                }
+            }
+            .room-cost-text{
+                @include font-style(24, $gy, NotoSans-Regular);
+            }
+            .room-cost{
+                @include font-style(28, $deepGy, NotoSans-Regular);
+            }
+        }
+        .map-chat-call{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr 1fr;
+            justify-items: center;
+            margin: 4%;
+            .map{
+                justify-items: center;
+                img{
+                    height: rem(34);
+                    width: rem(34);
+                    padding: rem(11)
+                }
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+            .chat{
+                img{
+                    height: rem(34);
+                    width: rem(34);
+                    padding: rem(11)
+                }
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+            .call{
+                img{
+                    height: rem(34);
+                    width: rem(34);
+                    padding: rem(11)
+                }
+                @include font-style(28, $deepgray, NotoSans-Regular);
+            }
+        }
+        .room-detail-info-day{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr 10%;
+            -ms-grid-columns: 1fr 1fr 10%;
+            border-top: 14px solid $gray;
+            border-bottom: 1px solid $gray;
+            padding-left: rem(30);
+            padding-right: rem(10);
+            .room-detail-info{
+                line-height: rem(100);
+                text-align: left;
+                @include font-style(28, $bk, NotoSans-Regular);
+                
+            }
+            .room-detail-day{
+                align-self: center;
+                text-align: right;
+                @include font-style(22, $placehorder, NotoSans-Regular);
+            }
+            .room-detail-arrow{
+                align-self: center;
+                justify-self: end;
+                img{
+                    width: rem(72);
+                    height: rem(72);
+                }
+            }
+        }
+        .room-detail-info-content{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: rem(130) 1fr;
+            -ms-grid-columns: rem(130) 1fr;
+            text-align: left;
+            line-height: rem(54);
+            margin: rem(39) 0 rem(76) 0;
+            @include sidePadding(30)
+            .room-detail-title{
+                @include font-style(24, $gy-text, NotoSans-Regular);
+            }
+            .room-detail-content{
+                margin-left: rem(49);
+                @include font-style(24, $deepgray, NotoSans-Regular);
+            }
+        }
+        .producer-info{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: 1fr 1fr;
+            -ms-grid-columns: 1fr 1fr;
+            border-top: 14px solid $gray;
+            border-bottom: 1px solid $gray;
+            padding-left: rem(30);
+            padding-right: rem(10);
+            line-height: rem(100);
+            .producer-title{
+                align-self: center;
+                text-align: left;
+                @include font-style(32, $bk, NotoSans-Regular);
+            }
+            .producer-arrow{
+                align-self: center;
+                justify-self: end;
+                img{
+                    width: rem(72);
+                    height: rem(72);
+                }
+            }
+        }
+        .producer-title-content{
+            display: grid;
+            display: -ms-grid;
+            grid-template-columns: rem(130) 1fr;
+            -ms-grid-columns: rem(130) 1fr;
+            line-height: rem(54);
+            margin-top: rem(39);
+            @include sidePadding(30);
+            padding-bottom: rem(70);
+            .producer-title{
+                @include font-style(24, $gy-text, NotoSans-Regular);
+            }
+            .producer-content{
+                margin-left: rem(49);
+                @include font-style(24, $deepgray, NotoSans-Regular);
+            }
+        }
+                .two-button{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    border: 1px solid $border;
+                    border-radius: rem(5);
+                    text-align: center;
+                    margin: 0 rem(30) 0 rem(30);
+                    .left-button{
+                        padding: rem(10) 0 rem(10) 0;
+                        border-right: 1px solid $border;
+                        @include font-style(24, $deepgray, NotoSans-Regular);
+                    }
+                    .right-button{
+                        padding: rem(10) 0 rem(10) 0;
+                        @include font-style(24, $deepgray, NotoSans-Regular);
+                    }
+                }
         
     }
 }

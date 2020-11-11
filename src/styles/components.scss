@@ -314,9 +314,9 @@
             height: rem(82);
             line-height: rem(82);
             width: rem(342);
-            border: 1px solid $border;
+            // border: 1px solid $border;
             text-align: left;
-            border-radius: rem(10);    
+            // border-radius: rem(10);    
             margin-right: rem(20);           
             @include background('../assets/image/space/icons/map.png', rem(26.6) rem(31.92), rem(20) 50%);
             @include font-style(28, $bk, NotoSans-Regular);
@@ -324,8 +324,8 @@
             padding-left: rem(60);
         }
         .select-wraper{
-            border: 1px solid $border;
-            border-radius: rem(10);   
+            // border: 1px solid $border;
+            // border-radius: rem(10);   
             flex-grow: 1;
             display: flex;
             align-items: center;
@@ -333,7 +333,8 @@
             @include sidePadding(10);
             @include background('../assets/image/space/icons/path-below.png', rem(36) rem(36), 95% 50%);
             .place-holder{
-                text-align: left;
+                margin-right: rem(50);
+                text-align: right;
                 @include font-style(28, $gy, NotoSans-Regular);
                 @include ellipsis(200);
 

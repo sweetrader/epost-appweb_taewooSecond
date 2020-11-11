@@ -7,56 +7,60 @@
       <div class="title"><p>기본정보</p><p v-if="false" class="button">공간정보 불러오기</p></div>
       <div class="contents-wraper">
         <dl class="inner-content">
-          <div v-if="false" :class="readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.spcRsrcNm" type="text" placeholder="공간명" :readonly="readOnly"></div>
-          <div :class="readOnly ? 'input-wraper two-wraper readonly' : 'input-wraper two-wraper'">
-            <input v-model="rent.addr" type="text" placeholder="기본 주소" :readonly="readOnly">
+          <dt class="content-title"><p>공간위치</p></dt>
+          <div v-if="true" :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.spcRsrcNm" type="text" placeholder="공간명 입력" :readonly="!readOnly"></div>
+          <div :class="!readOnly ? 'input-wraper two-wraper readonly' : 'input-wraper two-wraper'">
+            <input v-model="rent.addr" type="text" placeholder="기본 주소" :readonly="!readOnly">
             <div class="search">찾기</div>
           </div>
-          <div :class="readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.addrDtl" type="text" placeholder="상세 주소" :readonly="readOnly"></div>
+          <div :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.addrDtl" type="text" placeholder="상세주소" :readonly="!readOnly"></div>
         </dl>
         <dl class="inner-content">
-          <dt :class="readOnly ? 'input-wraper readonly' : 'input-wraper'"><!--@click="onClickOpenSelectBox('업무시설')"-->
-            <select v-model="rent.useCl" :disabled="readOnly">
-              <option :value="null" disabled>업무시설 선택</option>
+          <dt class="content-title"><p>업무시설/면적</p></dt>
+          <dt :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'" @click="onClickOpenSelectBox">
+            <select v-model="rent.useCl" :disabled="!readOnly">
+              <option selected>업무시설 선택</option>
               <option v-for="item in useClOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
           <dt class="wraper-two-div">
-            <div :class="readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.area" type="text" placeholder="전용면적" :readonly="readOnly"></div><p class="each-text-of-two">m2 또는</p>
-            <div :class="readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.areaPyeong" type="text" placeholder="전용면적" :readonly="readOnly"></div><p class="each-text-of-two">평</p>
+            <div :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.area" type="text" placeholder="전용면적" :readonly="!readOnly"></div><p class="each-text-of-two">m2 또는</p>
+            <div :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.areaPyeong" type="text" placeholder="전용면적" :readonly="!readOnly"></div><p class="each-text-of-two">평</p>
           </dt>
-          <dt :class="readOnly ? 'input-wraper readonly' : 'input-wraper'">
-            <select v-model="rent.sepratSpcCnt" :disabled="readOnly">
+          <dt :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'" @click="selectedSpaceEachAmount">
+            <select v-model="rent.sepratSpcCnt" :disabled="!readOnly">
               <option :value="null" disabled>분리공간 개수 선택</option>
               <option v-for="item in sepratSpcOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
         </dl>
         <dl class="inner-content">
+          <dt class="content-title"><p>해당층/주차</p></dt>
           <dt class="wraper-two-div">
-            <div :class="readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.crrspndFloor" type="text" placeholder="해당층" :readonly="readOnly"></div><p class="each-text-of-two">층/</p>
-            <div :class="readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.allFloor" type="text" placeholder="전체층" :readonly="readOnly"></div><p class="each-text-of-two">층</p>
+            <div :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.crrspndFloor" type="text" placeholder="해당층" :readonly="!readOnly"></div><p class="each-text-of-two">층/</p>
+            <div :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.allFloor" type="text" placeholder="전체층" :readonly="!readOnly"></div><p class="each-text-of-two">층</p>
           </dt>
-          <dt :class="readOnly ? 'input-wraper readonly' : 'input-wraper'">
-            <select v-model="rent.drc" :disabled="readOnly">
+          <dt :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'">
+            <select v-model="rent.drc" :disabled="!readOnly">
               <option :value="null" disabled>방향 선택</option>
               <option v-for="item in drcOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
           <dt class="wraper-two-div">
-            <div :class="readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.parkingPosblCnt" type="text" placeholder="주차가능대수" :readonly="readOnly"></div><p class="each-text-of-two">대/</p>
-            <div :class="readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.parkingAllCnt" type="text" placeholder="주차수" :readonly="readOnly"></div><p class="each-text-of-two">대</p>
+            <div :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.parkingPosblCnt" type="text" placeholder="주차가능대수" :readonly="!readOnly"></div><p class="each-text-of-two">대/</p>
+            <div :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'"><input v-model="rent.parkingAllCnt" type="text" placeholder="주차수" :readonly="!readOnly"></div><p class="each-text-of-two">대</p>
           </dt>
         </dl>
         <dl class="inner-content">
-          <DatePicker v-model="rent.comptConfmDe" input-class="mx-input" value-type="format" type="date" placeholder="준공인가일" format="YYYY-MM-DD" :disabled="readOnly"/>
-          <dt :class="readOnly ? 'input-wraper readonly' : 'input-wraper'">
+          <dt class="content-title"><p>준공인가일/용도</p></dt>
+          <DatePicker v-model="rent.comptConfmDe" input-class="mx-input" type="date" value-type="format" placeholder="준공인가일" format="YYYY-MM-DD" :disabled="!readOnly"/>
+          <dt :class="!readOnly ? 'input-wraper readonly' : 'input-wraper'">
             <select v-model="rent.bildPrpos" :disabled="readOnly">
               <option :value="null" disabled>건축물 용도 선택</option>
               <option v-for="item in bildPrposOptions" :key="item.codeDtl" :value="item.codeDtl">{{ item.dtlNm }}</option>
             </select>
           </dt>
-          <dt :class="readOnly ? 'textarea-wraper readonly' : 'textarea-wraper'"><textarea v-model="rent.note" type="text" placeholder="비공개 비고 입력(선택)" :readonly="readOnly"/></dt>
+          <dt :class="!readOnly ? 'textarea-wraper readonly' : 'textarea-wraper'"><textarea v-model="rent.note" type="text" placeholder="비공개 비고 입력(선택)" :readonly="readOnly"/></dt>
           <p class="check-available-party">- 공급자만 확인 가능합니다.</p>
         </dl>
 
@@ -149,18 +153,18 @@
             </div>
           </dt>
           <ul class="notice">
-            <li>사진 최소 5장 최대 15장 까지 등록할 수 있습니다.</li>
-            <li>직접 찍은 실제 사진의 원본을 등록해야 합니다.</li>
-            <li>워터마크, 날짜, 전화번호 등이 포함된 사진이나 관련 없는 사진을 등록할 경우 글 게시가 종료될 수 있습니다.</li>
+            <li>게시글이 무통보 삭제될 수 있습니다.</li>
           </ul>
           <dt v-if="photoList.length > 0" class="photo-list-area">
             <div v-for="(item, index) in photoList" :key="index" class="each-photo"><p>{{ item }}</p>
               <!--<div><img src="@/assets/image/space/icons/x.png"></div>-->
             </div>
           </dt>
-          <dl class="inner-content"><dt class="textarea-wraper"><textarea v-model="rent.dscrp" type="text" placeholder="상세설명 입력(선택)"/></dt>
-          </dl>
-
+          <dt class="inner-content"/>
+          <dt class="content-title"><p>상세설명(선택)</p></dt>
+          <dt class="textarea-wraper">
+            <textarea v-model="rent.dscrp" type="text" placeholder="서울중앙우체국 5층 사무실입니다. 안락하며 구내식당이 있습니다."/>
+          </dt>
         </dl>
       </div>
     </section>

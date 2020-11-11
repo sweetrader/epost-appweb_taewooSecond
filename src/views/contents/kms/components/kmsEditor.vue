@@ -70,6 +70,7 @@ export default {
     return {
       title: null,
       contents: null,
+      contentsText: '',
       registerId: this.$store.getters.mberId,
       kmsBoardParams: {
         kmsId: this.id,
@@ -84,7 +85,7 @@ export default {
         kmsId: this.isEdit ? this.id : null,
         kmsSj: null,
         kmsCn: null,
-        publicYn: null,
+        publicYn: 'Y',
         kmsCtgry: CATEGORY_TYPE.DLVY,
         registerId: this.$store.getters.mberId,
         registerNm: this.$store.getters.name
@@ -169,7 +170,8 @@ export default {
     async completeEditor() {
       let response = null
       if (this.isReply === false) {
-        if (isEmpty(this.title) || isEmpty(this.contents)) {
+        console.log(this.contentsText)
+        if (isEmpty(this.title.trim()) || isEmpty(this.contentsText)) {
           this.alertOption.content = '제목 또는 내용을 입력해 주세요.'
           this.alertOption.show = true
           this.Alert(this.alertOption)
@@ -184,9 +186,9 @@ export default {
           response = await updateKmsBoard(this.kmsBoard)
         }
         console.log(response)
-        this.$router.back()
+        this.$router.go(-2)
       } else {
-        if (isEmpty(this.contents)) {
+        if (isEmpty(this.contentsText)) {
           this.alertOption.content = '내용을 입력해 주세요.'
           this.alertOption.show = true
           this.Alert(this.alertOption)
@@ -207,7 +209,7 @@ export default {
           response = await updateKmsBoardReply(this.kmsBoardReply)
         }
         console.log(response)
-        this.$router.back()
+        this.$router.go(-2)
       }
     },
     onEditorBlur(quill) {
@@ -225,6 +227,7 @@ export default {
         quill.history.undo()
       }
       this.contents = quill.root.innerHTML
+      this.contentsText = text.trim()
       this.getKmsCategory()
     },
     getKmsCategory() {

@@ -8,10 +8,10 @@
         <b>{{ kmsBoard.kmsSj }}</b>
         <span>{{ getCnByPublicYn(kmsBoard.registerNm, kmsBoard.publicYn, false) }}</span><span>{{ getDateStr(kmsBoard.registerDt) }}</span>
         <template v-if="isWriter(kmsBoard.registerId)">
-          <div class="more" @touchstart.stop="clickMoreButton"/>
-          <div v-show="showKmsBoardMoreButton" class="question_more_action">
-            <a href="#" @touchstart="edit(kmsBoard.kmsId, null,false)">수정</a>
-            <a href="#">삭제</a>
+          <div class="more" @touchstart.stop="clickMoreButton(0)"/>
+          <div v-show="showKmsBoardMoreList[0]" class="question_more_action">
+            <a href="#" @touchstart.prevent="processEdit(kmsBoard.kmsId, null,false, kmsBoard.registerId, null)">수정</a>
+            <a href="#" @touchstart.prevent="processDelete(kmsBoard.kmsId, null,false, kmsBoard.registerId, null)">삭제</a>
           </div>
         </template>
       </div>
@@ -26,10 +26,10 @@
           <div :class="isSelected(kmsBoardReply.rplId) ? 'picked_answer' : 'answer'">{{ isSelected(kmsBoardReply.rplId) ? '채택' : '답변' }}</div>
           <span>{{ kmsBoardReply.registerNm }}님의 답변</span><b>{{ getDateStr(kmsBoardReply.registerDt) }}</b>
           <template v-if="isWriter(kmsBoardReply.registerId)">
-            <div class="more"/>
-            <div v-show="true" class="question_more_action">
-              <a href="#">수정</a>
-              <a href="#">삭제</a>
+            <div class="more" @touchstart.stop="clickMoreButton(rplIndex + 1)"/>
+            <div v-show="showKmsBoardMoreList[rplIndex+1]" class="question_more_action">
+              <a href="#" @touchstart.prevent="processEdit(kmsBoard.kmsId, kmsBoardReply.rplId,true, kmsBoardReply.registerId, rplIndex)">수정</a>
+              <a href="#" @touchstart.prevent="processDelete(kmsBoard.kmsId, kmsBoardReply.rplId,true, kmsBoardReply.registerId, rplIndex)">삭제</a>
             </div>
           </template>
         </div>
@@ -64,7 +64,7 @@
 
 <script>
 import { isEmpty, KMS_CONTENTS_MAX } from '@/utils/kms'
-import { getKmsBoard, registerKmsBoardReplyRecommend, registerKmsBoardReply, updateKmsBoardReplySelected } from '@/api/kms'
+import { getKmsBoard, registerKmsBoardReplyRecommend, registerKmsBoardReply, updateKmsBoardReplySelected, deleteKmsBoard, deleteKmsBoardReply } from '@/api/kms'
 import { getDateStr } from '@/utils/kms'
 import { html2Text } from '@/utils'
 
@@ -115,6 +115,7 @@ export default {
       moreButtonList: [],
       findIndex: -1,
       showKmsBoardMoreButton: false,
+      showKmsBoardMoreList: [],
       dataLoading: false,
       confirmLoading: false
     }
@@ -134,6 +135,8 @@ export default {
       this.kmsBoard = response.resData.kmsBoard
       this.kmsBoardReplyList = response.resData.kmsBoardReplyList
       this.selKmsBoardReply = response.resData.selKmsBoardReply
+      // this.showKmsBoardMoreList.push(false)
+      this.$set(this.showKmsBoardMoreList, 0, false)
       console.log(response)
     },
     html2Text(val) {
@@ -316,9 +319,11 @@ export default {
       }
       this.Alert(alertOption)
     },
-    clickMoreButton(id, isReply) {
-      console.log('clickMoreButton', this.showKmsBoardMoreButton)
-      this.showKmsBoardMoreButton = !this.showKmsBoardMoreButton
+    clickMoreButton(rplIndex) {
+      // console.log('clickMoreButton rplIndex = ', rplIndex)
+      // console.log('clickMoreButton', this.showKmsBoardMoreList[0])
+      // this.showKmsBoardMoreList[0] = !this.showKmsBoardMoreList[0]
+      this.$set(this.showKmsBoardMoreList, rplIndex, !this.showKmsBoardMoreList[rplIndex])
       // if (this.showKmsBoardMoreButton === false) {
       //   this.showKmsBoardMoreButton = true
       // }
@@ -357,21 +362,70 @@ export default {
       const matched = this.moreButtonList.filter(item => item.isReply === isReply && item.id === id)
       return matched.length !== 0 && matched[0]
     },
-    edit(id, rplId, isReply) {
-      console.log('edit this.replyTotCnt = ' + this.replyTotCnt)
-      if (this.replyTotCnt !== 0) {
+    processEdit(id, rplId, isReply, registerId, rplIndex) {
+      if (this.replyTotCnt !== 0 && isReply === false) {
         this.showAlert('답변이 있는 글은 수정할 수 없습니다.', false, null, null)
         return
+      } else if (isReply && this.selKmsBoardReply !== null && this.selKmsBoardReply.rplId === rplId) {
+        this.showAlert('채택된 답글은 수정할 수 없습니다.', false, null, null)
+        return
+      } else if (isReply && rplIndex !== null) {
+        if (this.kmsBoardReplyList[rplIndex].reltReplyList !== null && this.kmsBoardReplyList[rplIndex].reltReplyList.length > 0) {
+          this.showAlert('댓글이 있는 답변은 수정할 수 없습니다.', false, null, null)
+          return
+        }
       }
+
       if (isReply) {
         this.$router.push({ name: 'EditKmsEditor', params: { isReply: true, kmsId: id, id: rplId }})
       } else {
         this.$router.push({ name: 'EditKmsEditor', params: { isReply: false, kmsId: id }})
       }
     },
+    async processDelete(id, rplId, isReply, registerId, rplIndex) {
+      if (this.replyTotCnt !== 0 && isReply === false) {
+        this.showAlert('답변이 있는 글은 삭제할 수 없습니다.', false, null, null)
+        return
+      } else if (isReply && this.selKmsBoardReply !== null && this.selKmsBoardReply.rplId === rplId) {
+        this.showAlert('채택된 답글은 삭제할 수 없습니다.', false, null, null)
+        return
+      } else if (isReply && rplIndex !== null) {
+        if (this.kmsBoardReplyList[rplIndex].reltReplyList !== null && this.kmsBoardReplyList[rplIndex].reltReplyList.length > 0) {
+          this.showAlert('댓글이 있는 답변은 삭제할 수 없습니다.', false, null, null)
+          return
+        }
+      }
+
+      if (isReply) {
+        const kmsBoardReplyParams = {
+          rplId: rplId,
+          registerId: this.$store.getters.mberId
+        }
+        const response = await deleteKmsBoardReply(kmsBoardReplyParams)
+        console.log(response)
+        if (response.resCode === 1000) {
+          this.kmsBoardReplyList.splice(rplIndex, 1)
+          // this.$router.go(-1)
+        }
+      } else {
+        const kmsBoarParams = {
+          kmsId: this.kmsBoard.kmsId
+        }
+        const response = await deleteKmsBoard(kmsBoarParams)
+        console.log(response)
+        this.$router.back()
+      }
+    },
     clearMoreButton() {
-      this.showKmsBoardMoreButton = false
-      console.log('clearMoreButton', this.showKmsBoardMoreButton)
+      this.showKmsBoardMoreList.forEach((item, index) => {
+        // console.log('clearMoreButton index = ' + index, item)
+        this.$set(this.showKmsBoardMoreList, index, false)
+      })
+      // if (this.showKmsBoardMoreList[0] === true) {
+      //   this.$set(this.showKmsBoardMoreList, 0, false)
+      //   console.log('clearMoreButton', this.showKmsBoardMoreList[0])
+      // }
+      // this.showKmsBoardMoreList[0] = false
       // if (this.showKmsBoardMoreButton) {
       //   setTimeout(() => {
       //     this.showKmsBoardMoreButton = false

@@ -21,6 +21,7 @@ import kms from './modules/kms'
 import homeBoard from './modules/homeBoard'
 import mssage from './modules/mssage'
 import chtt from './modules/chtt'
+import hnfdmand from './modules/hnfdmand'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -96,6 +97,18 @@ export const constantRoutes = [
         component: () => import('@/views/redirect/index')
       }
     ]
+  },
+  {
+    path: '/hnf/dmand',
+    name: 'HnfDmandListManagement',
+    component: () => import('@/views/contents/hnf/dmand/hnfDmandList'),
+    props: true
+  },
+  {
+    path: '/hnf/dmandRegister',
+    name: 'HnfDmandRegisterManagement',
+    component: () => import('@/views/contents/hnf/dmand/hnfDmandRegister'),
+    props: true
   }
 ]
 
@@ -126,6 +139,7 @@ export const asyncRoutes = [
   homeBoard,
   mssage,
   chtt,
+  hnfdmand,
 
   /** 라우터에 명시하지 않은 url 처리 **/
   { path: '*', redirect: '/404', hidden: true }

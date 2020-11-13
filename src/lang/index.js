@@ -10,10 +10,12 @@ import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
+import VueMoment from 'vue-moment'
 
 Vue.use(VueQuillEditor, /* { default global options } */)
 
 Vue.use(VueI18n)
+Vue.use(VueMoment)
 
 const messages = {
   ko: {

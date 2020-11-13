@@ -52,7 +52,8 @@
     "vue2-datepicker": "^3.7.0",
     "vuejs-datepicker": "^1.6.2",
     "@babel/polyfill": "^7.6.0",
-    "core-js": "^2.6.5"
+    "core-js": "^2.6.5",
+    "vue-moment": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.0.0",

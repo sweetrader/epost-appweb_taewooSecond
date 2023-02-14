@@ -24,7 +24,7 @@ export default {
   },
   created() {
     console.log('CreateKmsEditor id', this.id)
-    // console.log('CreateKmsEditor kmsId', this.kmsId)
+    console.log('CreateKmsEditor kmsId')
     // console.log('CreateKmsEditor isReply', this.isReply)
     // console.log('CreateKmsEditor isEdit', this.isEdit)
   }
